@@ -1,5 +1,6 @@
 import React from 'react'
-import { View, Text, Image } from 'react-native';
+import { View } from 'react-native';
+import Activity from './src/features/app/Activity';
 import CheckUpdates from './src/features/app/CheckUpdates';
 import ForumType from './src/features/app/ForumType';
 import UpdateActivity from './src/features/app/UpdateActivity';
@@ -7,9 +8,10 @@ import UpdateActivity from './src/features/app/UpdateActivity';
 const App = () => {
   return (
     <View>
-      {/* <ForumType /> */}
+      <ForumType />
       {/* <UpdateActivity /> */}
-      <CheckUpdates/>
+      {/* <CheckUpdates/> */}
+      {/* <Activity/> */}
     </View>
 
   )

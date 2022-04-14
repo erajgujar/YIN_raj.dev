@@ -1,7 +1,9 @@
-import React from 'react'
-import { View, Text, Image, StyleSheet } from 'react-native'
+import React, { useState } from 'react'
+import { View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
+
 const UpdateActivity = () => {
-    
+
+
     return (
         <View>
             <View style={styles.container}>
@@ -9,7 +11,7 @@ const UpdateActivity = () => {
                 <Text style={styles.header_text}>Update Activity</Text>
             </View>
             <View>
-                
+               
             </View>
 
         </View>
