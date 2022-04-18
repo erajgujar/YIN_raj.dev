@@ -7,6 +7,7 @@ import UpdateActivity from './src/features/app/UpdateActivity';
 import Members from './src/features/app/Members';
 import AddNewIssue from './src/features/app/AddNewIssue';
 import MinutesOfMeeting from './src/features/app/MinutesOfMeeting';
+import AddActivity from './src/features/app/AddActivity';
 
 const App = () => {
   return (
@@ -17,7 +18,8 @@ const App = () => {
       {/* <Activity/> */}
       {/* <Members/> */}
       {/* <AddNewIssue/> */}
-      <MinutesOfMeeting/>
+      {/* <MinutesOfMeeting/> */}
+      <AddActivity/>
     </View>
 
   )
