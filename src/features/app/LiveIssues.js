@@ -1,5 +1,5 @@
 import React from 'react';
-// import Video from 'react-native-video';
+import YouTube from 'react-native-youtube';
 import { View, Text, Image, StyleSheet, TextInput } from 'react-native'
 const LiveIssues = () => {
 
@@ -87,37 +87,56 @@ const LiveIssues = () => {
                 </View>
             </View>
 
-            {/* <View>
-                <Video source={{ uri: 'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4?_=1' }}   // Can be a URL or a local file.
-                    ref={(ref) => {
-                        this.player = ref
-                    }}                                      // Store reference
-                    onBuffer={this.onBuffer}                // Callback when remote video is buffering
-                    onError={this.videoError}               // Callback when video cannot be loaded
-                    style={styles.backgroundVideo} />
-            </View> */}
-            
-            <View style={{ display: "flex",
-             flexDirection: "row",
-              marginTop:530}}>
-                <View style={{ display: "flex", flexDirection: "row", marginLeft:7}}>
-                    <Image style={styles.activity_img} source={require('../assets/images/Others/think.png')}/>
+            <View style={{}}>
+                <YouTube
+                    apiKey='AIzaSyD23DuJHCULMajsj7L-SY-Z0W4-sytPU3o'
+                    videoId="6oFuwhIibo4" // The YouTube video ID
+                    play // control playback of video with true/false
+                    fullscreen // control whether the video should play in fullscreen or inline
+                    loop // control whether the video should loop when ended
+                    onReady={e => this.setState({ isReady: true })}
+                    onChangeState={e => this.setState({ status: e.state })}
+                    onChangeQuality={e => this.setState({ quality: e.quality })}
+                    // onError={e => this.setState({ error: e.error })}
+                    style={{ alignSelf:'center',
+                    width:'90%',
+                    marginTop:170,
+                    borderTopLeftRadius:20,
+                     height: 200, }}
+                />
+                <Text style={{width:'90%',
+                borderBottomLeftRadius:20,
+                borderBottomRightRadius:20,
+                borderWidth:2,
+                borderColor:'#e0e3e8',
+                padding:10,
+                textAlign:'left',
+                alignSelf:'center'}}>This video is included using 'react-native-youtube' library in node package manager</Text>
+            </View>
+
+            <View style={{
+                display: "flex",
+                flexDirection: "row",
+                marginTop: 95
+            }}>
+                <View style={{ display: "flex", flexDirection: "row", marginLeft: 7 }}>
+                    <Image style={styles.activity_img} source={require('../assets/images/Others/think.png')} />
                     <Text style={styles.activity_text}>Think</Text>
                 </View>
                 <View style={{ display: "flex", flexDirection: "row" }}>
-                    <Image style={styles.activity_img} source={require('../assets/images/Others/chat.png')}/>
+                    <Image style={styles.activity_img} source={require('../assets/images/Others/chat.png')} />
                     <Text style={styles.activity_text}>Talk</Text>
                 </View>
                 <View style={{ display: "flex", flexDirection: "row" }}>
-                    <Image style={styles.activity_img} source={require('../assets/images/Others/todo.png')}/>
+                    <Image style={styles.activity_img} source={require('../assets/images/Others/todo.png')} />
                     <Text style={styles.activity_text}>Do</Text>
                 </View>
                 <View style={{ display: "flex", flexDirection: "row" }}>
-                    <Image style={styles.activity_img} source={require('../assets/images/Others/amplify.png')}/>
+                    <Image style={styles.activity_img} source={require('../assets/images/Others/amplify.png')} />
                     <Text style={styles.activity_text}>Amplify</Text>
                 </View>
             </View>
-            
+
         </View>
     )
 }
@@ -185,18 +204,18 @@ const styles = StyleSheet.create({
         borderTopLeftRadius: 25
     },
     activity_img: {
-        width:45,
-        height:45,
-        borderRadius:50,
+        width: 45,
+        height: 45,
+        borderRadius: 50,
         borderColor: "#8cc5e8",
-        marginRight:2
-        
+        marginRight: 2
+
     },
     activity_text: {
         fontSize: 15,
         color: "black",
-        marginRight:15,
-        marginTop:10
+        marginRight: 15,
+        marginTop: 10
     }
     // backgroundVideo: {
     //     position: 'absolute',
