@@ -9,6 +9,8 @@ import AddNewIssue from './src/features/app/AddNewIssue';
 import MinutesOfMeeting from './src/features/app/MinutesOfMeeting';
 import AddActivity from './src/features/app/AddActivity';
 import LiveIssues from './src/features/app/LiveIssues';
+import ListIssues from './src/features/app/ListIssues';
+import IssueFilter from './src/features/app/IssueFilter';
 
 const App = () => {
   return (
@@ -21,7 +23,9 @@ const App = () => {
       {/* <AddNewIssue/> */}
       {/* <MinutesOfMeeting/> */}
       {/* <AddActivity/> */}
-      <LiveIssues/>
+      {/* <LiveIssues/> */}
+      {/* <IssueFilter/> */}
+      <IssueFilter/>
     </View>
 
   )

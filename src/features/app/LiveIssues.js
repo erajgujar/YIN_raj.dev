@@ -4,7 +4,7 @@ import { View, Text, Image, StyleSheet, TextInput } from 'react-native'
 const LiveIssues = () => {
 
     return (
-        <View>
+        <View style={{height:'100%'}}>
             <View style={styles.container}>
                 <View style={{
                     display: 'flex',
@@ -97,12 +97,12 @@ const LiveIssues = () => {
                     onReady={e => this.setState({ isReady: true })}
                     onChangeState={e => this.setState({ status: e.state })}
                     onChangeQuality={e => this.setState({ quality: e.quality })}
-                    // onError={e => this.setState({ error: e.error })}
+                    onError={e => this.setState({ error: e.error })}
                     style={{ alignSelf:'center',
                     width:'90%',
                     marginTop:170,
                     borderTopLeftRadius:20,
-                     height: 200, }}
+                     height: 180, }}
                 />
                 <Text style={{width:'90%',
                 borderBottomLeftRadius:20,
@@ -117,7 +117,7 @@ const LiveIssues = () => {
             <View style={{
                 display: "flex",
                 flexDirection: "row",
-                marginTop: 95
+                marginTop: 10
             }}>
                 <View style={{ display: "flex", flexDirection: "row", marginLeft: 7 }}>
                     <Image style={styles.activity_img} source={require('../assets/images/Others/think.png')} />
