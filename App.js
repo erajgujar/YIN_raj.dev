@@ -11,6 +11,7 @@ import AddActivity from './src/features/app/AddActivity';
 import LiveIssues from './src/features/app/LiveIssues';
 import ListIssues from './src/features/app/ListIssues';
 import IssueFilter from './src/features/app/IssueFilter';
+import IssueDetails from './src/features/app/IssueDetails';
 
 const App = () => {
   return (
@@ -24,8 +25,9 @@ const App = () => {
       {/* <MinutesOfMeeting/> */}
       {/* <AddActivity/> */}
       {/* <LiveIssues/> */}
+      {/* <ListIssues/> */}
       {/* <IssueFilter/> */}
-      <IssueFilter/>
+      <IssueDetails/>
     </View>
 
   )

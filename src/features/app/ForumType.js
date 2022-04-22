@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-import { View, Image, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Image, Text, StyleSheet, TouchableOpacity, Dimensions} from 'react-native'
+const {height, width} = Dimensions.get('window')
 const ForumType = () => {
     const [mixed, setMixed] = useState("")
     const [female, setFemale] = useState("")
@@ -26,7 +27,7 @@ const ForumType = () => {
 
     return (<>
 
-        <View>
+        <View style={{height:height, width:width, justifyContent:'flex-start' }}>
             <Image style={styles.container} source={require('../assets/images/yin/light-solid-full-header.png')} />
             <Text style={styles.heading}>FORUM TYPES</Text>
             <TouchableOpacity onPress={MixedForum}>
@@ -69,7 +70,7 @@ const ForumType = () => {
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: 20,
+        marginTop: 5,
         marginLeft: 10,
         marginRight: 10,
         height: 135,
@@ -77,7 +78,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center'
     },
     heading: {
-        marginTop: 30,
+        marginTop: 20,
         fontSize: 30,
         textAlign: "center",
         color: "black",
@@ -92,7 +93,7 @@ const styles = StyleSheet.create({
         display: "flex",
         flexDirection: "row",
         width: 300,
-        marginTop: 30,
+        marginTop: 20,
         marginLeft: 20,
         marginRight: 20,
         alignContent: "space-between",
@@ -117,7 +118,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignContent: "space-between",
         textAlign: "left",
-        marginTop: 110,
+        marginTop: 90,
         borderRadius: 15,
         marginLeft: 15,
         marginRight: 15,
@@ -130,7 +131,7 @@ const styles = StyleSheet.create({
         height: 20,
         width: 20,
         padding: 5,
-        marginStart: 230,
+        marginStart: 190,
         tintColor: "white"
     },
     btn_text: {

@@ -3,7 +3,7 @@ import { View, Text, Image, Dimensions, StyleSheet, TextInput } from 'react-nati
 const { width, height } = Dimensions.get('window')
 export default function IssueFilter() {
     return (
-        <View style={{ width: width, height: height, justifyContent:'flex-start' }}>
+        <View style={{flex:1, width: width, height: height, justifyContent:'flex-start', flexShrink:1}}>
 
             <View style={styles.issue_wrap}>
                 <View style={{
@@ -45,6 +45,7 @@ export default function IssueFilter() {
                 position: 'relative',
                 zIndex: 1,
                 top: 135,
+                height:height/5
             }}>
                 <View>
                     <Image style={styles.river_cleaning_img} source={require('../assets/images/Others/issues-image-1.png')} />
@@ -79,7 +80,8 @@ export default function IssueFilter() {
             <View style={{
                 position: 'relative',
                 top: 145,
-                width: width
+                width: width,
+                height:height/5
             }}>
                 <View>
                     <Image style={{
@@ -119,7 +121,8 @@ export default function IssueFilter() {
             <View style={{
                 position: 'relative',
                 top: 155,
-                width: width
+                width: width,
+                height:height/5
             }}>
 
                 <View>
@@ -188,8 +191,8 @@ const styles = StyleSheet.create({
         padding: 5,
         color: '#ffff',
         borderColor: '#ffff',
-        height: 35,
-        flexBasis: 135,
+        height: 30,
+        flexBasis: 130,
         marginTop: 5,
         textAlign: 'center'
 
@@ -224,6 +227,6 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-end',
         marginRight: 13,
         tintColor: '#ffff',
-        marginTop: -65
+        marginTop: -60
     }
 })

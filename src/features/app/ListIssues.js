@@ -44,7 +44,8 @@ export default function ListIssues() {
             <View style={{
                 position: 'relative',
                 zIndex: 1,
-                top: 135,
+                top: 150,
+                height:height/5
             }}>
                 <View>
                     <Image style={styles.river_cleaning_img} source={require('../assets/images/Others/issues-image-1.png')} />
@@ -79,7 +80,8 @@ export default function ListIssues() {
             <View style={{
                 position: 'relative',
                 top: 145,
-                width: width
+                width: width,
+                height:height/5
             }}>
                 <View>
                     <Image style={{
@@ -119,7 +121,8 @@ export default function ListIssues() {
             <View style={{
                 position: 'relative',
                 top: 155,
-                width: width
+                width: width,
+                height:height/5
             }}>
 
                 <View>
@@ -142,6 +145,7 @@ export default function ListIssues() {
                         marginTop: 10
                     }}>5th January 2022</Text>
                 </View>
+
                 <View >
                 <View style={{flexDirection:'row'}}>
                     <Text style={{ marginLeft: 15, marginTop: 15, fontSize:15, color: 'black' }}>Forum Name:</Text>
@@ -224,6 +228,6 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-end',
         marginRight: 13,
         tintColor: '#ffff',
-        marginTop: -65
+        marginTop: -70
     }
 })
