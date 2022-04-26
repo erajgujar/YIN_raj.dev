@@ -1,9 +1,11 @@
 import React from 'react'
-import { View, Text, Image, StyleSheet, Button } from 'react-native'
+import { View, Text, Image, StyleSheet, Dimensions } from 'react-native';
+const H = Dimensions.get('window').height;
+const W = Dimensions.get('window').width;
 const CheckUpdates = () => {
 
     return (
-        <View>
+        <View style={{ width: W, height: H }}>
 
             <View>
                 <Image style={styles.pollution_img} source={require('../assets/images/Others/issue-details-image.png')} />
@@ -15,120 +17,167 @@ const CheckUpdates = () => {
             <View style={{
                 backgroundColor: "white",
                 position: "relative",
-                top: 150,
-                marginLeft: 10,
-                marginRight: 10,
-                borderRadius: 10,
+                top: H * 0.170,
+                marginLeft: H * 0.010,
+                marginRight: H * 0.010,
+                borderRadius: 20,
+                padding: H * 0.005,
                 borderColor: "#dfd8d8",
                 borderWidth: 2,
-                marginTop:-10
+                marginTop: H * -0.010,
+                marginBottom: H * 0.020
 
             }}>
                 <View style={styles.heading_date}>
-                    <Text style={{ marginLeft: 5, fontSize: 15, color: "black" }}>Air Pollution</Text>
-                    <Text style={{ marginLeft: 150, color: "black", fontSize: 12.5 }}>1st Jan to 10th Jan</Text>
+                    <Text style={{ marginLeft: H * 0.007, fontSize: H * 0.017, color: "black" }}>Air Pollution</Text>
+                    <Text style={{ marginRight: H * 0.010, color: "black", fontSize: H * 0.013 }}>1st Jan to 10th Jan</Text>
                 </View>
-                <Text style={{ padding: 10, marginTop:-10 }}>
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+                <Text style={{ fontSize: H * 0.014, textAlign: 'justify', padding: H * 0.010, marginTop: H * -0.010 }}>
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+                    standard dummy text ever since the 1500s. This is dummy text
                 </Text>
                 <View style={styles.pending}>
-                    <Text style={{ marginLeft: 5, color: "black" }}> Status</Text>
+                    <Text style={{ marginLeft: H * 0.005, color: "black", marginTop: H * -0.009 }}> Status</Text>
                     <Text style={{
-                        marginLeft: 20,
+                        marginLeft: H * 0.015,
                         backgroundColor: "#e44d15",
-                        paddingLeft: 7,
-                        paddingRight: 7,
-                        borderRadius: 10,
+                        paddingLeft: H * 0.013,
+                        paddingRight: H * 0.013,
+                        paddingTop: H * 0.003,
+                        paddingBottom: H * 0.003,
+                        alignSelf: 'center',
+                        borderRadius: H * 0.015,
                         color: "white",
-                        marginBottom: 9
+                        fontSize: H * 0.015,
+                        marginBottom: H * 0.009
                     }}>Pending</Text>
+                    <Image style={{
+                        width: H * 0.025,
+                        height: H * 0.025,
+                        alignSelf: 'center',
+                        marginRight: 'auto',
+                        tintColor: '#0b7dee'
+                    }} source={require('../assets/images/Others/more_vert.png')} />
                 </View>
             </View>
-            <Text style={{
-                fontSize: 15,
-                marginTop: 155,
-                marginLeft: 10,
-                color: "black"
-            }}>Updates</Text>
-            <View style={{ position: "absolute", zIndex: 0, marginTop: 380 }}>
+
+            <View>
+                <Text style={{
+                    fontSize: H * 0.020,
+                    marginTop: H * 0.160,
+                    marginLeft: H * 0.015,
+                    color: "black"
+                }}>Updates</Text>
+            </View>
+
+            <View style={{ position: "absolute", zIndex: 0, marginTop: H * 0.380 }}>
                 <Image style={styles.progress_line} source={require('../assets/images/Others/line.png')} />
             </View>
-            <View style={{ display: "flex", flexDirection: "row" }}>
-                <Text style={styles.progress_stage}>4</Text>
 
+
+            <View style={{ display: "flex", flexDirection: "row", marginBottom: H * 0.020 }}>
+                <View>
+                    <Text style={styles.progress_stage}>4</Text>
+                </View>
                 <View style={{
-                    display: "flex",
-                    flexDirection: "row",
+                    width: '75%',
                     backgroundColor: "#a7e1cd",
-                    width: -40,
-                    borderTopLeftRadius: 10,
-                    borderTopRightRadius: 10,
-                    marginBottom:9
-
+                    borderRadius: 15,
+                    padding: H * 0.015
                 }}>
-                    <Text style={styles.progress_date}>31st October 2021</Text>
-                    <Text style={styles.progress_status}>Completed</Text>
+                    <View style={{
+                        flexDirection: "row",
+                        justifyContent: 'space-between',
+
+                    }}>
+                        <Text style={styles.progress_date}>15th October 2021</Text>
+                        <Text style={styles.progress_status}>Completed</Text>
+                    </View>
+                    <View>
+                        <Text style={styles.progress_text}>Lorem Ipsum is simply dummy text of the printing and showing.
+                            This is a dummy text written here for the purpose of design only.
+                        </Text>
+                    </View>
                 </View>
             </View>
-            <Text style={styles.progress_text}>Lorem Ipsum is simply dummy text of the printing and showing</Text>
 
-            <View style={{ display: "flex", flexDirection: "row" }}>
-                <Text style={styles.progress_stage}>3</Text>
-
+            <View style={{ display: "flex", flexDirection: "row", marginBottom: H * 0.020 }}>
+                <View>
+                    <Text style={styles.progress_stage}>3</Text>
+                </View>
                 <View style={{
-                    display: "flex",
-                    flexDirection: "row",
+                    width: '75%',
                     backgroundColor: "#a7e1cd",
-                    width: -40,
-                    borderTopLeftRadius: 10,
-                    borderTopRightRadius: 10,
-                    marginBottom:9
-
+                    borderRadius: 15,
+                    padding: H * 0.015
                 }}>
-                    <Text style={styles.progress_date}>27th October 2021</Text>
-                    <Text style={styles.progress_status}>Completed</Text>
+                    <View style={{
+                        flexDirection: "row",
+                        justifyContent: 'space-between',
+
+                    }}>
+                        <Text style={styles.progress_date}>21st October 2021</Text>
+                        <Text style={styles.progress_status}>Completed</Text>
+                    </View>
+                    <View>
+                        <Text style={styles.progress_text}>Lorem Ipsum is simply dummy text of the printing and showing.
+                            This is a dummy text written here for the purpose of design only.
+                        </Text>
+                    </View>
                 </View>
             </View>
-            <Text style={styles.progress_text}>Lorem Ipsum is simply dummy text of the printing and showing</Text>
 
-            <View style={{ display: "flex", flexDirection: "row" }}>
-                <Text style={styles.progress_stage}>2</Text>
-
+            <View style={{ display: "flex", flexDirection: "row", marginBottom: H * 0.020 }}>
+                <View>
+                    <Text style={styles.progress_stage}>2</Text>
+                </View>
                 <View style={{
-                    display: "flex",
-                    flexDirection: "row",
+                    width: '75%',
                     backgroundColor: "#a7e1cd",
-                    width: -40,
-                    borderTopLeftRadius: 10,
-                    borderTopRightRadius: 10,
-                    marginBottom:9
-
+                    borderRadius: 15,
+                    padding: H * 0.015
                 }}>
-                    <Text style={styles.progress_date}>25th October 2021</Text>
-                    <Text style={styles.progress_status}>Completed</Text>
+                    <View style={{
+                        flexDirection: "row",
+                        justifyContent: 'space-between',
+
+                    }}>
+                        <Text style={styles.progress_date}>25th October 2021</Text>
+                        <Text style={styles.progress_status}>Completed</Text>
+                    </View>
+                    <View>
+                        <Text style={styles.progress_text}>Lorem Ipsum is simply dummy text of the printing and showing.
+                            This is a dummy text written here for the purpose of design only.
+                        </Text>
+                    </View>
                 </View>
             </View>
-            <Text style={styles.progress_text}>Lorem Ipsum is simply dummy text of the printing and showing</Text>
 
             <View style={{ display: "flex", flexDirection: "row" }}>
-                <Text style={styles.progress_stage}>1</Text>
-
+                <View>
+                    <Text style={styles.progress_stage}>1</Text>
+                </View>
                 <View style={{
-                    display: "flex",
-                    flexDirection: "row",
+                    width: '75%',
                     backgroundColor: "#a7e1cd",
-                    width: -40,
-                    borderTopLeftRadius: 10,
-                    borderTopRightRadius: 10
-                    
-
+                    borderRadius: 15,
+                    padding: H * 0.015
                 }}>
-                    <Text style={styles.progress_date}>15th October 2021</Text>
-                    <Text style={styles.progress_status}>Completed</Text>
+                    <View style={{
+                        flexDirection: "row",
+                        justifyContent: 'space-between',
+
+                    }}>
+                        <Text style={styles.progress_date}>31st October 2021</Text>
+                        <Text style={styles.progress_status}>Completed</Text>
+                    </View>
+                    <View>
+                        <Text style={styles.progress_text}>Lorem Ipsum is simply dummy text of the printing and showing.
+                            This is a dummy text written here for the purpose of design only.
+                        </Text>
+                    </View>
                 </View>
             </View>
-            <Text style={styles.progress_text}>Lorem Ipsum is simply dummy text of the printing and showing</Text>
-
 
         </View>
     )
@@ -136,97 +185,92 @@ const CheckUpdates = () => {
 
 const styles = StyleSheet.create({
     container: {
-        display: "flex",
         flexDirection: "row",
         backgroundColor: "#14a3db",
-        paddingTop: 40,
-        paddingBottom: 15,
-        borderBottomLeftRadius: 25,
-        borderBottomRightRadius: 25,
+        paddingTop: H * 0.040,
+        paddingBottom: H * 0.015,
+        borderBottomLeftRadius: H * 0.025,
+        borderBottomRightRadius: H * 0.025,
         marginTop: 0,
         position: "relative",
-        zIndex: 1
+        zIndex: 1,
+        justifyContent: 'flex-start',
+        alignItems: 'center'
 
 
     },
     left_arrow: {
-        width: 30,
-        height: 30,
-        marginLeft: 15,
-        marginRight: 15,
+        width: H * 0.025,
+        height: H * 0.020,
+        marginLeft: H * 0.015,
+        marginRight: H * 0.015,
         tintColor: "white"
     },
     header_text: {
-        fontSize: 20,
-        color: "white"
+        fontSize: H * 0.025,
+        color: "white",
+        marginRight: 'auto'
     },
     pollution_img: {
-        marginTop: 0,
         position: "absolute",
         zIndex: 0,
-        height: 300
+        height: H * 0.320,
+        width: W
     },
     heading_date: {
-        display: "flex",
         flexDirection: "row",
-        alignContent: "space-between",
-        marginBottom: 5,
-        marginTop: 5
+        justifyContent: 'space-between',
+        marginBottom: H * 0.005,
+        marginTop: H * 0.005
     },
     pending: {
-        display: "flex",
         flexDirection: "row",
-        alignContent: "space-between",
+        justifyContent: 'flex-start',
+        alignItems: 'center'
+        //marginBottom: H * 0.005
     },
     progress_line: {
-        width: 5,
-        height: 400,
-        marginLeft: 50,
-        tintColor:"#a7e1cd",
-        marginTop:-35
+        width: H * 0.005,
+        height: H * 0.630,
+        marginLeft: H * 0.055,
+        tintColor: "#91f1d0",
+        marginTop: H * 0.025
     },
     progress_stage: {
         color: "white",
         backgroundColor: "#0a7ff3",
-        height: 25,
-        width: 35,
-        marginLeft: 35,
+        height: H * 0.040,
+        width: H * 0.045,
+        textAlign: 'center',
+        marginLeft: H * 0.035,
         borderRadius: 5,
-        paddingLeft: 14,
-        paddingTop: 2,
-        marginRight: 30,
-        marginTop: 30,
-        marginBottom: 20
+        alignSelf: 'center',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: H * 0.003,
+        paddingTop: H * 0.005,
+        marginRight: H * 0.030,
+        marginTop: H * 0.040,
+        marginBottom: H * 0.020
     },
     progress_date: {
         color: "black",
-        marginLeft: 10,
-        fontSize: 12.5,
-        marginTop: 5,
-
-
+        fontSize: H * 0.015,
+        alignSelf: 'center'
     },
     progress_status: {
-        borderRadius: 10,
+        borderRadius: 15,
         color: "white",
+        alignSelf: 'center',
+        fontSize: H * 0.013,
+        paddingTop: H * 0.002,
+        paddingBottom: H * 0.002,
         backgroundColor: "green",
-        paddingLeft: 10,
-        paddingRight: 10,
-        height: 22,
-        marginLeft: 60,
-        marginTop: 4,
-        marginRight: 10
+        paddingLeft: H * 0.010,
+        paddingRight: H * 0.010,
     },
     progress_text: {
-        marginLeft: 100,
-        backgroundColor: "#a7e1cd",
-        marginRight: 17.5,
-        borderBottomLeftRadius: 10,
-        borderBottomRightRadius: 10,
-        paddingLeft: 5,
-        paddingBottom: 5,
-        marginTop: -50,
-        marginBottom:9
+        fontSize: H * 0.015
     }
 })
 

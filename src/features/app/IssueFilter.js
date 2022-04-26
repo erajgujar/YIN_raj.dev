@@ -1,9 +1,12 @@
 import React from 'react';
 import { View, Text, Image, Dimensions, StyleSheet, TextInput } from 'react-native';
-const { width, height } = Dimensions.get('window')
+// const { width, height } = Dimensions.get('window')
+const H = Dimensions.get('window').height;
+const W = Dimensions.get('window').width;
+
 export default function IssueFilter() {
     return (
-        <View style={{flex:1, width: width, height: height, justifyContent:'flex-start', flexShrink:1}}>
+        <View style={{ width: W, justifyContent:'flex-start' }}>
 
             <View style={styles.issue_wrap}>
                 <View style={{
@@ -15,10 +18,11 @@ export default function IssueFilter() {
                     <Image style={styles.menu_icon_img} source={require('../assets/images/Others/menu-icon.png')} />
                     <Text style={{
                         textAlign: 'left',
-                        marginTop: 5,
-                        fontSize: 15,
+                        marginTop: H * 0.005,
+                        fontSize: H * 0.023,
                         color: '#ffff',
-                        flexBasis: 70,
+                        alignSelf: 'flex-start',
+                        flexBasis: H * 0.070,
                         marginRight: 'auto'
                     }}>Issues</Text>
                     <Text style={styles.Add_issue}>Add New Issue + </Text>
@@ -27,9 +31,10 @@ export default function IssueFilter() {
                 <View style={{
                     flex: 1,
                     width: '95%',
-                    alignSelf: 'center',
+                    alignSelf: 'flex-start',
                     flexDirection: 'row',
-                    marginTop: -50
+                    marginTop: H * 0.005,
+                    marginBottom:H * 0.005
 
                 }}>
                     <TextInput style={styles.input_issue} placeholder='Search by Categories of Issues' />
@@ -39,120 +44,119 @@ export default function IssueFilter() {
                 <View>
                     <Image style={styles.filter_img} source={require('../assets/images/Others/filter.png')} />
                 </View>
+               
             </View>
 
             <View style={{
                 position: 'relative',
                 zIndex: 1,
-                top: 135,
-                height:height/5
+                top: H * 0.190,
             }}>
                 <View>
                     <Image style={styles.river_cleaning_img} source={require('../assets/images/Others/issues-image-1.png')} />
-                    <View style={{ position: 'absolute', top: 10 }}>
+                    <View style={{ position: 'absolute', top: H * 0.010 }}>
                         <Text style={{
-                            marginLeft: 20,
+                            marginLeft: H * 0.030,
                             backgroundColor: '#515254',
-                            padding: 3,
-                            width: 100,
+                            padding: H * 0.003,
+                            width: H * 0.100,
                             color: 'white',
-                            borderRadius: 20,
+                            borderRadius: H * 0.020,
                             textAlign: 'center',
-                            fontSize: 10
+                            fontSize: H * 0.010
                         }}>1st December 2021</Text>
                         <Text style={{
-                            marginLeft: 20,
-                            backgroundColor: 'red',
-                            padding: 1,
-                            marginTop: 6,
-                            width: 50,
+                            marginLeft: H * 0.030,
+                            backgroundColor: 'green',
+                            padding: H * 0.001,
+                            marginTop: H * 0.006,
+                            width: H * 0.050,
                             color: 'white',
-                            borderRadius: 20,
+                            borderRadius: H * 0.020,
                             textAlign: 'center',
-                            fontSize: 10
+                            fontSize: H * 0.010
                         }}>open</Text>
                     </View>
                 </View>
 
-                <Text style={{ marginLeft: 15, marginTop: 5, color: 'black' }}>River Cleaning</Text>
+                <Text style={{ marginLeft: H * 0.015, marginTop: H * 0.003, color: 'black' }}>River Cleaning</Text>
             </View>
 
             <View style={{
                 position: 'relative',
-                top: 145,
-                width: width,
-                height:height/5
+                top: H * 0.210,
+                width: W,
             }}>
                 <View>
                     <Image style={{
                         width: '95%',
-                        height: 115,
+                        height: H * 0.170,
                         alignSelf: 'center',
-                        borderRadius: 20,
+                        borderRadius: H * 0.020,
                         position: 'absolute'
                     }} source={require('../assets/images/Others/air-pollution.png')} />
-                    <View style={{ position: 'relative', top: 10 }}>
+                    <View style={{ position: 'relative', top: H * 0.010 }}>
                         <Text style={{
-                            marginLeft: 20,
+                            marginLeft: H * 0.030,
                             backgroundColor: '#515254',
-                            padding: 3,
-                            width: 90,
+                            padding: H * 0.003,
+                            width: H * 0.090,
                             color: 'white',
-                            borderRadius: 20,
+                            borderRadius: H * 0.020,
                             textAlign: 'center',
-                            fontSize: 10
+                            fontSize: H * 0.010
                         }}>1st January 2022</Text>
                         <Text style={{
-                            marginLeft: 20,
+                            marginLeft: H * 0.030,
                             backgroundColor: 'red',
-                            padding: 1,
-                            marginTop: 6,
-                            width: 70,
+                            padding: H * 0.001,
+                            marginTop: H * 0.006,
+                            width: H * 0.070,
                             color: 'white',
-                            borderRadius: 20,
+                            borderRadius: H * 0.020,
                             textAlign: 'center',
-                            fontSize: 10
+                            fontSize: H * 0.010
                         }}>abondoned</Text>
                     </View>
                 </View>
-                <Text style={{ marginLeft: 15, marginTop: 75, color: 'black' }}>Air Pollution</Text>
+                <Text style={{ marginLeft: H * 0.015, marginTop: H * 0.130, color: 'black' }}>Air Pollution</Text>
             </View>
 
             <View style={{
                 position: 'relative',
-                top: 155,
-                width: width,
-                height:height/5
+                top: H * 0.230,
+                width: W,
             }}>
 
                 <View>
                     <Image style={{
                         width: '95%',
-                        height: 150,
+                        height: H * 0.170,
                         alignSelf: 'center',
-                        borderRadius: 20
+                        borderRadius: H * 0.020
                     }} source={require('../assets/images/Others/forum-des.png')} />
                     <Text style={{
-                        marginLeft: 20,
+                        marginLeft: H * 0.020,
                         backgroundColor: '#515254',
-                        padding: 3,
-                        width: 90,
+                        padding: H * 0.003,
+                        width: H * 0.090,
                         color: 'white',
                         position: 'absolute',
-                        borderRadius: 20,
+                        borderRadius: H * 0.020,
                         textAlign: 'center',
-                        fontSize: 10,
-                        marginTop: 10
+                        fontSize: H * 0.010,
+                        marginTop: H * 0.010
                     }}>5th January 2022</Text>
                 </View>
+
                 <View >
                 <View style={{flexDirection:'row'}}>
-                    <Text style={{ marginLeft: 15, marginTop: 15, fontSize:15, color: 'black' }}>Forum Name:</Text>
-                    <Text style={{ marginLeft: 15, marginTop: 15}}>Grievence Corner</Text>
+                    <Text style={{ marginLeft: H * 0.015, marginTop: H * 0.015, fontSize:H * 0.017, color: 'black' }}>Forum Name:</Text>
+                    <Text style={{ marginLeft: H * 0.015, marginTop: H * 0.015, fontSize: H * 0.017}}>Grievence Corner</Text>
                 </View>
                 <View style={{flexDirection:'row'}}>
-                    <Text style={{ marginLeft: 15, marginTop: 5, fontSize:15, color: 'black' }}>College Name:</Text>
-                    <Text style={{ marginLeft: 15, marginTop: 5 }}>MIT College</Text>
+                    <Text style={{ marginLeft: H * 0.015, marginTop: H * 0.005, fontSize:H * 0.017, color: 'black' }}>College Name:</Text>
+                    <Text style={{ marginLeft: H * 0.015, marginTop: H * 0.005, fontSize: H * 0.017 }}>MIT College</Text>
                 </View>
                 </View>
             </View>
@@ -162,25 +166,30 @@ export default function IssueFilter() {
 
 const styles = StyleSheet.create({
     container: {
-        // flex: 1,
-        // backgroundColor: 'gray'
+       flex:1,
+       justifyContent: 'center',
+       alignItems:'center'
 
     },
     issue_wrap: {
         width: '100%',
-        height: height / 4,
         backgroundColor: '#4083f6',
         borderBottomLeftRadius: 30,
         borderBottomRightRadius: 30,
+        justifyContent:'space-between',
+        alignItems:'stretch',
         position: 'absolute',
+        height: 'auto',
         zIndex: 0,
-        padding: 7
+        padding: H * 0.007,
+        paddingBottom: H*0.015
 
     },
     menu_icon_img: {
-        height: 35,
-        width: 30,
-        // marginRight: 7,
+        height: H * 0.045,
+        width: H * 0.044,
+        marginRight: H * 0.007,
+        alignSelf:'flex-start',
         tintColor: '#ffff'
 
 
@@ -188,45 +197,52 @@ const styles = StyleSheet.create({
     Add_issue: {
         borderWidth: 2,
         borderRadius: 20,
-        padding: 5,
+        padding: H * 0.010,
         color: '#ffff',
         borderColor: '#ffff',
-        height: 30,
-        flexBasis: 130,
-        marginTop: 5,
+        fontSize:H * 0.017,
+        height: H * 0.045,
+        flexBasis: H * 0.155,
+        marginTop: H * 0.005,
+        alignSelf:'flex-end',
         textAlign: 'center'
 
     },
     river_cleaning_img: {
         width: '95%',
-        height: 115,
-        borderRadius: 30,
+        height: H * 0.170,
+        borderRadius: 20,
         alignSelf: 'center'
     },
     search_img: {
-        width: 20,
-        height: 20,
-        marginLeft: -35,
-        marginTop: 9
+        width: H * 0.020,
+        height: H * 0.020,
+        marginLeft: H * -0.050,
+        marginTop: H * 0.025
     },
     input_issue: {
-        padding: 7,
+        padding: H * 0.015,
+        margin: H* 0.010,
         borderWidth: 2,
         borderRadius: 20,
-        width: '100%',
-        height: 35,
+        width: W-20,
+        height: H * 0.050,
         borderColor: '#ffff',
+        alignSelf:'center',
         color: 'gray',
         backgroundColor: '#ffff',
-        fontSize: 15
+        fontSize: H * 0.015,
+        marginBottom: H * 0.005
 
     },
     filter_img: {
-        width: 15,
-        height: 17,
+        width: H * 0.015,
+        height: H * 0.017,
         alignSelf: 'flex-end',
-        marginRight: 13,
+        marginRight: H * 0.015,
         tintColor: '#ffff',
-        marginTop: -60
+        marginTop: H * 0.010,
+        marginBottom: H * 0.090
+        
     }
 })

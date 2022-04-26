@@ -1,6 +1,8 @@
 import React from 'react';
 import YouTube from 'react-native-youtube';
 import { View, Text, Image, StyleSheet, TextInput } from 'react-native'
+const H = Dimensions.get('window').height;
+const W = Dimensions.get('window').width;
 const LiveIssues = () => {
 
     return (
@@ -10,21 +12,21 @@ const LiveIssues = () => {
                     display: 'flex',
                     flexDirection: 'row',
                     justifyContent: 'space-between',
-                    marginLeft: 10,
-                    marginRight: 10,
-                    marginTop: 10
+                    marginLeft: H* 0.010,
+                    marginRight: H* 0.010,
+                    marginTop: H* 0.010
                 }}>
                     <View style={{
                         display: 'flex',
                         flexDirection: 'row',
-                        marginBottom: 15
+                        marginBottom: H* 0.015
 
                     }}>
                         <Image style={styles.menu_icon_img} source={require('../assets/images/Others/menu-icon.png')} />
                         <Text style={{
                             textAlign: 'center',
-                            marginTop: 5,
-                            fontSize: 15,
+                            marginTop: H* 0.005,
+                            fontSize: H* 0.015,
                             color: '#ffff'
                         }}>Live Issues</Text>
                     </View>
@@ -35,8 +37,8 @@ const LiveIssues = () => {
 
                 <View style={{
                     display: 'flex',
-                    marginLeft: 10,
-                    marginRight: 10,
+                    marginLeft: H* 0.010,
+                    marginRight: H* 0.010,
                     flexDirection: 'row'
                 }}>
                     <TextInput style={styles.input_issue} placeholder='Search by Categories of Issues' />
@@ -58,7 +60,7 @@ const LiveIssues = () => {
                 borderRadius: 25,
                 justifyContent: 'space-between',
                 borderColor: '#adb1b4',
-                top: 150
+                top: H* 0.150
             }}>
                 <View style={{ width: '30%', borderColor: '#ffff', }}>
                     <Image style={styles.live_issue_img} source={require('../assets/images/Others/live-issue-image.png')} />
@@ -69,21 +71,21 @@ const LiveIssues = () => {
                 }}>
                     <Text style={{
                         width: '100%',
-                        marginBottom: 7,
-                        marginTop: 7,
+                        marginBottom: H* 0.007,
+                        marginTop: H* 0.007,
                         color: 'black',
-                        marginLeft: -20
+                        marginLeft: H* -0.020
                     }}>
                         Lorem Ipsum is simply dummy text of the printing.
                     </Text>
                     <Text style={{
                         width: '100%',
-                        fontSize: 11,
-                        marginLeft: -20
+                        fontSize: H* 0.011,
+                        marginLeft: H* -0.020
                     }}>
                         Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical
                     </Text>
-                    <Text style={{ alignSelf: 'flex-end', fontSize: 11, marginTop: 10, marginRight: 20 }}> 5 Minutes ago</Text>
+                    <Text style={{ alignSelf: 'flex-end', fontSize: H* 0.011, marginTop: H* 0.010, marginRight: H* 0.020 }}> 5 Minutes ago</Text>
                 </View>
             </View>
 
@@ -100,16 +102,16 @@ const LiveIssues = () => {
                     onError={e => this.setState({ error: e.error })}
                     style={{ alignSelf:'center',
                     width:'90%',
-                    marginTop:170,
+                    marginTop:H* 0.170,
                     borderTopLeftRadius:20,
-                     height: 180, }}
+                     height: H* 0.180 }}
                 />
                 <Text style={{width:'90%',
                 borderBottomLeftRadius:20,
                 borderBottomRightRadius:20,
                 borderWidth:2,
                 borderColor:'#e0e3e8',
-                padding:10,
+                padding:H* 0.010,
                 textAlign:'left',
                 alignSelf:'center'}}>This video is included using 'react-native-youtube' library in node package manager</Text>
             </View>
@@ -117,9 +119,9 @@ const LiveIssues = () => {
             <View style={{
                 display: "flex",
                 flexDirection: "row",
-                marginTop: 10
+                marginTop: H* 0.010
             }}>
-                <View style={{ display: "flex", flexDirection: "row", marginLeft: 7 }}>
+                <View style={{ display: "flex", flexDirection: "row", marginLeft: H* 0.007 }}>
                     <Image style={styles.activity_img} source={require('../assets/images/Others/think.png')} />
                     <Text style={styles.activity_text}>Think</Text>
                 </View>
@@ -145,7 +147,7 @@ const styles = StyleSheet.create({
     container: {
         width: '100%',
         alignSelf: 'center',
-        height: 215,
+        height: H* 0.217,
         backgroundColor: "#427bed",
         borderBottomLeftRadius: 40,
         borderBottomRightRadius: 40,
@@ -154,68 +156,68 @@ const styles = StyleSheet.create({
 
     },
     menu_icon_img: {
-        height: 35,
-        width: 30,
-        marginRight: 7,
+        height: H* 0.035,
+        width: H* 0.030,
+        marginRight: H* 0.007,
         tintColor: '#ffff'
     },
     Add_issue: {
         borderWidth: 2,
         borderRadius: 20,
-        paddingTop: 5,
-        paddingBottom: 5,
-        paddingRight: 10,
-        paddingLeft: 10,
+        paddingTop: H* 0.005,
+        paddingBottom: H* 0.005,
+        paddingRight: H* 0.010,
+        paddingLeft: H* 0.010,
         color: '#ffff',
         borderColor: '#ffff'
 
     },
     search_img: {
-        width: 20,
-        height: 20,
-        marginLeft: -35,
-        marginTop: 9
+        width: H* 0.020,
+        height: H* 0.020,
+        marginLeft: H* -0.035,
+        marginTop: H* 0.009
     },
     input_issue: {
-        paddingTop: 3,
-        paddingBottom: 3,
-        paddingRight: 10,
-        paddingLeft: 15,
+        paddingTop: H* 0.003,
+        paddingBottom: H* 0.003,
+        paddingRight: H* 0.010,
+        paddingLeft: H* 0.015,
         borderWidth: 2,
         borderRadius: 20,
         width: '100%',
         borderColor: '#ffff',
         color: 'gray',
         backgroundColor: '#ffff',
-        fontSize: 15
+        fontSize: H* 0.015
 
     }, filter_img: {
-        width: 18,
-        height: 22,
+        width: H* 0.009,
+        height: H* 0.007,
         alignSelf: 'flex-end',
-        marginTop: 13,
-        marginRight: 13,
+        marginTop: H* 0.013,
+        marginRight: H* 0.013,
         tintColor: '#ffff'
     },
     live_issue_img: {
         width: '100%',
-        height: 130,
+        height: H* 0.130,
         borderBottomLeftRadius: 25,
         borderTopLeftRadius: 25
     },
     activity_img: {
-        width: 45,
-        height: 45,
+        width: H* 0.045,
+        height: H* 0.045,
         borderRadius: 50,
         borderColor: "#8cc5e8",
-        marginRight: 2
+        marginRight: H* 0.002
 
     },
     activity_text: {
-        fontSize: 15,
+        fontSize: H* 0.015,
         color: "black",
-        marginRight: 15,
-        marginTop: 10
+        marginRight: H* 0.007,
+        marginTop: H* 0.010
     }
     // backgroundVideo: {
     //     position: 'absolute',

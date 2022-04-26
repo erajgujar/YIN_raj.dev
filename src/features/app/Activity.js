@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-import { View, Text, Image, StyleSheet, TouchableOpacity, TextInput, Button } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity, TextInput, Dimensions } from 'react-native';
+const H = Dimensions.get('window').height;
+const W = Dimensions.get('window').width;
 export default class Activity extends Component {
     constructor() {
         super()
@@ -21,31 +23,38 @@ export default class Activity extends Component {
                     <Text style={styles.header_text}>Update Activity</Text>
                 </View>
 
-                <View style={{ flexDirection: "row" }}>
+
+                <Image style={{
+                    width: H * 0.003,
+                    height: H * 0.320,
+                    marginLeft: H * 0.085,
+                    marginTop: H * 0.100,
+                    marginRight: H * 0.022,
+                    zIndex: 0,
+                    position: 'absolute',
+                    tintColor: "#a7e1cd"
+                }} source={require('../assets/images/Others/line.png')} />
+
+                <View style={{ flexDirection: "row", width: W, marginBottom: H * 0.020 }}>
                     <Image style={styles.radio_img} source={require('../assets/images/Others/Radio_checked.png')} />
                     <Text style={styles.progress_btn}>1</Text>
                     <View style={styles.activity_card}>
-                        <Text style={{ fontSize: 12, color: "black", padding: 4 }}>Activity Title</Text>
-                        <Text style={{ fontSize: 12, padding: 4 }}>Lorem Ipsum is simply dummy text of the printing </Text>
+                        <Text style={{ fontSize: H * 0.016, color: "black", padding: H * 0.004 }}>Activity Title</Text>
+                        <Text style={{ fontSize: H * 0.015, padding: H * 0.004 }}>Lorem Ipsum is simply dummy text of the printing,
+                            this is an dummy text written here </Text>
                     </View>
                 </View>
 
-                <View style={{ flexDirection: "row" }}>
+                <View style={{ flexDirection: "row", marginBottom: H * 0.025 }}>
                     <Image style={styles.radio_img} source={require('../assets/images/Others/Radio_unchecked.png')} />
                     <Text style={styles.progress_btn}>2</Text>
-                    <Image style={{width:3, height: 210,
-                     marginLeft:-27,
-                      marginTop:-100,
-                      marginRight:22,
-                      zIndex:0,
-                      tintColor:"#11abe9"
-                      }} source={require('../assets/images/Others/line.png')}/>
                     <View style={styles.activity_card}>
-                        <Text style={{ fontSize: 12, color: "black", padding: 4 }}>Activity Title</Text>
-                        <Text style={{ fontSize: 12, padding: 4}}>Lorem Ipsum is simply dummy text of the printing </Text>
+                        <Text style={{ fontSize: H * 0.016, color: "black", padding: H * 0.004 }}>Activity Title</Text>
+                        <Text style={{ fontSize: H * 0.015, padding: H * 0.004 }}>Lorem Ipsum is simply dummy text of the printing,
+                            this is an dummy text written here </Text>
                     </View>
                 </View>
-           
+
                 <View style={styles.radio_btn}>
                     {
                         this.state.data.map((data, key) => {
@@ -54,12 +63,12 @@ export default class Activity extends Component {
                                     {this.state.checked == key ?
                                         <TouchableOpacity onPress={() => this.setState({ checked: key })} key={key}>
                                             <Image style={styles.radio_img} source={require('../assets/images/Others/Radio_checked.png')} />
-                                            <Text style={{ marginRight: 10 }}>{data}</Text>
+                                            <Text style={{ marginRight: H * 0.010 }}>{data}</Text>
                                         </TouchableOpacity>
                                         :
                                         <TouchableOpacity onPress={() => this.setState({ checked: key })} key={key}>
                                             <Image style={styles.radio_img} source={require('../assets/images/Others/Radio_unchecked.png')} />
-                                            <Text style={{ marginRight: 10 }}>{data}</Text>
+                                            <Text style={{ marginRight: H * 0.010 }}>{data}</Text>
                                         </TouchableOpacity>
                                     }
                                 </View>
@@ -72,34 +81,41 @@ export default class Activity extends Component {
                         style={styles.input}
                         placeholder="Write Your Comments"
                     />
+                    <Image style={{width:H* 0.030,
+                    tintColor:'gray',
+                    position:'relative',
+                    top: H* -0.058,
+                    left: H* 0.040,
+                     height: H* 0.025}} source={require('../assets/images/Others/message_des.png')}/>
                 </View>
-                <View style={{ margin: 30 }}>
-                    <Text style={{ fontSize: 15, color: "black", marginBottom: 10 }}>Add Photo</Text>
+                <View style={{ margin: H * 0.030, marginBottom: H/7}}>
+                    <Text style={{ fontSize: H * 0.015, color: "black", marginBottom: H * 0.010 }}>Add Photo</Text>
                     <View style={styles.camera_border}>
                         <Image style={styles.camera} source={require('../assets/images/Others/camera.jpg')} />
                     </View>
                 </View>
                 <View style={styles.button}>
                     <Text style={{
-                        width: 150,
+                        width: H * 0.150,
                         color: "white",
                         textAlign: "center",
-                        borderRadius: 15,
-                        fontSize: 15,
-                        marginRight: 20,
-                        padding: 10,
-                        marginLeft:35,
-                        backgroundColor: "#5cbbe8"
+                        alignSelf:'center',
+                        borderRadius: 20,
+                        fontSize: H * 0.017,
+                        marginRight: H * 0.020,
+                        padding: H * 0.008,
+                        backgroundColor: "#14a3db"
                     }}>Save & Update</Text>
                     <Text style={{
-                        width: 100,
-                        borderRadius: 15,
-                        fontSize: 15,
+                        width: H * 0.100,
+                        borderRadius: 20,
+                        fontSize: H * 0.017,
                         color: "white",
+                        alignSelf:'center',
                         textAlign: "center",
-                        padding: 10,
-                        backgroundColor: "#5cbbe8",
-                        marginLeft: 10
+                        padding: H * 0.008,
+                        backgroundColor: "#14a3db",
+                        marginLeft: H * 0.010
                     }}>Cancel</Text>
                 </View>
             </View>
@@ -109,102 +125,102 @@ export default class Activity extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        display: "flex",
+       justifyContent: 'flex-start',
         flexDirection: "row",
         backgroundColor: "#14a3db",
-        paddingTop: 50,
-        paddingBottom: 15,
+        paddingTop: H * 0.040,
+        paddingBottom: H * 0.015,
         borderBottomLeftRadius: 25,
         borderBottomRightRadius: 25,
-        marginBottom: 30
+        marginBottom: H * 0.030
 
 
     },
     left_arrow: {
-        width: 30,
-        height: 30,
-        marginLeft: 15,
-        marginRight: 15,
+        width: H * 0.025,
+        height: H * 0.020,
+        marginLeft: H * 0.016,
+        marginRight: H * 0.015,
+        alignSelf:'center',
         tintColor: "white"
     },
     header_text: {
-        fontSize: 20,
+        fontSize: H * 0.025,
+        alignSelf:'center',
         color: "white"
     },
     radio_img: {
-        height: 17,
-        width: 17,
+        height: H * 0.017,
+        width: H * 0.017,
         tintColor: "black",
-        marginLeft: 15,
-        marginTop: 20
+        marginLeft: H * 0.020,
+        marginTop: H * 0.042
 
     },
     radio_btn: {
         flexDirection: "row",
         alignContent: "space-between",
-        marginHorizontal: 30
+        marginHorizontal: H * 0.030
 
 
     },
     activity_card: {
-        marginLeft: 20,
-        width: 250,
+        marginLeft: H * 0.020,
+        width: '70%',
         borderRadius: 10,
-        height: 70,
-        marginBottom: 10,
+        marginBottom: H * 0.010,
         borderRadius: 12,
+        padding: H * 0.015,
         backgroundColor: "#a7e1cd"
 
     },
     progress_btn: {
-        width: 40,
-        height: 30,
+        width: H * 0.040,
+        height: H * 0.030,
         color: "white",
         backgroundColor: "#14a3db",
-        marginLeft: 30,
+        marginLeft: H * 0.030,
         textAlign: "center",
-        fontSize: 20,
+        fontSize: H * 0.020,
         borderRadius: 5,
-        marginTop: 18,
-        zIndex:1
-        
-        
-        
+        marginTop: H * 0.035,
+        zIndex: 1
+
+
+
     },
     radio: {
         flexDirection: 'column',
-        marginVertical: 150
+        marginVertical: H * 0.150
     },
     input: {
         borderWidth: 1,
-        width: 320,
-        height: 80,
+        width: '90%',
+        padding: H * 0.030,
         alignSelf: "center",
-        marginTop: 35,
+        marginTop: H * 0.035,
         borderRadius: 10,
-        borderColor: "#eae5e5",
+        borderColor: "#d3cece",
+        paddingLeft: H*0.060
     },
     camera: {
-        width: 35,
-        height: 30,
-        marginLeft: 5,
-        marginTop: 10,
+        width: H * 0.035,
+        height: H * 0.030,
+        marginLeft: H * 0.005,
+        marginTop: H * 0.01,
         alignSelf: "center"
 
     },
     camera_border: {
         borderRadius: 7,
-        borderColor: "#eae5e5",
+        borderColor: "#d3cece",
         borderWidth: 1,
-        height: 60,
-        width: 70
+        height: H * 0.060,
+        width: H * 0.070
     },
     button: {
-        display: 'flex',
         flexDirection: "row",
-        alignContent: "space-between",
-        alignItems: "stretch",
-        marginLeft: 20,
+        justifyContent: 'center'
 
 
     }

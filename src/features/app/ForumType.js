@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import { View, Image, Text, StyleSheet, TouchableOpacity, Dimensions} from 'react-native'
-const {height, width} = Dimensions.get('window')
+// const {height, width} = Dimensions.get('window')
+const H = Dimensions.get('window').height;
+const W = Dimensions.get('window').width;
+
 const ForumType = () => {
     const [mixed, setMixed] = useState("")
     const [female, setFemale] = useState("")
@@ -27,8 +30,8 @@ const ForumType = () => {
 
     return (<>
 
-        <View style={{height:height, width:width, justifyContent:'flex-start' }}>
-            <Image style={styles.container} source={require('../assets/images/yin/light-solid-full-header.png')} />
+        <View style={{height:H, width:W, justifyContent:'flex-start' }}>
+            <Image style={styles.heading_img} source={require('../assets/images/yin/light-solid-full-header.png')} />
             <Text style={styles.heading}>FORUM TYPES</Text>
             <TouchableOpacity onPress={MixedForum}>
                 <View style={styles.forum_container}>
@@ -69,79 +72,82 @@ const ForumType = () => {
 
 
 const styles = StyleSheet.create({
-    container: {
-        marginTop: 5,
-        marginLeft: 10,
-        marginRight: 10,
-        height: 135,
-        width: 350,
+    heading_img: {
+        marginTop: H*0.010,
+        marginLeft: H*0.010,
+        marginRight: H*0.010,
+        height: H*0.175,
+        width: W-45,
         alignSelf: 'center'
     },
     heading: {
-        marginTop: 20,
-        fontSize: 30,
+        marginTop: H*0.030,
+        fontSize: H*0.030,
+        marginBottom:H*0.030,
         textAlign: "center",
         color: "black",
-        fontSize: 25
+        fontSize: H*0.035
     },
     forum_img: {
-        height: 50,
-        width: 60,
-        marginRight: 30
+        height: H*0.060,
+        width: H*0.070,
+        marginRight:H*0.030,
+        alignSelf:'flex-start'
     },
     forum_container: {
         display: "flex",
         flexDirection: "row",
-        width: 300,
-        marginTop: 20,
-        marginLeft: 20,
-        marginRight: 20,
+        width: H*0.420,
+        marginTop: H*0.020,
+        marginLeft: H*0.020,
+        marginRight: H*0.020,
         alignContent: "space-between",
         alignSelf: "center",
-        paddingTop: 12,
-        paddingBottom: 12,
-        paddingLeft: 30,
-        paddingRight: 30,
-        borderRadius: 7,
+        paddingTop: H*0.020,
+        paddingBottom: H*0.020,
+        paddingLeft: H*0.030,
+        paddingRight: H*0.030,
+        borderRadius: H*0.007,
         borderColor: "#dfd8d8",
-        borderWidth: 2,
-        shadowRadius: 7
+        borderWidth: H*0.002,
+        shadowRadius: H*0.007
     },
     forum_text: {
         textAlign: "center",
-        marginVertical: 10,
+        marginVertical: H*0.005,
         color: "black",
-        fontSize: 15
+        fontSize: H*0.025,
+        alignSelf:'center',
+        marginRight: H* 0.010
     },
     btn_container: {
-        display: "flex",
         flexDirection: "row",
-        alignContent: "space-between",
+        justifyContent:'space-between',
         textAlign: "left",
-        marginTop: 90,
-        borderRadius: 15,
-        marginLeft: 15,
-        marginRight: 15,
-        padding: 15,
-        backgroundColor: "#6ce4e4",
-        alignContent: "space-between"
+        marginTop: H*0.230,
+        borderRadius: H*0.015,
+        marginLeft: H*0.015,
+        marginRight: H*0.015,
+        padding: H*0.015,
+        backgroundColor: "#1d81e5",
 
     },
     btn_img: {
-        height: 20,
-        width: 20,
-        padding: 5,
-        marginStart: 190,
+        height: H*0.020,
+        width: H*0.020,
+        padding: H*0.005,
+        //marginStart: H*0.300,
+        alignSelf:'center',
         tintColor: "white"
     },
     btn_text: {
-        fontSize: 17,
+        fontSize: H*0.022,
         color: "white"
     },
     checked: {
-        height: 25,
-        width: 25,
-        marginLeft: 10
+        height: H*0.035,
+        width: H*0.035,
+        alignSelf:'center',
     }
 
 });

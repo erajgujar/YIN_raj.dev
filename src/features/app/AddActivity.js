@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
-import { Alert, Modal, View, Text, StyleSheet, Image, TextInput, SafeAreaView, Pressable } from 'react-native';
+import { Alert, Modal, View, Text, StyleSheet, Image, TextInput, SafeAreaView, Pressable, Dimensions } from 'react-native';
+const H = Dimensions.get('window').height;
+const W = Dimensions.get('window').width;
 export default function AddActivity() {
     const [text, onChangeText] = useState('Give a Title to the Issue');
     const [text1, onChangeText1] = useState('Give a description to the Issue');
@@ -27,19 +29,18 @@ export default function AddActivity() {
                         <View style={styles.modalView}>
                             <View>
                                 <View>
-                                    <Text style={{ textAlign: 'center', color: 'black', marginBottom: 30, fontSize:20    }}>Add Activity</Text>
-                                   <TextInput style={styles.input_title} placeholder="Title" />
-                                   <View style={{display:'flex', flexDirection:'row'}}>
-                                   <Image style={styles.placeholder_icon} source={require('../assets/images/Others/message_des.png')}/>
-                                   <TextInput style={styles.input_des} placeholder="Write Description" />
-                                   </View>
+                                    <Text style={{ textAlign: 'center', color: 'black', marginBottom: H * 0.030, fontSize: H * 0.020 }}>Add Activity</Text>
+                                    <TextInput style={styles.input_title} placeholder="Title" />
+                                    <View style={{ display: 'flex', flexDirection: 'row' }}>
+                                        <TextInput style={styles.input_des} placeholder="Write Description" />
+                                    </View>
                                 </View>
                             </View>
 
                             <Pressable
                                 onPress={() => setModalVisible(!modalVisible)}
                             >
-                                <View style={{ display: 'flex', flexDirection: 'row', width: '100%', marginTop: 50 }}>
+                                <View style={{ flexDirection: 'row', width: '100%', marginTop: H * 0.050 }}>
                                     <Text style={styles.save}>Save</Text>
                                     <Text style={styles.cancel}>Cancel</Text>
                                 </View>
@@ -54,10 +55,10 @@ export default function AddActivity() {
             <View style={{
                 borderWidth: 1,
                 borderColor: "#dfe2e4",
-                borderRadius: 20,
-                paddingLeft: 30,
+                borderRadius: 25,
+                paddingLeft: H * 0.030,
                 width: "85%",
-                height: 40,
+                //height: H * 0.040,
                 alignSelf: 'center'
 
             }}>
@@ -69,13 +70,15 @@ export default function AddActivity() {
         <View style={{
             borderWidth: 1,
             borderColor: "#dfe2e4",
-            borderRadius: 20,
-            padding: 10,
-            paddingLeft: 25,
+            borderRadius: 25,
+            padding: H * 0.005,
+            paddingLeft: H * 0.025,
             width: "85%",
-            height: 70,
+            color: 'gray',
+            //height: H * 0.070,
             alignSelf: 'center',
-            marginTop: 10
+            marginTop: H * 0.010,
+            marginBottom: H * 0.010
 
         }}>
             <SafeAreaView>
@@ -84,111 +87,152 @@ export default function AddActivity() {
         </View>
 
         <View style={{ flexDirection: "row" }}>
-            <View style={{ margin: 10, marginLeft: 30 }}>
-                <Text style={{ fontSize: 15, color: "black", marginBottom: 10 }}>Add Photo</Text>
+            <View style={{ margin: H * 0.010, marginLeft: H * 0.030 }}>
+                <Text style={{ fontSize: H * 0.015, color: "black", marginBottom: H * 0.010 }}>Add Photo</Text>
                 <View style={styles.camera_border}>
                     <Image style={styles.camera} source={require('../assets/images/Others/camera.jpg')} />
                 </View>
             </View>
             <View style={{
-                width: "63%", borderWidth: 1,
+                width: "75%", borderWidth: 1,
                 borderColor: "#dfe2e4",
-                height: 90,
-                marginTop: 10,
+                height: H * 0.090,
+                marginTop: H * 0.010,
                 borderRadius: 20,
-                padding: 30,
+                padding: H * 0.030,
                 alignSelf: "center"
             }}>
                 <Text>Preview of the Photo</Text>
             </View>
         </View>
         <View style={{
-            display: "flex",
             flexDirection: "row",
-            marginTop: 10,
+            marginTop: H * 0.010,
             width: '100%',
             alignContent: 'space-between',
-            marginBottom: 20
+            marginBottom: H * 0.020
         }}>
-            <View style={{ width: '60%', alignSelf: "flex-start", marginLeft: 10, marginTop: 5 }}>
-                <Text style={{ color: "black", fontSize: 16 }}>Activities You will Perform</Text>
+            <View style={{ width: '60%', alignSelf: "flex-start", marginLeft: H * 0.010, marginTop: H * 0.005 }}>
+                <Text style={{ color: "black", fontSize: H * 0.020 }}>Activities You will Perform</Text>
             </View>
             <View style={{
                 width: '40%',
                 backgroundColor: "#0080ff",
-                padding: 7,
-                marginLeft: -20,
-                borderRadius: 15,
+                padding: H * 0.007,
+                marginLeft: H * -0.020,
+                borderRadius: 25,
                 alignSelf: "flex-end"
             }}>
                 <Pressable
-                    style={[styles.button_modal, styles.buttonOpen]}
+                    //style={[styles.button_modal, styles.buttonOpen]}
                     onPress={() => setModalVisible(true)}>
                     <Text style={{ textAlign: 'center', color: "white" }}>Add New Activity +</Text>
                 </Pressable>
-
-
             </View>
         </View>
-        <View style={{ position: "absolute", zIndex: 0, marginTop: 380 }}>
+
+        <View style={{ position: "absolute", zIndex: 0, marginTop: H * 0.450 }}>
             <Image style={styles.progress_line} source={require('../assets/images/Others/line.png')} />
         </View>
-        <View style={{ display: "flex", flexDirection: "row", width: '100%' }}>
-            <Text style={styles.progress_stage}>1</Text>
-            <View style={{
-                display: "flex",
-                flexDirection: "row",
-                backgroundColor: "#a7e1cd",
-                width: -40,
-                borderTopLeftRadius: 10,
-                borderTopRightRadius: 10,
-                marginBottom: 9,
-                width: '70%'
 
+        <View style={{ flexDirection: "row" }}>
+            <View>
+                <Text style={styles.progress_stage}>1</Text>
+            </View>
+
+            <View style={{
+                backgroundColor: "#a7e1cd",
+                width: '78%',
+                borderRadius:25,
+                marginBottom: H*0.015,
+                padding: H* 0.013,
+                marginBottom: H * 0.009,
             }}>
-                <Text style={styles.progress_title}>Activity Title</Text>
-                <Text style={styles.progress_status_completed}>Completed</Text>
+                <View style={{
+                flexDirection: "row",
+                justifyContent:'space-between'}}>
+                    <Text style={{fontSize:H* 0.017, color:'black'}}>Activity Title</Text>
+                    <Text style={{fontSize:H* 0.014,
+                     borderRadius:20,
+                      backgroundColor:'green',
+                       color:'white',
+                       paddingLeft: H*0.007,
+                       paddingRight:H*0.007,
+                       marginBottom: H*0.005,
+                        padding:H*0.002}}>Completed</Text>
+                </View>
+                <View>
+                    <Text style={{fontSize: H*0.014}}>Lorem Ipsum is simply dummy text of the printing and showing the text and images.</Text>
+                </View>
             </View>
         </View>
-        <Text style={styles.progress_text}>Lorem Ipsum is simply dummy text of the printing and showing</Text>
 
-        <View style={{ display: "flex", flexDirection: "row" }}>
-            <Text style={styles.progress_stage}>2</Text>
+        <View style={{ flexDirection: "row" }}>
+            <View>
+                <Text style={styles.progress_stage}>2</Text>
+            </View>
+
             <View style={{
-                display: "flex",
-                flexDirection: "row",
                 backgroundColor: "#a7e1cd",
-                width: -40,
-                borderTopLeftRadius: 10,
-                borderTopRightRadius: 10,
-                marginBottom: 20,
-                width: '70%'
-
+                width: '78%',
+                borderRadius:25,
+                marginBottom: H*0.015,
+                padding: H* 0.013,
+                marginBottom: H * 0.009,
             }}>
-                <Text style={styles.progress_title}>Activity Title</Text>
-                <Text style={styles.progress_status_pending}>Pending</Text>
+                <View style={{
+                flexDirection: "row",
+                justifyContent:'space-between'}}>
+                    <Text style={{fontSize:H* 0.017, color:'black'}}>Activity Title</Text>
+                    <Text style={{fontSize:H* 0.014,
+                     borderRadius:20,
+                      backgroundColor:'orange',
+                       color:'white',
+                       paddingLeft: H*0.007,
+                       paddingRight:H*0.007,
+                       marginBottom: H*0.005,
+                        padding:H*0.002}}>Pending</Text>
+                </View>
+                <View>
+                    <Text style={{fontSize: H*0.014}}>Lorem Ipsum is simply dummy text of the printing and showing the text and images.</Text>
+                </View>
             </View>
         </View>
-        <Text style={styles.progress_text}>Lorem Ipsum is simply dummy text of the printing and showing</Text>
 
-        <View style={{ display: "flex", flexDirection: "row" }}>
-            <Text style={styles.progress_stage}>3</Text>
+        <View style={{ flexDirection: "row" }}>
+            <View>
+                <Text style={styles.progress_stage}>3</Text>
+            </View>
+
             <View style={{
-                display: "flex",
-                flexDirection: "row",
                 backgroundColor: "#a7e1cd",
-                width: -40,
-                borderTopLeftRadius: 10,
-                borderTopRightRadius: 10,
-                marginBottom: 9,
-                width: '70%'
-
+                width: '78%',
+                borderRadius:25,
+                marginBottom: H*0.015,
+                padding: H* 0.013,
+                marginBottom: H * 0.009,
             }}>
-                <Text style={styles.progress_title}>Activity Title</Text>
-                <Text style={styles.progress_status_pending}>Pending</Text>
+                <View style={{
+                flexDirection: "row",
+                justifyContent:'space-between'}}>
+                    <Text style={{fontSize:H* 0.017, color:'black'}}>Activity Title</Text>
+                    <Text style={{fontSize:H* 0.014,
+                     borderRadius:20,
+                      backgroundColor:'orange',
+                       color:'white',
+                       paddingLeft: H*0.007,
+                       paddingRight:H*0.007,
+                       marginBottom: H*0.005,
+                        padding:H*0.002}}>Pending</Text>
+                </View>
+                <View>
+                    <Text style={{fontSize: H*0.014}}>Lorem Ipsum is simply dummy text of the printing and showing the text and images.</Text>
+                </View>
             </View>
         </View>
-        <Text style={styles.progress_text}>Lorem Ipsum is simply dummy text of the printing and showing</Text>
+
+        
+
 
         <View style={styles.button}>
             <Text style={{
@@ -196,26 +240,27 @@ export default function AddActivity() {
                 color: "white",
                 textAlign: "center",
                 borderRadius: 15,
-                fontSize: 15,
-                marginRight: 40,
-                padding: 10,
-                marginLeft: 1,
+                fontSize: H * 0.017,
+                marginRight: H * 0.040,
+                padding: H * 0.010,
+                marginLeft: H * 0.001,
                 backgroundColor: "#14a3db",
-                paddingTop: 7,
-                paddingBottom: 7
+                paddingTop: H * 0.007,
+                paddingBottom: H * 0.007
             }}>Save Issue</Text>
             <Text style={{
                 width: '30%',
                 borderRadius: 15,
-                fontSize: 15,
+                fontSize: H * 0.017,
                 color: "white",
                 textAlign: "center",
                 backgroundColor: "#14a3db",
-                marginRight: 10,
-                paddingTop: 7,
-                paddingBottom: 7
+                marginRight: H * 0.010,
+                paddingTop: H * 0.007,
+                paddingBottom: H * 0.007
             }}>Cancel</Text>
         </View>
+
     </View>)
 
 
@@ -224,33 +269,35 @@ export default function AddActivity() {
 
 const styles = StyleSheet.create({
     container: {
-        display: "flex",
         flexDirection: "row",
         backgroundColor: "#14a3db",
-        paddingTop: 30,
-        paddingBottom: 15,
+        paddingTop: H * 0.040,
+        paddingBottom: H * 0.015,
         borderBottomLeftRadius: 25,
         borderBottomRightRadius: 25,
-        marginBottom: 17,
-        width: '100%'
+        marginBottom: H * 0.010,
+        width: '100%',
+        justifyContent: 'flex-start'
     },
     left_arrow: {
-        width: 25,
-        height: 25,
-        marginLeft: 15,
-        marginRight: 15,
+        width: H * 0.025,
+        height: H * 0.025,
+        marginLeft: H * 0.015,
+        marginRight: H * 0.015,
+        alignSelf: 'center',
         tintColor: "white",
-        marginTop: 2
+        marginTop: H * 0.002
     },
     header_text: {
-        fontSize: 20,
-        color: "white"
+        fontSize: H * 0.023,
+        color: "white",
+        alignSelf: 'center'
     },
     camera: {
-        width: 35,
-        height: 30,
-        marginLeft: 5,
-        marginTop: 10,
+        width: H * 0.035,
+        height: H * 0.030,
+        marginLeft: H * 0.005,
+        marginTop: H * 0.010,
         alignSelf: "center"
 
     },
@@ -258,81 +305,37 @@ const styles = StyleSheet.create({
         borderRadius: 7,
         borderColor: "#eae5e5",
         borderWidth: 1,
-        height: 60,
-        width: 70
+        height: H * 0.060,
+        width: H * 0.070
     },
     progress_line: {
-        width: 5,
-        height: 325,
-        marginLeft: 50,
+        width: H * 0.005,
+        height: H * 0.400,
+        marginLeft: H * 0.050,
         tintColor: "#a7e1cd",
-        marginTop: -25
+        marginTop: H * -0.025
     },
     progress_stage: {
         color: "white",
         backgroundColor: "#0a7ff3",
-        height: 25,
-        width: 35,
-        marginLeft: 35,
+        height: H * 0.035,
+        width: H * 0.035,
+        marginLeft: H * 0.035,
         borderRadius: 5,
-        paddingLeft: 14,
-        paddingTop: 2,
-        marginRight: 30,
-        marginTop: 25,
-        marginBottom: 20
-    },
-    progress_title: {
-        color: "black",
-        marginLeft: 10,
-        fontSize: 12.5,
-        marginTop: 7,
-
-
-    },
-    progress_status_completed: {
-        borderRadius: 10,
-        color: "white",
-        backgroundColor: "green",
-        paddingLeft: 10,
-        paddingRight: 10,
-        height: 22,
-        marginLeft: 90,
-        marginTop: 6,
-        width: '35%',
-        textAlign: 'center'
-
-    },
-    progress_status_pending: {
-        borderRadius: 10,
-        color: "white",
-        backgroundColor: "#ff4500",
-        paddingLeft: 10,
-        paddingRight: 10,
-        height: 22,
-        marginLeft: 90,
-        marginTop: 6,
-        width: '35%',
-        textAlign: 'center'
-
-    },
-    progress_text: {
-        marginLeft: 100,
-        backgroundColor: "#a7e1cd",
-        marginRight: 17.5,
-        borderBottomLeftRadius: 10,
-        borderBottomRightRadius: 10,
-        paddingLeft: 5,
-        paddingBottom: 5,
-        marginTop: -35,
-        marginBottom: 9
+        paddingLeft: H * 0.014,
+        paddingTop: H * 0.005,
+        marginRight: H * 0.030,
+        marginTop: H * 0.025,
+        marginBottom: H * 0.020
     },
     button: {
-        display: 'flex',
+        justifyContent:'center',
+        alignItems:'center',
         flexDirection: "row",
         alignItems: 'center',
-        marginLeft: 50,
+        //marginLeft: H * 0.050,
         width: '100%',
-        marginTop: 20
+        marginTop: H * 0.080
 
 
     },
@@ -340,13 +343,13 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        marginTop: 15
+        marginTop: H * 0.015
     },
     modalView: {
-        margin: 10,
+        margin: H * 0.010,
         backgroundColor: "white",
         borderRadius: 20,
-        padding: 40,
+        padding: H * 0.040,
         alignItems: "center",
         shadowColor: "#000",
         shadowOffset: {
@@ -363,19 +366,18 @@ const styles = StyleSheet.create({
         textAlign: "center"
     },
     modalText: {
-        marginBottom: 15,
+        marginBottom: H * 0.015,
         textAlign: "center"
     },
     input_title: {
-        width: '90%',
-        height: 35,
+        width: '100%',
+        height: H * 0.075,
         borderRadius: 10,
         borderColor: '#d9dcde',
         borderWidth: 2,
-        padding: 10,
-        marginBottom: 5,
+        padding: H * 0.010,
+        marginBottom: H * 0.005,
         alignSelf: 'center',
-        alignContent: "center",
         justifyContent: "center",
     },
     input_des: {
@@ -383,39 +385,29 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         borderColor: '#d9dcde',
         borderWidth: 2,
-        padding: 35,
-        alignItems:'center',
+        padding: H * 0.035,
+        alignItems: 'center',
         alignSelf: 'center',
         justifyContent: "center",
-        marginLeft:25
     },
     save: {
         backgroundColor: '#0084ff',
-        marginRight: 10,
-        width: 60,
+        marginRight: H * 0.010,
+        width: H * 0.090,
         textAlign: 'center',
         borderRadius: 10,
-        padding: 3,
+        padding: H * 0.003,
         color: '#ffff'
 
     },
     cancel: {
         backgroundColor: '#0084ff',
-        width: 60,
+        width: H * 0.090,
         textAlign: 'center',
         borderRadius: 10,
-        padding: 3,
+        padding: H * 0.003,
         color: '#ffff'
     },
-    placeholder_icon:{
-        padding: 10,
-        marginRight:-52,
-        marginTop:43,
-        height: 20,
-        width: 20,
-        tintColor:'gray',
-        resizeMode: 'stretch',
-        alignItems: 'center'
-    }
     
+
 })
