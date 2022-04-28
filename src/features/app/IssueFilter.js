@@ -1,12 +1,20 @@
-import React from 'react';
-import { View, Text, Image, Dimensions, StyleSheet, TextInput } from 'react-native';
-// const { width, height } = Dimensions.get('window')
+import React, { useState } from 'react';
+import { View, Text, Image, StyleSheet, TextInput, Dimensions, TouchableOpacity } from 'react-native';
+import DropDown from './DropDown';
+//import SelectDropdown from 'react-native-select-dropdown'
 const H = Dimensions.get('window').height;
 const W = Dimensions.get('window').width;
-
+const issues = [{ id: 1, name: 'All' }, { id: 2, name: 'Completed' }, { id: 3, name: 'Live' }, { id: 4, name: 'Droped' }, { id: 4, name: 'External' }]
 export default function IssueFilter() {
+    const [selectedItem, setSelectedItem] = useState(null)
+
+    const onSelect = (item) => {
+        setSelectedItem(item)
+    }
+
+
     return (
-        <View style={{ width: W, justifyContent:'flex-start' }}>
+        <View>
 
             <View style={styles.issue_wrap}>
                 <View style={{
@@ -34,18 +42,49 @@ export default function IssueFilter() {
                     alignSelf: 'flex-start',
                     flexDirection: 'row',
                     marginTop: H * 0.005,
-                    marginBottom:H * 0.005
+                    marginBottom: H * 0.155
 
                 }}>
                     <TextInput style={styles.input_issue} placeholder='Search by Categories of Issues' />
                     <Image style={styles.search_img} source={require('../assets/images/Others/search.png')} />
                 </View>
 
-                <View>
-                    <Image style={styles.filter_img} source={require('../assets/images/Others/filter.png')} />
-                </View>
-               
+
             </View>
+
+            {/* <View>
+                <SelectDropdown
+                    buttonTextStyle={styles.dropdown_button_text}
+                    buttonStyle={styles.dropdown_button}
+                    rowStyle={styles.dropdown_row}
+                    rowTextStyle={styles.dropdown_row_text}
+                    dropdownIconPosition="right"
+
+                    data={Issues}
+                    onSelect={(selectedItem, index) => {
+                        console.log(selectedItem, index)
+                    }}
+                    buttonTextAfterSelection={(selectedItem, index) => {
+                        // text represented after item is selected
+                        // if data array is an array of objects then return selectedItem.property to render after item is selected
+                        return selectedItem
+                    }}
+                    rowTextForSelection={(item, index) => {
+                        // text represented for each item in dropdown
+                        // if data array is an array of objects then return item.property to represent item in dropdown
+                        return item
+                    }}
+                />
+            </View> */}
+
+
+
+
+
+
+
+
+
 
             <View style={{
                 position: 'relative',
@@ -83,8 +122,22 @@ export default function IssueFilter() {
             </View>
 
             <View style={{
-                position: 'relative',
-                top: H * 0.210,
+                    //Top: H * 0.040,
+                    position: 'absolute',
+                    zIndex: 1,
+                    top:H* 0.090,
+                    marginLeft: H* 0.200
+                }}>
+                    <DropDown
+                        value={selectedItem}
+                        data={issues}
+                        onSelect={onSelect}
+                    />
+                </View>
+
+            <View style={{
+                position: 'absolute',
+                top: H * 0.400,
                 width: W,
             }}>
                 <View>
@@ -124,7 +177,7 @@ export default function IssueFilter() {
 
             <View style={{
                 position: 'relative',
-                top: H * 0.230,
+                top: H * 0.410,
                 width: W,
             }}>
 
@@ -150,25 +203,29 @@ export default function IssueFilter() {
                 </View>
 
                 <View >
-                <View style={{flexDirection:'row'}}>
-                    <Text style={{ marginLeft: H * 0.015, marginTop: H * 0.015, fontSize:H * 0.017, color: 'black' }}>Forum Name:</Text>
-                    <Text style={{ marginLeft: H * 0.015, marginTop: H * 0.015, fontSize: H * 0.017}}>Grievence Corner</Text>
-                </View>
-                <View style={{flexDirection:'row'}}>
-                    <Text style={{ marginLeft: H * 0.015, marginTop: H * 0.005, fontSize:H * 0.017, color: 'black' }}>College Name:</Text>
-                    <Text style={{ marginLeft: H * 0.015, marginTop: H * 0.005, fontSize: H * 0.017 }}>MIT College</Text>
-                </View>
+                    <View style={{ flexDirection: 'row' }}>
+                        <Text style={{ marginLeft: H * 0.015, marginTop: H * 0.015, fontSize: H * 0.017, color: 'black' }}>Forum Name:</Text>
+                        <Text style={{ marginLeft: H * 0.015, marginTop: H * 0.015, fontSize: H * 0.017 }}>Grievence Corner</Text>
+                    </View>
+                    <View style={{ flexDirection: 'row' }}>
+                        <Text style={{ marginLeft: H * 0.015, marginTop: H * 0.005, fontSize: H * 0.017, color: 'black' }}>College Name:</Text>
+                        <Text style={{ marginLeft: H * 0.015, marginTop: H * 0.005, fontSize: H * 0.017 }}>MIT College</Text>
+                    </View>
                 </View>
             </View>
+
         </View>
+
+
+
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-       flex:1,
-       justifyContent: 'center',
-       alignItems:'center'
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
 
     },
     issue_wrap: {
@@ -176,23 +233,21 @@ const styles = StyleSheet.create({
         backgroundColor: '#4083f6',
         borderBottomLeftRadius: 30,
         borderBottomRightRadius: 30,
-        justifyContent:'space-between',
-        alignItems:'stretch',
+        justifyContent: 'space-between',
+        alignItems: 'stretch',
         position: 'absolute',
         height: 'auto',
         zIndex: 0,
         padding: H * 0.007,
-        paddingBottom: H*0.015
+        paddingBottom: H * 0.015
 
     },
     menu_icon_img: {
         height: H * 0.045,
         width: H * 0.044,
         marginRight: H * 0.007,
-        alignSelf:'flex-start',
+        alignSelf: 'flex-start',
         tintColor: '#ffff'
-
-
     },
     Add_issue: {
         borderWidth: 2,
@@ -200,11 +255,11 @@ const styles = StyleSheet.create({
         padding: H * 0.010,
         color: '#ffff',
         borderColor: '#ffff',
-        fontSize:H * 0.017,
+        fontSize: H * 0.017,
         height: H * 0.045,
         flexBasis: H * 0.155,
         marginTop: H * 0.005,
-        alignSelf:'flex-end',
+        alignSelf: 'flex-end',
         textAlign: 'center'
 
     },
@@ -222,13 +277,13 @@ const styles = StyleSheet.create({
     },
     input_issue: {
         padding: H * 0.015,
-        margin: H* 0.010,
+        margin: H * 0.010,
         borderWidth: 2,
         borderRadius: 20,
-        width: W-20,
+        width: W - 20,
         height: H * 0.050,
         borderColor: '#ffff',
-        alignSelf:'center',
+        alignSelf: 'center',
         color: 'gray',
         backgroundColor: '#ffff',
         fontSize: H * 0.015,
@@ -243,6 +298,45 @@ const styles = StyleSheet.create({
         tintColor: '#ffff',
         marginTop: H * 0.010,
         marginBottom: H * 0.090
-        
-    }
+
+    },
+    // dropdown_button_text: {
+    //     fontSize: 10,
+
+    //     padding: 0
+    // },
+    // dropdown_button: {
+    //     width: 100,
+    //     padding: 0
+    // },
+    // dropdown_row: {
+    //     padding: 5
+    // },
+    // dropdown_row_text: {
+    //     fontSize: 13,
+    //     padding: 5
+    // },
+    // dropdown_menu: {
+    //     backgroundColor: 'black',
+    //     color: 'white',
+    //     borderWidth: 2,
+    //     padding: 5
+    // },
+    // text: {
+    //     width: H * 0.045,
+    //     height: H * 0.107,
+    //     alignSelf: 'flex-end',
+    //     marginRight: H * 0.015,
+    //     marginTop: H * 0.010,
+    //     marginBottom: H * 0.090,
+    //     zIndex:1
+
+    // }
 })
+
+
+
+    
+
+
+
