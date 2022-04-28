@@ -1,6 +1,6 @@
 import React from 'react';
 import YouTube from 'react-native-youtube';
-import { View, Text, Image, StyleSheet, TextInput } from 'react-native'
+import { View, Text, Image, StyleSheet, TextInput, Dimensions } from 'react-native'
 const H = Dimensions.get('window').height;
 const W = Dimensions.get('window').width;
 const LiveIssues = () => {
