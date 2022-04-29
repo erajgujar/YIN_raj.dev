@@ -18,17 +18,22 @@ const App = () => {
 
 
 
+      
+      <IssueFilter/>
+
+
+
+
+      {/* <ForumType /> */}
       {/* <LiveIssues /> */}
       {/* <ListIssues/> */}
-      {/* <IssueFilter/> */}
-      <IssueDetails/>
-      {/* <ForumType /> */}
+      {/* <MinutesOfMeeting/> */}
+      {/* <AddActivity/> */}
+      {/* <AddNewIssue/> */}
+      {/* <Members/> */}
       {/* <CheckUpdates/> */}
       {/* <Activity /> */}
-      {/* <Members/> */}
-      {/* <AddNewIssue/> */}
-      {/* <AddActivity/> */}
-      {/* <MinutesOfMeeting/> */}
+      {/* <IssueDetails/> */}
 
 
 

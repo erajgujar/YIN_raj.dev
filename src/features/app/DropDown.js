@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, StyleSheet, Image, Dimensions} from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet, Image, Dimensions, ScrollView } from 'react-native'
 import React, { useState, useEffect } from 'react'
 const H = Dimensions.get('window').height;
 const W = Dimensions.get('window').width;
@@ -20,70 +20,73 @@ const DropDown = ({
 
 
     return (
-        <View>
-            <TouchableOpacity onPress={() => setShowOption(!showOption)}>
-                <Image style={styles.filter_img} source={require('../assets/images/Others/filter.png')} />
-                <Text style={{
-                    backgroundColor: '#4083f6',
-                    padding: H*0.003,
-                    marginLeft: H* 0.080,
-                    textAlign: 'center',
-                    marginBottom: H* 0.010,
-                    color: 'white'
-                }}>{!!value ? value?.name : "Select Issue"}</Text>
-            </TouchableOpacity>
-            {showOption && <View>
-                {
-                    data.map((val, i) => {
-                        return (
-                            <TouchableOpacity style={{
-                                flexDirection: 'row',
-                                justifyContent: 'flex-end',
-                                borderWidth: 1,
-                                marginLeft:H* 0.135,         
-                                borderColor: 'white',
-                                backgroundColor: 'gray',
-                                maxWidth:H* 0.135   
-                            }} key={String(i)}>
-                                <Image style={styles.radio} source={require('../assets/images/Others/radio_button.png')} />
-                                <Text onPress={() => onSelectedItem(val)} style={styles.text} >{val.name}</Text>
-                            </TouchableOpacity>
-                        )
-                    })
+        <ScrollView>
+        
+            <View>
+                <TouchableOpacity onPress={() => setShowOption(!showOption)}>
+                    <Image style={styles.filter_img} source={require('../assets/images/Others/filter.png')} />
+                    <Text style={{
+                        backgroundColor: '#4083f6',
+                        padding: 3,
+                        marginLeft: 30,
+                        textAlign: 'center',
+                        marginBottom: 10,
+                        color: 'white'
+                    }}>{!!value ? value?.name : "Select Issue"}</Text>
+                </TouchableOpacity>
+                {showOption && <View>
+                    {
+                        data.map((val, i) => {
+                            return (
+                                <TouchableOpacity style={{
+                                    flexDirection: 'row',
+                                    justifyContent: 'flex-end',
+                                    borderWidth: 1,
+                                    marginLeft: 20,
+                                    borderColor: 'white',
+                                    backgroundColor: 'gray',
+                                    maxWidth: 130
+                                }} key={String(i)}>
+                                    <Image style={styles.radio} source={require('../assets/images/Others/radio_button.png')} />
+                                    <Text onPress={() => onSelectedItem(val)} style={styles.text} >{val.name}</Text>
+                                </TouchableOpacity>
+                            )
+                        })
+                    }
+                </View>
                 }
-            </View>
-            }
 
-        </View>
+            </View>
+        </ScrollView>
     )
 }
 
 const styles = StyleSheet.create({
     filter_img: {
-        width: H* 0.018,
-        height: H* 0.022,
-        marginTop: H* 0.045,
-        marginLeft: H* 0.260,
+        width: 16,
+        height: 18,
+        marginTop: 35,
+        marginLeft: 115,
         tintColor: '#ffff',
         //backgroundColor: 'white',
 
 
     },
     text: {
-        fontSize: H* 0.017,
-        width: H* 0.100,
-        marginLeft:H* 0.010,
+        fontSize: 15,
+        width: 80,
+        marginLeft: 10,
         color: 'white',
         textAlign: 'left'
     },
     radio: {
-        width: H* 0.013,
-        height: H* 0.013,
+        width: 13,
+        height: 13,
         marginRight: 'auto',
-        marginBottom:H* 0.005,
-        marginLeft:H* 0.010,
-        alignSelf:'flex-end',
-        padding:'auto',
+        marginBottom: 5,
+        marginLeft: 10,
+        alignSelf: 'flex-end',
+        padding: 'auto',
         tintColor: '#ffff',
 
     }

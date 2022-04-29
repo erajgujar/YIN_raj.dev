@@ -1,32 +1,34 @@
 import React from 'react';
 import YouTube from 'react-native-youtube';
-import { View, Text, Image, StyleSheet, TextInput } from 'react-native'
-const H = Dimensions.get('window').height;
-const W = Dimensions.get('window').width;
+import { View, Text, Image, StyleSheet, TextInput, ScrollView, SafeAreaView, Dimensions} from 'react-native'
+const {width, height} = Dimensions.get('window')
 const LiveIssues = () => {
 
     return (
+        <SafeAreaView >
+            <ScrollView>
+
         <View style={{height:'100%'}}>
             <View style={styles.container}>
                 <View style={{
                     display: 'flex',
                     flexDirection: 'row',
                     justifyContent: 'space-between',
-                    marginLeft: H* 0.010,
-                    marginRight: H* 0.010,
-                    marginTop: H* 0.010
+                    marginLeft: 10,
+                    marginRight: 10,
+                    marginTop: 10
                 }}>
                     <View style={{
                         display: 'flex',
                         flexDirection: 'row',
-                        marginBottom: H* 0.015
+                        marginBottom: 15
 
                     }}>
                         <Image style={styles.menu_icon_img} source={require('../assets/images/Others/menu-icon.png')} />
                         <Text style={{
                             textAlign: 'center',
-                            marginTop: H* 0.005,
-                            fontSize: H* 0.015,
+                            marginTop: 5,
+                            fontSize: 15,
                             color: '#ffff'
                         }}>Live Issues</Text>
                     </View>
@@ -37,8 +39,8 @@ const LiveIssues = () => {
 
                 <View style={{
                     display: 'flex',
-                    marginLeft: H* 0.010,
-                    marginRight: H* 0.010,
+                    marginLeft: 10,
+                    marginRight: 10,
                     flexDirection: 'row'
                 }}>
                     <TextInput style={styles.input_issue} placeholder='Search by Categories of Issues' />
@@ -60,7 +62,7 @@ const LiveIssues = () => {
                 borderRadius: 25,
                 justifyContent: 'space-between',
                 borderColor: '#adb1b4',
-                top: H* 0.150
+                top: 150
             }}>
                 <View style={{ width: '30%', borderColor: '#ffff', }}>
                     <Image style={styles.live_issue_img} source={require('../assets/images/Others/live-issue-image.png')} />
@@ -71,21 +73,21 @@ const LiveIssues = () => {
                 }}>
                     <Text style={{
                         width: '100%',
-                        marginBottom: H* 0.007,
-                        marginTop: H* 0.007,
+                        marginBottom: 7,
+                        marginTop: 7,
                         color: 'black',
-                        marginLeft: H* -0.020
+                        marginLeft: -20
                     }}>
                         Lorem Ipsum is simply dummy text of the printing.
                     </Text>
                     <Text style={{
                         width: '100%',
-                        fontSize: H* 0.011,
-                        marginLeft: H* -0.020
+                        fontSize: 11,
+                        marginLeft: -20
                     }}>
                         Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical
                     </Text>
-                    <Text style={{ alignSelf: 'flex-end', fontSize: H* 0.011, marginTop: H* 0.010, marginRight: H* 0.020 }}> 5 Minutes ago</Text>
+                    <Text style={{ alignSelf: 'flex-end', fontSize: 11, marginTop: 10, marginRight: 20 }}> 5 Minutes ago</Text>
                 </View>
             </View>
 
@@ -99,19 +101,19 @@ const LiveIssues = () => {
                     onReady={e => this.setState({ isReady: true })}
                     onChangeState={e => this.setState({ status: e.state })}
                     onChangeQuality={e => this.setState({ quality: e.quality })}
-                    onError={e => this.setState({ error: e.error })}
+                    //onError={e => this.setState({ error: e.error })}
                     style={{ alignSelf:'center',
                     width:'90%',
-                    marginTop:H* 0.170,
+                    marginTop:170,
                     borderTopLeftRadius:20,
-                     height: H* 0.180 }}
+                     height: 180, }}
                 />
                 <Text style={{width:'90%',
                 borderBottomLeftRadius:20,
                 borderBottomRightRadius:20,
                 borderWidth:2,
                 borderColor:'#e0e3e8',
-                padding:H* 0.010,
+                padding:10,
                 textAlign:'left',
                 alignSelf:'center'}}>This video is included using 'react-native-youtube' library in node package manager</Text>
             </View>
@@ -119,9 +121,10 @@ const LiveIssues = () => {
             <View style={{
                 display: "flex",
                 flexDirection: "row",
-                marginTop: H* 0.010
+                marginTop: 40,
+                width:width
             }}>
-                <View style={{ display: "flex", flexDirection: "row", marginLeft: H* 0.007 }}>
+                <View style={{ display: "flex", flexDirection: "row", marginLeft: 7 }}>
                     <Image style={styles.activity_img} source={require('../assets/images/Others/think.png')} />
                     <Text style={styles.activity_text}>Think</Text>
                 </View>
@@ -140,6 +143,8 @@ const LiveIssues = () => {
             </View>
 
         </View>
+        </ScrollView>
+        </SafeAreaView>
     )
 }
 
@@ -147,7 +152,7 @@ const styles = StyleSheet.create({
     container: {
         width: '100%',
         alignSelf: 'center',
-        height: H* 0.217,
+        height: 215,
         backgroundColor: "#427bed",
         borderBottomLeftRadius: 40,
         borderBottomRightRadius: 40,
@@ -156,68 +161,68 @@ const styles = StyleSheet.create({
 
     },
     menu_icon_img: {
-        height: H* 0.035,
-        width: H* 0.030,
-        marginRight: H* 0.007,
+        height: 35,
+        width: 30,
+        marginRight: 7,
         tintColor: '#ffff'
     },
     Add_issue: {
         borderWidth: 2,
         borderRadius: 20,
-        paddingTop: H* 0.005,
-        paddingBottom: H* 0.005,
-        paddingRight: H* 0.010,
-        paddingLeft: H* 0.010,
+        paddingTop: 5,
+        paddingBottom: 5,
+        paddingRight: 10,
+        paddingLeft: 10,
         color: '#ffff',
         borderColor: '#ffff'
 
     },
     search_img: {
-        width: H* 0.020,
-        height: H* 0.020,
-        marginLeft: H* -0.035,
-        marginTop: H* 0.009
+        width: 20,
+        height: 20,
+        marginLeft: -35,
+        marginTop: 9
     },
     input_issue: {
-        paddingTop: H* 0.003,
-        paddingBottom: H* 0.003,
-        paddingRight: H* 0.010,
-        paddingLeft: H* 0.015,
+        paddingTop: 3,
+        paddingBottom: 3,
+        paddingRight: 10,
+        paddingLeft: 15,
         borderWidth: 2,
         borderRadius: 20,
         width: '100%',
         borderColor: '#ffff',
         color: 'gray',
         backgroundColor: '#ffff',
-        fontSize: H* 0.015
+        fontSize: 15
 
     }, filter_img: {
-        width: H* 0.009,
-        height: H* 0.007,
+        width: 18,
+        height: 22,
         alignSelf: 'flex-end',
-        marginTop: H* 0.013,
-        marginRight: H* 0.013,
+        marginTop: 13,
+        marginRight: 13,
         tintColor: '#ffff'
     },
     live_issue_img: {
         width: '100%',
-        height: H* 0.130,
+        height: 130,
         borderBottomLeftRadius: 25,
         borderTopLeftRadius: 25
     },
     activity_img: {
-        width: H* 0.045,
-        height: H* 0.045,
+        width: 40,
+        height: 45,
         borderRadius: 50,
         borderColor: "#8cc5e8",
-        marginRight: H* 0.002
+        marginRight: 2
 
     },
     activity_text: {
-        fontSize: H* 0.015,
+        fontSize: 15,
         color: "black",
-        marginRight: H* 0.007,
-        marginTop: H* 0.010
+        marginRight: 10,
+        marginTop: 10
     }
     // backgroundVideo: {
     //     position: 'absolute',
