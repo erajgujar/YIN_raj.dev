@@ -11,19 +11,23 @@ const ForumType = () => {
         setMixed(<Image style={styles.checked} source={require('../assets/images/Others/checked.png')} />)
         setFemale("")
         setMale("")
+        console.log("Mixed-Forum Selected")
     }
     const FemaleForum = () => {
         setFemale(<Image style={styles.checked} source={require('../assets/images/Others/checked.png')} />)
         setMixed("")
         setMale("")
+        console.log("Female-Forum Selected")
     }
 
     const MaleForum = () => {
         setMale(<Image style={styles.checked} source={require('../assets/images/Others/checked.png')} />)
         setMixed("")
         setFemale("")
+        console.log("Male-Forum Selected")
     }
 
+ 
 
     return (
         <SafeAreaView>
@@ -116,24 +120,22 @@ const styles = StyleSheet.create({
         fontSize: 15
     },
     btn_container: {
-        display: "flex",
         flexDirection: "row",
-        alignContent: "space-between",
+        justifyContent:'space-between',
         textAlign: "left",
-        marginTop: 90,
+        marginTop: height/4,
         borderRadius: 15,
         marginLeft: 15,
         marginRight: 15,
         padding: 15,
-        backgroundColor: "#6ce4e4",
-        alignContent: "space-between"
-
+        backgroundColor: "#20e8e8"
+       
     },
     btn_img: {
         height: 20,
         width: 20,
         padding: 5,
-        marginStart: 190,
+        //marginStart: 210,
         tintColor: "white"
     },
     btn_text: {

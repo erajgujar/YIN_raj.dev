@@ -1,7 +1,22 @@
-import React from 'react'
+import axios from 'axios'
+import React, {useState, useEffect } from 'react'
 import { View, Text, Image, StyleSheet, ScrollView, SafeAreaView } from 'react-native'
 const MinutesOfMeeting = () => {
+const [data, setData] = useState([])
+const [isLoading, setLoading] = useState(false)
 
+useEffect(()=>{
+    minutesfMeeting()
+},[])
+
+async function minutesfMeeting(){
+    setLoading(true)
+    const response = await axios.get('https://stg-yin-talk-api.foxberry.link/v1/meeting/all/list')
+    setData(response.data)
+    setLoading(false)
+    console.log(response.data)
+
+}
     return (
 
         <SafeAreaView>
@@ -15,59 +30,70 @@ const MinutesOfMeeting = () => {
                         <Image style={styles.left_arrow} source={require('../assets/images/left.png')} />
                         <Text style={styles.header_text}>Minutes of Meeting</Text>
                     </View>
+
                     <View style={{
-                        width: '95%',
-                        backgroundColor: "white",
-                        position: "relative",
-                        top: 150,
-                        marginLeft: 10,
-                        borderRadius: 10,
-                        borderColor: "#dfd8d8",
-                        borderWidth: 2,
-                        alignItems: 'center'
+                            width: '95%',
+                            backgroundColor: "white",
+                            position: "relative",
+                            top: 150,
+                            marginLeft: 10,
+                            borderRadius: 10,
+                            borderColor: "#dfd8d8",
+                            borderWidth: 2,
+                            alignItems: 'center'
 
-                    }}>
-                        <View style={{ display: 'flex', flexDirection: 'row', }}>
-                            <View style={[styles.progress_stage, { marginTop: 25, marginLeft: 10 }]}>
-                                <Text style={{ color: 'white' }}>4</Text>
+                        }}>
+                            <View style={{ display: 'flex', flexDirection: 'row', }}>
+                                <View style={[styles.progress_stage, { marginTop: 25, marginLeft: 10 }]}>
+                                    <Text style={{ color: 'white' }}>4</Text>
+                                </View>
+                                <View style={styles.heading_date_status}>
+                                    <Text style={{ marginLeft: 0, fontSize: 13, color: "black", marginTop: 10 }}>31st October 2021</Text>
+                                    <Text style={{
+                                        marginLeft: 170,
+                                        borderRadius: 20,
+                                        width: '30%',
+                                        backgroundColor: 'green',
+                                        color: "white",
+                                        fontSize: 12,
+                                        paddingLeft: 5,
+                                        paddingRight: 5,
+                                        marginTop: -15
+                                    }}>Completed</Text>
+                                </View>
                             </View>
-                            <View style={styles.heading_date_status}>
-                                <Text style={{ marginLeft: 0, fontSize: 13, color: "black", marginTop: 10 }}>31st October 2021</Text>
-                                <Text style={{
-                                    marginLeft: 170,
-                                    borderRadius: 20,
-                                    width: '30%',
-                                    backgroundColor: 'green',
-                                    color: "white",
-                                    fontSize: 12,
-                                    paddingLeft: 5,
-                                    paddingRight: 5,
-                                    marginTop: -15
-                                }}>Completed</Text>
+                            <View style={{ marginTop: -40 }}>
+                                <Text style={{ padding: 10, marginLeft: 80, fontSize: 11 }}>
+                               lorem ipsum printing data for the event which is not given for dummy text which is dummy
+                                </Text>
                             </View>
                         </View>
-                        <View style={{ marginTop: -40 }}>
-                            <Text style={{ padding: 10, marginLeft: 80, fontSize: 11 }}>
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry
-                            </Text>
+                        <Text style={{
+                            fontSize: 15,
+                            marginTop: 155,
+                            marginLeft: 10,
+                            color: "black"
+                        }}>Details</Text>
+                   
+                    { isLoading? <Text>Loadin please wait</Text>: data.map((value,i)=>{
+                        return( <View key={String(i)}>
+                       
+
+
+                       
+
+                        <View style={{ width: '100%' }}>
+                            <View style={{ display: "flex", flexDirection: "row", width: "30%" }}>
+                                <Text style={styles.progress_stage}>1</Text>
+                            </View>
+                            <Text style={styles.progress_text}>{value.meeting_description}</Text>
                         </View>
+
                     </View>
-
-
-                    <Text style={{
-                        fontSize: 15,
-                        marginTop: 155,
-                        marginLeft: 10,
-                        color: "black"
-                    }}>Details</Text>
-
-                    <View style={{ width: '100%' }}>
-                        <View style={{ display: "flex", flexDirection: "row", width: "30%" }}>
-                            <Text style={styles.progress_stage}>1</Text>
-                        </View>
-                        <Text style={styles.progress_text}>Lorem Ipsum is simply dummy text of the printing and showing the text and print the text accordingly</Text>
-                    </View>
-
+                       )
+                    })
+                }
+                    {/* 
                     <View style={{ width: '100%' }}>
                         <View style={{ display: "flex", flexDirection: "row" }}>
                             <Text style={styles.progress_stage}>2</Text>
@@ -87,7 +113,7 @@ const MinutesOfMeeting = () => {
                             <Text style={styles.progress_stage}>4</Text>
                         </View>
                         <Text style={styles.progress_text}>Lorem Ipsum is simply dummy text of the printing and showing the text and print the text accordingly</Text>
-                    </View>
+                    </View> */}
 
                 </View>
             </ScrollView>

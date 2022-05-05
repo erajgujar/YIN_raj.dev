@@ -1,7 +1,33 @@
-import React from 'react';
-import { View, Text, Image, Dimensions, StyleSheet, ScrollView, SafeAreaView } from 'react-native';
+import React,{useState} from 'react';
+import { View, TextInput, Text, Image, Dimensions, StyleSheet, ScrollView, SafeAreaView, Alert, Modal, Pressable} from 'react-native';
 const { width, height } = Dimensions.get('window');
 export default function IssueDetails() {
+  const [modalVisible, setModalVisible] = useState(false);
+  
+  const [name, setName] = useState('')
+  const [college, setCollege] = useState('')
+  const [designation, setDesignation] = useState('')
+  const [mobile, setMobile] = useState('')
+  const [email, setEmail] = useState('')
+
+  function addMember() {
+    const memberDetails = { name, college, designation,mobile, email }
+    console.log({ name, college, designation,mobile, email })
+    fetch("https://stg-yin-talk-api.foxberry.link/v1/forum/add/forum/member", {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(memberDetails)
+    }).then((result) => {
+        //console.log('result', result);
+        result.json().then((response) => {
+            console.log("response", response);
+        })
+    })
+}
+
   return (
 
     <SafeAreaView>
@@ -71,6 +97,47 @@ export default function IssueDetails() {
               <Text style={{ fontSize: 11 }}>+12 Members</Text>
             </View>
 
+
+            <View style={styles.centeredView}>
+              <Modal
+                animationType="slide"
+                transparent={true}
+                visible={modalVisible}
+                onRequestClose={() => {
+                  Alert.alert("Modal has been closed.");
+                  setModalVisible(!modalVisible);
+                }}
+              >
+                <View style={styles.centeredView}>
+                  <View style={styles.modalView}>
+                    <View>
+                      <View>
+                        <Text style={{ textAlign: 'center', color: 'black', marginBottom: 30, fontSize: 20 }}>Add Member</Text>
+                        <View style={{borderRadius:1}}>
+                        <TextInput onChangeText={Name=>setName(Name)} style={styles.input_field} placeholder='Enter Name'/>
+                        <TextInput onChangeText={College=>setCollege(College)} style={styles.input_field} placeholder='Enter College Name'/>
+                        <TextInput onChangeText={Designation=>setDesignation(Designation)} style={styles.input_field} placeholder='Enter Designation'/>
+                        <TextInput onChangeText={Mobile=>setMobile(Mobile)} style={styles.input_field} placeholder='Enter Mobile Number'/>
+                        <TextInput onChangeText={Email=>setEmail(Email)} style={styles.input_field} placeholder='Enter Email Id'/>
+                        </View>
+                      </View>
+                    </View>
+
+                    <Pressable
+                      onPress={() => setModalVisible(!modalVisible)}
+                    >
+                      <View style={{ flexDirection: 'row', width: '100%', marginTop: 50 }}>
+
+                        <Text onPress={addMember} style={styles.save}>Save</Text>
+
+                        <Text style={styles.cancel}>Cancel</Text>
+                      </View>
+                    </Pressable>
+                  </View>
+                </View>
+              </Modal>
+            </View>
+
             <View style={{
               alignItems: 'center',
               padding: 10,
@@ -79,6 +146,7 @@ export default function IssueDetails() {
               justifyContent: 'space-between'
             }}>
               <View>
+              <Pressable onPress={() => setModalVisible(true)}>
                 <Text style={{
                   borderRadius: 25,
                   backgroundColor: '#0cb0e7',
@@ -89,6 +157,8 @@ export default function IssueDetails() {
                   paddingTop: 5,
                   paddingBottom: 5
                 }}>Add Member +</Text>
+            </Pressable>
+
               </View>
               <View style={{ flexDirection: 'row' }}>
                 <Text style={{
@@ -122,7 +192,7 @@ export default function IssueDetails() {
             justifyContent: 'space-between',
             width: width,
             height: 'auto',
-            marginLeft:5,
+            marginLeft: 5,
             marginTop: -5,
             alignItems: 'center'
           }}>
@@ -134,7 +204,7 @@ export default function IssueDetails() {
               paddingTop: 5,
               paddingBottom: 5,
               paddingLeft: 10,
-              marginRight:7,
+              marginRight: 7,
               paddingRight: 10
             }}>Add Activity +</Text>
           </View>
@@ -352,7 +422,7 @@ export default function IssueDetails() {
                 padding: 10,
                 width: '82%',
                 borderwidth: 2,
-                marginBottom:15,
+                marginBottom: 15,
                 borderRadius: 20,
                 backgroundColor: '#afcfed'
 
@@ -449,7 +519,67 @@ const styles = StyleSheet.create({
     paddingRight: 15,
     width: width,
     height: 'auto'
-  }
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 15
+},
+modalView: {
+    width:'90%',
+    margin: 10,
+    borderwidth:2,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 20,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+        width: 5,
+        height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5
+},
+textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center"
+},
+modalText: {
+    marginBottom: 15,
+    textAlign: "center"
+},
+input_field: {
+    width: width-60,
+    borderRadius: 10,
+    borderColor: '#d9dcde',
+    borderWidth: 1,
+    padding: 4,
+    marginBottom: 4,
+    alignSelf: 'center',
+    justifyContent: "center",
+},
+save: {
+    backgroundColor: '#0084ff',
+    marginRight: 10,
+    width: 90,
+    textAlign: 'center',
+    borderRadius: 20,
+    padding: 3,
+    color: '#ffff'
+
+},
+cancel: {
+    backgroundColor: '#0084ff',
+    width: 90,
+    textAlign: 'center',
+    borderRadius: 20,
+    padding: 3,
+    color: '#ffff'
+}
 
 
 })

@@ -1,7 +1,22 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Image, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
-
+import axios from 'axios';
 export default function Members() {
+    const [isLoading, setLoading] = useState(false)
+    const [memberDetails, setMemberDetails] = useState([])
+
+    const memberDetailed_list = async () => {
+        setLoading(true)
+        const response = await axios.get("https://stg-yin-talk-api.foxberry.link/v1/issue/get/issue/member-details/ISSUECOL_120223_RIVERCLEANINGD")
+        setMemberDetails(response.data)
+        setLoading(false)
+        console.log(response.data)
+    }
+
+    useEffect(() => {
+        memberDetailed_list()
+    }, [])
+
     return (
         <SafeAreaView>
             <ScrollView>
@@ -10,257 +25,60 @@ export default function Members() {
                         <Image style={styles.left_arrow} source={require('../assets/images/left.png')} />
                         <Text style={styles.header_text}>Members</Text>
                     </View>
-                    <View style={{
-                        display: "flex",
-                        width: '100%',
-                        borderBottomWidth: 2,
-                        borderColor: "#ebebf2",
-                        flexDirection: "row"
-                    }}>
-                        <View style={{ display: "flex", flexDirection: "row", marginBottom: 15 }}>
-                            <Image style={styles.user_img} source={require('../assets/images/Others/member-4.png')} />
-                        </View>
-                        <View style={{ marginTop: 10 }}>
-                            <View style={{ display: "flex", flexDirection: "row" }}>
-                                <Text style={styles.user_name}>Manisha Deshpande</Text>
-                                <Image style={{
-                                    height: 17,
-                                    width: 17,
-                                    marginLeft: 150
-                                }} source={require('../assets/images/Others/call.png')} />
+{/* Get Members details using issue id */}
 
-                            </View>
-                            <View style={{ display: "flex", flexDirection: "row" }}>
-                                <View style={{ display: "flex", flexDirection: "row", marginBottom: 7 }}>
-                                    <Text style={{ fontSize: 10, color: "black" }}>College Name:</Text>
-                                    <Text style={{ fontSize: 10, color: "#444445", marginLeft: 2 }}>Modern College</Text>
+                    {
+                        isLoading ? <Text>Loading please wait</Text> : memberDetails.map((value, i) => {
+                            return (<View key={String(i)} style={{
+                                display: "flex",
+                                width: '100%',
+                                borderBottomWidth: 2,
+                                borderColor: "#ebebf2",
+                                flexDirection: "row"
+                            }}>
+                                <View style={{ display: "flex", flexDirection: "row", marginBottom: 15 }}>
+                                    <Image style={styles.user_img} source={{uri:value.profile_image[0]}} />
                                 </View>
-                                <View style={{ display: "flex", flexDirection: "row" }}>
-                                    <Text style={{ fontSize: 10, color: "black", marginLeft: 15 }}>Designation:</Text>
-                                    <Text style={{ fontSize: 10, color: "#444445", marginLeft: 2 }}>Forum Director</Text>
-                                </View>
-                            </View>
-                            <View style={{ display: "flex", flexDirection: "row" }}>
-                                <View style={{ display: "flex", flexDirection: "row" }}>
-                                    <Text style={{ fontSize: 10, color: "black" }}>Mobile No:</Text>
-                                    <Text style={{ fontSize: 10, color: "#444445", marginLeft: 2 }}>9881000985</Text>
-                                </View>
-                                <View style={{ display: "flex", flexDirection: "row" }}>
-                                    <Text style={{ fontSize: 10, color: "black", marginLeft: 45 }}>Email Id:</Text>
-                                    <Text style={{ fontSize: 10, color: "#444445", marginLeft: 2 }}>manisha@gmail.com</Text>
-                                </View>
-                            </View>
-                        </View>
-                    </View>
+                                <View style={{ marginTop: 10 }}>
+                                    <View style={{ justifyContent:'space-between', flexDirection: "row" }}>
+                                        <Text style={styles.user_name}>{value.first_name} {value.last_name}</Text>
+                                        <Image style={{
+                                            height: 17,
+                                            width: 17,
+                                            marginLeft: 150
+                                        }} source={require('../assets/images/Others/call.png')} />
 
-                    <View style={{
-                        display: "flex",
-                        borderBottomWidth: 2,
-                        borderColor: "#ebebf2",
-                        flexDirection: "row"
-                    }}>
-                        <View style={{ display: "flex", flexDirection: "row", marginBottom: 15 }}>
-                            <Image style={styles.user_img} source={require('../assets/images/Others/chat-profile-2.jpg')} />
-                        </View>
-                        <View style={{ marginTop: 10 }}>
-                            <View style={{ display: "flex", flexDirection: "row" }}>
-                                <Text style={styles.user_name}>Aniket sabnis</Text>
-                                <Image style={{
-                                    height: 17,
-                                    width: 17,
-                                    marginLeft: 195
-                                }} source={require('../assets/images/Others/call.png')} />
+                                    </View>
+                                    <View>
+                                        <View style={{ display: "flex", flexDirection: "row", marginBottom: 7 }}>
+                                            <Text style={{ fontSize: 10, color: "black" }}>College Name:</Text>
+                                            <Text style={{ fontSize: 10, color: "#444445", marginLeft: 2 }}>{value.college_name}</Text>
+                                        </View>
+                                        <View style={{ display: "flex", flexDirection: "row" }}>
+                                            <Text style={{ fontSize: 10, color: "black" }}>Designation:</Text>
+                                            <Text style={{ fontSize: 10, color: "#444445", marginLeft: 2 }}>{value.designation}</Text>
+                                        </View>
+                                    </View>
+                                    <View style={{ display: "flex", flexDirection: "row" }}>
+                                        <View style={{ display: "flex", flexDirection: "row" }}>
+                                            <Text style={{ fontSize: 10, color: "black" }}>Mobile No:</Text>
+                                            <Text style={{ fontSize: 10, color: "#444445", marginLeft: 2 }}>{value.mobile}</Text>
+                                        </View>
+                                        <View style={{ display: "flex", flexDirection: "row" }}>
+                                            <Text style={{ fontSize: 10, color: "black", marginLeft: 45 }}>Email Id:</Text>
+                                            <Text style={{ fontSize: 10, color: "#444445", marginLeft: 2 }}>{value.email}</Text>
+                                        </View>
+                                    </View>
+                                </View>
+                            </View>
 
-                            </View>
-                            <View style={{ display: "flex", flexDirection: "row" }}>
-                                <View style={{ display: "flex", flexDirection: "row", marginBottom: 7 }}>
-                                    <Text style={{ fontSize: 10, color: "black" }}>College Name:</Text>
-                                    <Text style={{ fontSize: 10, color: "#444445", marginLeft: 2 }}>Modern College</Text>
-                                </View>
-                                <View style={{ display: "flex", flexDirection: "row" }}>
-                                    <Text style={{ fontSize: 10, color: "black", marginLeft: 15 }}>Designation:</Text>
-                                    <Text style={{ fontSize: 10, color: "#444445", marginLeft: 2 }}>Boys Representative</Text>
-                                </View>
-                            </View>
-                            <View style={{ display: "flex", flexDirection: "row" }}>
-                                <View style={{ display: "flex", flexDirection: "row" }}>
-                                    <Text style={{ fontSize: 10, color: "black" }}>Mobile No:</Text>
-                                    <Text style={{ fontSize: 10, color: "#444445", marginLeft: 2 }}>7881000985</Text>
-                                </View>
-                                <View style={{ display: "flex", flexDirection: "row" }}>
-                                    <Text style={{ fontSize: 10, color: "black", marginLeft: 45 }}>Email Id:</Text>
-                                    <Text style={{ fontSize: 10, color: "#444445", marginLeft: 2 }}>aniket@gmail.com</Text>
-                                </View>
-                            </View>
-                        </View>
-                    </View>
+                            )
+                        })
+                    }
+
 
                     <View style={{
-                        display: "flex",
-                        borderBottomWidth: 2,
-                        borderColor: "#ebebf2",
-                        flexDirection: "row"
-                    }}>
-                        <View style={{ display: "flex", flexDirection: "row", marginBottom: 15 }}>
-                            <Image style={styles.user_img} source={require('../assets/images/Others/member-3.png')} />
-                        </View>
-                        <View style={{ marginTop: 10 }}>
-                            <View style={{ display: "flex", flexDirection: "row" }}>
-                                <Text style={styles.user_name}>Priyanka Yadav</Text>
-                                {/* <Image style={styles.call_img} source={require('../assets/images/Others/call.png')} /> */}
-
-                            </View>
-                            <View style={{ display: "flex", flexDirection: "row" }}>
-                                <View style={{ display: "flex", flexDirection: "row", marginBottom: 7 }}>
-                                    <Text style={{ fontSize: 10, color: "black" }}>College Name:</Text>
-                                    <Text style={{ fontSize: 10, color: "#444445", marginLeft: 2 }}>Modern College</Text>
-                                </View>
-                                <View style={{ display: "flex", flexDirection: "row" }}>
-                                    <Text style={{ fontSize: 10, color: "black", marginLeft: 15 }}>Designation:</Text>
-                                    <Text style={{ fontSize: 10, color: "#444445", marginLeft: 2 }}>Gr Representative</Text>
-                                </View>
-                            </View>
-                            <View style={{ display: "flex", flexDirection: "row" }}>
-                                <View style={{ display: "flex", flexDirection: "row" }}>
-                                    <Text style={{ fontSize: 10, color: "black" }}>Mobile No:</Text>
-                                    <Text style={{ fontSize: 10, color: "#444445", marginLeft: 2 }}>6551000985</Text>
-                                </View>
-                                <View style={{ display: "flex", flexDirection: "row" }}>
-                                    <Text style={{ fontSize: 10, color: "black", marginLeft: 45 }}>Email Id:</Text>
-                                    <Text style={{ fontSize: 10, color: "#444445", marginLeft: 2 }}>priyanka@gmail.com</Text>
-                                </View>
-                            </View>
-                        </View>
-                    </View>
-
-                    <View style={{
-                        display: "flex",
-                        borderBottomWidth: 2,
-                        borderColor: "#ebebf2",
-                        flexDirection: "row"
-                    }}>
-                        <View style={{ display: "flex", flexDirection: "row", marginBottom: 15 }}>
-                            <Image style={styles.user_img} source={require('../assets/images/Others/member-1.png')} />
-                        </View>
-                        <View style={{ marginTop: 10 }}>
-                            <View style={{ display: "flex", flexDirection: "row" }}>
-                                <Text style={styles.user_name}>Amruta Walimbe</Text>
-                                <Image style={{
-                                    height: 17,
-                                    width: 17,
-                                    marginLeft: 175
-                                }} source={require('../assets/images/Others/call.png')} />
-
-                            </View>
-                            <View style={{ display: "flex", flexDirection: "row" }}>
-                                <View style={{ display: "flex", flexDirection: "row", marginBottom: 7 }}>
-                                    <Text style={{ fontSize: 10, color: "black" }}>College Name:</Text>
-                                    <Text style={{ fontSize: 10, color: "#444445", marginLeft: 2 }}>Modern College</Text>
-                                </View>
-                                <View style={{ display: "flex", flexDirection: "row" }}>
-                                    <Text style={{ fontSize: 10, color: "black", marginLeft: 15 }}>Designation:</Text>
-                                    <Text style={{ fontSize: 10, color: "#444445", marginLeft: 2 }}>Leader</Text>
-                                </View>
-                            </View>
-                            <View style={{ display: "flex", flexDirection: "row" }}>
-                                <View style={{ display: "flex", flexDirection: "row" }}>
-                                    <Text style={{ fontSize: 10, color: "black" }}>Mobile No:</Text>
-                                    <Text style={{ fontSize: 10, color: "#444445", marginLeft: 2 }}>9850000985</Text>
-                                </View>
-                                <View style={{ display: "flex", flexDirection: "row" }}>
-                                    <Text style={{ fontSize: 10, color: "black", marginLeft: 45 }}>Email Id:</Text>
-                                    <Text style={{ fontSize: 10, color: "#444445", marginLeft: 2 }}>amruta@gmail.com</Text>
-                                </View>
-                            </View>
-                        </View>
-                    </View>
-
-                    <View style={{
-                        display: "flex",
-                        borderBottomWidth: 2,
-                        borderColor: "#ebebf2",
-                        flexDirection: "row"
-                    }}>
-                        <View style={{ display: "flex", flexDirection: "row", marginBottom: 15 }}>
-                            <Image style={styles.user_img} source={require('../assets/images/Others/member-2.png')} />
-                        </View>
-                        <View style={{ marginTop: 10 }}>
-                            <View style={{ display: "flex", flexDirection: "row" }}>
-                                <Text style={styles.user_name}>Ashutosh Kulkarni</Text>
-                                <Image style={{
-                                    height: 17,
-                                    width: 17,
-                                    marginLeft: 163
-                                }} source={require('../assets/images/Others/call.png')} />
-
-                            </View>
-                            <View style={{ display: "flex", flexDirection: "row" }}>
-                                <View style={{ display: "flex", flexDirection: "row", marginBottom: 7 }}>
-                                    <Text style={{ fontSize: 10, color: "black" }}>College Name:</Text>
-                                    <Text style={{ fontSize: 10, color: "#444445", marginLeft: 2 }}>Modern College</Text>
-                                </View>
-                                <View style={{ display: "flex", flexDirection: "row" }}>
-                                    <Text style={{ fontSize: 10, color: "black", marginLeft: 15 }}>Designation:</Text>
-                                    <Text style={{ fontSize: 10, color: "#444445", marginLeft: 2 }}>Union Head</Text>
-                                </View>
-                            </View>
-                            <View style={{ display: "flex", flexDirection: "row" }}>
-                                <View style={{ display: "flex", flexDirection: "row" }}>
-                                    <Text style={{ fontSize: 10, color: "black" }}>Mobile No:</Text>
-                                    <Text style={{ fontSize: 10, color: "#444445", marginLeft: 2 }}>6523000985</Text>
-                                </View>
-                                <View style={{ display: "flex", flexDirection: "row" }}>
-                                    {/* <Text style={{ fontSize: 10, color: "black", marginLeft: 45 }}>Email Id:</Text> */}
-                                    {/* <Text style={{ fontSize: 10, color: "#444445", marginLeft: 2 }}>ashutosh@gmail.com</Text> */}
-                                </View>
-                            </View>
-                        </View>
-                    </View>
-
-                    <View style={{
-                        display: "flex",
-                        borderBottomWidth: 2,
-                        borderColor: "#ebebf2",
-                        flexDirection: "row",
-                        marginBottom: 1
-                    }}>
-                        <View style={{ display: "flex", flexDirection: "row", marginBottom: 15 }}>
-                            <Image style={styles.user_img} source={require('../assets/images/Others/chat-profile-4.jpg')} />
-                        </View>
-                        <View style={{ marginTop: 10 }}>
-                            <View style={{ display: "flex", flexDirection: "row" }}>
-                                <Text style={styles.user_name}>Vivek Sharma</Text>
-                                <Image style={{
-                                    height: 17,
-                                    width: 17,
-                                    marginLeft: 190
-                                }} source={require('../assets/images/Others/call.png')} />
-
-                            </View>
-                            <View style={{ display: "flex", flexDirection: "row", marginBottom: 7 }}>
-                                <View style={{ display: "flex", flexDirection: "row" }}>
-                                    <Text style={{ fontSize: 10, color: "black" }}>College Name:</Text>
-                                    <Text style={{ fontSize: 10, color: "#444445", marginLeft: 2 }}>Modern College</Text>
-                                </View>
-                                <View style={{ display: "flex", flexDirection: "row" }}>
-                                    <Text style={{ fontSize: 10, color: "black", marginLeft: 15 }}>Designation:</Text>
-                                    <Text style={{ fontSize: 10, color: "#444445", marginLeft: 2 }}>Group head</Text>
-                                </View>
-                            </View>
-                            <View style={{ display: "flex", flexDirection: "row" }}>
-                                <View style={{ display: "flex", flexDirection: "row" }}>
-                                    <Text style={{ fontSize: 10, color: "black" }}>Mobile No:</Text>
-                                    <Text style={{ fontSize: 10, color: "#444445", marginLeft: 2 }}>5256000985</Text>
-                                </View>
-                                <View style={{ display: "flex", flexDirection: "row" }}>
-                                    <Text style={{ fontSize: 10, color: "black", marginLeft: 45 }}>Email Id:</Text>
-                                    <Text style={{ fontSize: 10, color: "#444445", marginLeft: 2 }}>vivek1@gmail.com</Text>
-                                </View>
-                            </View>
-                        </View>
-                    </View>
-                    <View style={{
-                        display: "flex",
+                        justifyContent:'space-around',
                         flexDirection: "row",
                         maxWidth: '100%',
                         marginTop: 20

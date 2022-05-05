@@ -77,9 +77,9 @@ export default function AddActivity() {
                                             onPress={() => setModalVisible(!modalVisible)}
                                         >
                                             <View style={{ flexDirection: 'row', width: '100%', marginTop: 50 }}>
-                                                <TouchableOpacity>
+                                                
                                                     <Text onPress={addNewActivity} style={styles.save}>Save</Text>
-                                                </TouchableOpacity>
+                                                
                                                 <Text style={styles.cancel}>Cancel</Text>
                                             </View>
                                         </Pressable>

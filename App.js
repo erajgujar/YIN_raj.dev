@@ -24,19 +24,19 @@ const App = () => {
 
 
 
-      {/* <ForumType /> */}
+      <ForumType />
       {/* <LiveIssues /> */}
       {/* <AddNewIssue/> */}
       {/* <CheckUpdates/> */}
         {/* <Activity /> */}
-      {/* <IssueDetails/> */}
       {/* <IssueFilter/> */}
 
 
       {/* <ListIssues/> */}
       {/* <Members/> */}
       {/* <MinutesOfMeeting/> */}
-      <AddActivity/>
+      {/* <AddActivity/> */}
+      {/* <IssueDetails/> */}
 
 
     </View>
