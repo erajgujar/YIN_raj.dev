@@ -1,32 +1,47 @@
-import React,{useState} from 'react';
-import { View, TextInput, Text, Image, Dimensions, StyleSheet, ScrollView, SafeAreaView, Alert, Modal, Pressable} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { View, ActivityIndicator, TextInput, Text, Image, Dimensions, StyleSheet, ScrollView, SafeAreaView, Alert, Modal, Pressable } from 'react-native';
 const { width, height } = Dimensions.get('window');
 export default function IssueDetails() {
   const [modalVisible, setModalVisible] = useState(false);
-  
+
   const [name, setName] = useState('')
   const [college, setCollege] = useState('')
   const [designation, setDesignation] = useState('')
   const [mobile, setMobile] = useState('')
   const [email, setEmail] = useState('')
+  const [data, setData] = useState([])
+  const [isLoading, setLoading] = useState(false)
 
   function addMember() {
-    const memberDetails = { name, college, designation,mobile, email }
-    console.log({ name, college, designation,mobile, email })
+    const memberDetails = { name, college, designation, mobile, email }
+    console.log({ name, college, designation, mobile, email })
     fetch("https://stg-yin-talk-api.foxberry.link/v1/forum/add/forum/member", {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(memberDetails)
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(memberDetails)
     }).then((result) => {
-        //console.log('result', result);
-        result.json().then((response) => {
-            console.log("response", response);
-        })
+      //console.log('result', result);
+      result.json().then((response) => {
+        console.log("response", response);
+      })
     })
-}
+  }
+
+  useEffect(() => {
+    const getActivity = async () => {
+      setLoading(true)
+      const response = await axios.get("https://stg-yin-talk-api.foxberry.link/v1/activity/list/yin-id/MHPC000012")
+      setData(response.data)
+      setLoading(false)
+      console.log(response.data)
+    }
+    getActivity()
+  },[])
+
 
   return (
 
@@ -113,12 +128,12 @@ export default function IssueDetails() {
                     <View>
                       <View>
                         <Text style={{ textAlign: 'center', color: 'black', marginBottom: 30, fontSize: 20 }}>Add Member</Text>
-                        <View style={{borderRadius:1}}>
-                        <TextInput onChangeText={Name=>setName(Name)} style={styles.input_field} placeholder='Enter Name'/>
-                        <TextInput onChangeText={College=>setCollege(College)} style={styles.input_field} placeholder='Enter College Name'/>
-                        <TextInput onChangeText={Designation=>setDesignation(Designation)} style={styles.input_field} placeholder='Enter Designation'/>
-                        <TextInput onChangeText={Mobile=>setMobile(Mobile)} style={styles.input_field} placeholder='Enter Mobile Number'/>
-                        <TextInput onChangeText={Email=>setEmail(Email)} style={styles.input_field} placeholder='Enter Email Id'/>
+                        <View style={{ borderRadius: 1 }}>
+                          <TextInput onChangeText={Name => setName(Name)} style={styles.input_field} placeholder='Enter Name' />
+                          <TextInput onChangeText={College => setCollege(College)} style={styles.input_field} placeholder='Enter College Name' />
+                          <TextInput onChangeText={Designation => setDesignation(Designation)} style={styles.input_field} placeholder='Enter Designation' />
+                          <TextInput onChangeText={Mobile => setMobile(Mobile)} style={styles.input_field} placeholder='Enter Mobile Number' />
+                          <TextInput onChangeText={Email => setEmail(Email)} style={styles.input_field} placeholder='Enter Email Id' />
                         </View>
                       </View>
                     </View>
@@ -146,18 +161,18 @@ export default function IssueDetails() {
               justifyContent: 'space-between'
             }}>
               <View>
-              <Pressable onPress={() => setModalVisible(true)}>
-                <Text style={{
-                  borderRadius: 25,
-                  backgroundColor: '#0cb0e7',
-                  color: 'white',
-                  fontSize: 15,
-                  paddingLeft: 10,
-                  paddingRight: 10,
-                  paddingTop: 5,
-                  paddingBottom: 5
-                }}>Add Member +</Text>
-            </Pressable>
+                <Pressable onPress={() => setModalVisible(true)}>
+                  <Text style={{
+                    borderRadius: 25,
+                    backgroundColor: '#0cb0e7',
+                    color: 'white',
+                    fontSize: 15,
+                    paddingLeft: 10,
+                    paddingRight: 10,
+                    paddingTop: 5,
+                    paddingBottom: 5
+                  }}>Add Member +</Text>
+                </Pressable>
 
               </View>
               <View style={{ flexDirection: 'row' }}>
@@ -221,67 +236,76 @@ export default function IssueDetails() {
               }} source={require('../assets/images/Others/line.png')} />
             </View>
 
-            <View style={styles.activity_card}>
 
-              <View>
-                <Text style={{
-                  borderRadius: 5,
-                  paddingLeft: 12,
-                  paddingRight: 12,
-                  paddingTop: 5,
-                  color: 'white',
-                  marginTop: 25,
-                  paddingBottom: 5,
-                  position: 'relative',
-                  zIndex: 1,
-                  marginLeft: 10,
-                  backgroundColor: '#0cb0e7'
-                }}>1</Text>
-              </View>
-
-              <View style={{
-                height: 'auto',
-                padding: 10,
-                width: '82%',
-                borderwidth: 2,
-                borderRadius: 20,
-                backgroundColor: '#afcfed'
-
-              }}>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                  <View style={{ flexDirection: 'row', marginBottom: 3 }}>
-                    <Text style={{ fontSize: 12, color: 'black', paddingRight: 3 }}>Activity Title</Text>
-                    <Text style={{ fontSize: 11, color: 'black', paddingRight: 3 }}>|</Text>
-                    <Text style={{ fontSize: 12 }}>5th Jan 2022</Text>
+            {
+              isLoading ? <ActivityIndicator size="large" color="gray"/> :data.map((value, i) => {
+                return (<View key={String(i)} style={styles.activity_card}>
+                  <View>
+                    <Text style={{
+                      borderRadius: 5,
+                      paddingLeft: 12,
+                      paddingRight: 12,
+                      paddingTop: 5,
+                      color: 'white',
+                      marginTop: 25,
+                      paddingBottom: 5,
+                      position: 'relative',
+                      zIndex: 1,
+                      marginLeft: 10,
+                      backgroundColor: '#0cb0e7'
+                    }}>1</Text>
                   </View>
+
                   <View style={{
-                    flexDirection: 'row',
-                    justifyContent: 'flex-end',
-                    alignItems: 'center'
+                    height: 'auto',
+                    padding: 10,
+                    width: '82%',
+                    borderwidth: 2,
+                    borderRadius: 20,
+                    backgroundColor: '#afcfed'
+
                   }}>
-                    <Image style={{ aspectRatio: 1 / 1, width: 20, marginRight: 5, alignSelf: 'center', tintColor: '#3297f5', }} source={require('../assets/images/Others/chat_bubble.png')} />
-                    <Image style={{ aspectRatio: 1 / 1, width: 20, marginRight: 5, alignSelf: 'center', tintColor: '#3297f5', }} source={require('../assets/images/Others/edit.png')} />
-                    <Image style={{ aspectRatio: 1 / 1, width: 20, alignSelf: 'center', tintColor: '#3297f5', }} source={require('../assets/images/Others/delete.png')} />
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                      <View style={{ flexDirection: 'row', marginBottom: 3, justifyContent: 'flex-start'}}>
+                        <Text style={{ fontSize: 12, color: 'black', paddingRight: 3 }}>{value.activity_title}</Text>
+                        <Text style={{ fontSize: 11, color: 'black', paddingRight: 3 }}>|</Text>
+                        <Text style={{ fontSize: 12 }}>{value.updated_at}</Text>
+                      </View>
+                      <View style={{
+                        flexDirection: 'row',
+                        justifyContent: 'flex-end',
+                        alignItems: 'center',
+                        justifyContent: 'flex-end',
+                        marginLeft:'auto'
+                      }}>
+                        <Image style={{ aspectRatio: 1 / 1, width: 20, marginRight: 5, alignSelf: 'center', tintColor: '#3297f5', }} source={require('../assets/images/Others/chat_bubble.png')} />
+                        <Image style={{ aspectRatio: 1 / 1, width: 20, marginRight: 5, alignSelf: 'center', tintColor: '#3297f5', }} source={require('../assets/images/Others/edit.png')} />
+                        <Image style={{ aspectRatio: 1 / 1, width: 20, alignSelf: 'center', tintColor: '#3297f5', }} source={require('../assets/images/Others/delete.png')} />
+                      </View>
+                    </View>
+
+                    <Text style={{
+                      fontSize: 12,
+                      textAlign: 'justify',
+                      marginBottom: 5
+                    }}>{value.activity_description}</Text>
+                    <View style={{ flexDirection: 'row' }}>
+                      <Text style={{ fontSize: 11, color: 'black', paddingRight: 3 }}>Activity Owners:</Text>
+                      <Text style={{ fontSize: 11 }}>Ashutosh Kulkarni</Text>
+                    </View>
+
+                    <View>
+
+                    </View>
                   </View>
                 </View>
-                <Text style={{
-                  fontSize: 12,
-                  textAlign: 'justify',
-                  marginBottom: 5
-                }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac ipsum et metus vulputate posuere.</Text>
-                <View style={{ flexDirection: 'row' }}>
-                  <Text style={{ fontSize: 11, color: 'black', paddingRight: 3 }}>Activity Owners:</Text>
-                  <Text style={{ fontSize: 11 }}>Ashutosh Kulkarni</Text>
-                </View>
-
-                <View>
-
-                </View>
-              </View>
-            </View>
+                )
+              })
+            }
 
 
-            <View style={styles.activity_card}>
+
+            {/* <View style={styles.activity_card}>
 
               <View>
                 <Text style={{
@@ -338,9 +362,9 @@ export default function IssueDetails() {
 
                 </View>
               </View>
-            </View>
+            </View> */}
 
-            <View style={styles.activity_card}>
+            {/* <View style={styles.activity_card}>
 
               <View>
                 <Text style={{
@@ -397,9 +421,9 @@ export default function IssueDetails() {
 
                 </View>
               </View>
-            </View>
+            </View> */}
 
-            <View style={styles.activity_card}>
+            {/* <View style={styles.activity_card}>
 
               <View>
                 <Text style={{
@@ -457,7 +481,7 @@ export default function IssueDetails() {
 
                 </View>
               </View>
-            </View>
+            </View> */}
 
           </View>
         </View>
@@ -525,35 +549,35 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginTop: 15
-},
-modalView: {
-    width:'90%',
+  },
+  modalView: {
+    width: '90%',
     margin: 10,
-    borderwidth:2,
+    borderwidth: 2,
     backgroundColor: "white",
     borderRadius: 20,
     padding: 20,
     alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
-        width: 5,
-        height: 2
+      width: 5,
+      height: 2
     },
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5
-},
-textStyle: {
+  },
+  textStyle: {
     color: "white",
     fontWeight: "bold",
     textAlign: "center"
-},
-modalText: {
+  },
+  modalText: {
     marginBottom: 15,
     textAlign: "center"
-},
-input_field: {
-    width: width-60,
+  },
+  input_field: {
+    width: width - 60,
     borderRadius: 10,
     borderColor: '#d9dcde',
     borderWidth: 1,
@@ -561,8 +585,8 @@ input_field: {
     marginBottom: 4,
     alignSelf: 'center',
     justifyContent: "center",
-},
-save: {
+  },
+  save: {
     backgroundColor: '#0084ff',
     marginRight: 10,
     width: 90,
@@ -571,15 +595,15 @@ save: {
     padding: 3,
     color: '#ffff'
 
-},
-cancel: {
+  },
+  cancel: {
     backgroundColor: '#0084ff',
     width: 90,
     textAlign: 'center',
     borderRadius: 20,
     padding: 3,
     color: '#ffff'
-}
+  }
 
 
 })

@@ -19,7 +19,6 @@ async function minutesfMeeting(){
 }
     return (
 
-        <SafeAreaView>
             <ScrollView>
                 <View>
 
@@ -77,11 +76,6 @@ async function minutesfMeeting(){
                    
                     { isLoading? <Text>Loadin please wait</Text>: data.map((value,i)=>{
                         return( <View key={String(i)}>
-                       
-
-
-                       
-
                         <View style={{ width: '100%' }}>
                             <View style={{ display: "flex", flexDirection: "row", width: "30%" }}>
                                 <Text style={styles.progress_stage}>1</Text>
@@ -93,31 +87,10 @@ async function minutesfMeeting(){
                        )
                     })
                 }
-                    {/* 
-                    <View style={{ width: '100%' }}>
-                        <View style={{ display: "flex", flexDirection: "row" }}>
-                            <Text style={styles.progress_stage}>2</Text>
-                        </View>
-                        <Text style={styles.progress_text}>Lorem Ipsum is simply dummy text of the printing and showing the text and print the text accordingly</Text>
-                    </View>
-
-                    <View style={{ width: '100%' }}>
-                        <View style={{ display: "flex", flexDirection: "row" }}>
-                            <Text style={styles.progress_stage}>3</Text>
-                        </View>
-                        <Text style={styles.progress_text}>Lorem Ipsum is simply dummy text of the printing and showing the text and print the text accordingly</Text>
-                    </View>
-
-                    <View style={{ width: '100%' }}>
-                        <View style={{ display: "flex", flexDirection: "row" }}>
-                            <Text style={styles.progress_stage}>4</Text>
-                        </View>
-                        <Text style={styles.progress_text}>Lorem Ipsum is simply dummy text of the printing and showing the text and print the text accordingly</Text>
-                    </View> */}
+                    
 
                 </View>
             </ScrollView>
-        </SafeAreaView>
     )
 }
 

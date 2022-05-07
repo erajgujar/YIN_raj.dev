@@ -1,22 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Image, StyleSheet, TextInput, Dimensions, TouchableOpacity, Pressable, ScrollView } from 'react-native';
 import DropDown from './DropDown';
+import axios from 'axios';
 //import SelectDropdown from 'react-native-select-dropdown'
 const H = Dimensions.get('window').height;
 const W = Dimensions.get('window').width;
+
 const issues = [{ id: 1, name: 'All' }, { id: 2, name: 'Completed' }, { id: 3, name: 'Live' }, { id: 4, name: 'Droped' }, { id: 4, name: 'External' }]
+
 export default function IssueFilter() {
     const [selectedItem, setSelectedItem] = useState(null)
+    const [isLoading, setLoading] = useState(false)
+    const [issue, setIssue] = useState([])
 
     const onSelect = (item) => {
         setSelectedItem(item)
     }
 
 
+    async function getIssues() {
+        setLoading(true)
+        const response = await axios.get("https://stg-yin-talk-api.foxberry.link/v1/issue/all/list?FORUM_COL0001234_BOYS")
+        setIssue(response.data)
+        setLoading(false)
+        //console.log(response.data)
+    }
+
+    useEffect(() => {
+        getIssues()
+    }, [])
+
     return (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
 
-            <View style={{ height: H }}>
+            <View>
 
                 <View style={styles.issue_wrap}>
                     <View style={{
@@ -52,45 +69,46 @@ export default function IssueFilter() {
                 </View>
 
 
-
-
-                <View style={{
-                    position: 'relative',
-                    zIndex: 1,
-                    top: 190,
-                }}>
-                    <View>
-                        <Image style={styles.river_cleaning_img} source={require('../assets/images/Others/issues-image-1.png')} />
-                        <View style={{ position: 'absolute', top: 10 }}>
-                            <Text style={{
-                                marginLeft: 30,
-                                backgroundColor: '#515254',
-                                padding: 3,
-                                width: 100,
-                                color: 'white',
-                                borderRadius: 20,
-                                textAlign: 'center',
-                                fontSize: 10
-                            }}>1st December 2021</Text>
-                            <Text style={{
-                                marginLeft: 30,
-                                backgroundColor: 'green',
-                                padding: 1,
-                                marginTop: 6,
-                                width: 50,
-                                color: 'white',
-                                borderRadius: 20,
-                                textAlign: 'center',
-                                fontSize: 10
-                            }}>open</Text>
+                {isLoading ? <Text>Loading please wait</Text> : issue.map((value, i) => {
+                    return (<View key={String(i)} style={{
+                        position: 'relative',
+                        zIndex: 1,
+                        top: 190,
+                    }}>
+                        <View>
+                            <Image style={styles.river_cleaning_img} source={{ uri: value.issue_images[0] }} />
+                            <View style={{ position: 'absolute', top: 10 }}>
+                                <Text style={{
+                                    marginLeft: 30,
+                                    backgroundColor: '#515254',
+                                    padding: 3,
+                                    width: 'auto',
+                                    color: 'white',
+                                    borderRadius: 20,
+                                    textAlign: 'center',
+                                    fontSize: 10
+                                }}>{value.updated_at}</Text>
+                                <Text style={{
+                                    marginLeft: 30,
+                                    backgroundColor: 'green',
+                                    padding: 1,
+                                    marginTop: 6,
+                                    width: 50,
+                                    color: 'white',
+                                    borderRadius: 20,
+                                    textAlign: 'center',
+                                    fontSize: 10
+                                }}>{value.issue_types}</Text>
+                            </View>
                         </View>
-                    </View>
 
-                    <Text style={{ marginLeft: 15, marginTop: 3, color: 'black' }}>River Cleaning</Text>
-                </View>
+                        <Text style={{ marginLeft: 15, marginTop: 3, color: 'black' }}>{value.issue_title}</Text>
+                    </View>
+                    )
+                })
+                }
 
                 <View style={{
-                    //Top: H * 0.040,
                     position: 'absolute',
                     zIndex: 1,
                     top: 90,
@@ -103,52 +121,7 @@ export default function IssueFilter() {
                     />
                 </View>
 
-                <View style={{
-                    position: 'absolute',
-                    top: 400,
-                    width: '100%',
-                }}>
-                    <View>
-                        <Image style={{
-                            width: '95%',
-                            height: 170,
-                            alignSelf: 'center',
-                            borderRadius: 20,
-                            position: 'absolute'
-                        }} source={require('../assets/images/Others/air-pollution.png')} />
-                        <View style={{ position: 'relative', top: 10 }}>
-                            <Text style={{
-                                marginLeft: 30,
-                                backgroundColor: '#515254',
-                                padding: 3,
-                                width: 90,
-                                color: 'white',
-                                borderRadius: 20,
-                                textAlign: 'center',
-                                fontSize: 10
-                            }}>1st January 2022</Text>
-                            <Text style={{
-                                marginLeft: 30,
-                                backgroundColor: 'red',
-                                padding: 1,
-                                marginTop: 6,
-                                width: 70,
-                                color: 'white',
-                                borderRadius: 20,
-                                textAlign: 'center',
-                                fontSize: 10
-                            }}>abondoned</Text>
-                        </View>
-                    </View>
-                    <Text style={{ marginLeft: 15, marginTop: 130, color: 'black' }}>Air Pollution</Text>
-                </View>
-
-                <View style={{
-                    position: 'relative',
-                    top: 410,
-                    width: W,
-
-                }}>
+                
 
                     <View>
                         <Image style={{
@@ -184,7 +157,7 @@ export default function IssueFilter() {
                 </View>
 
 
-            </View>
+            
 
         </ScrollView>
 

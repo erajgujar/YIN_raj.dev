@@ -23,7 +23,7 @@ export default function ListIssues() {
         <SafeAreaView>
             <ScrollView>
 
-                <View style={{ width: width, height: height, justifyContent: 'flex-start' }}>
+                <View style={{ width: width, justifyContent: 'flex-start' }}>
 
                     <View style={styles.issue_wrap}>
                         <View style={{
@@ -78,7 +78,7 @@ export default function ListIssues() {
                                             marginLeft: 20,
                                             backgroundColor: '#515254',
                                             padding: 3,
-                                            width: 100,
+                                            width: 'auto',
                                             color: 'white',
                                             borderRadius: 20,
                                             textAlign: 'center',
@@ -101,6 +101,7 @@ export default function ListIssues() {
                                 <Text style={{ marginLeft: 15, marginTop: 5, color: 'black' }}>{value.issue_title}</Text>
                             </View>
                         )})}
+
                     </View>
 
                     <View >
@@ -123,7 +124,7 @@ export default function ListIssues() {
 const styles = StyleSheet.create({
     issue_wrap: {
         width: '100%',
-        height: height / 4,
+        height:170,
         backgroundColor: '#4083f6',
         borderBottomLeftRadius: 30,
         borderBottomRightRadius: 30,

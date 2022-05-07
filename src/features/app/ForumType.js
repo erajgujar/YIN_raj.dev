@@ -1,22 +1,31 @@
 import React, { useState, useEffect } from 'react';
-
 import { View, Image, Text, StyleSheet, TouchableOpacity, Dimensions, SafeAreaView, ScrollView, StatusBar } from 'react-native'
 const { height, width } = Dimensions.get('window')
+
 const ForumType = () => {
     const [mixed, setMixed] = useState("")
     const [female, setFemale] = useState("")
     const [male, setMale] = useState("")
+    const [selectMixed, setSelectMixed] = useState(null)
+    const [selectFemale, setSelectFemale] = useState(null)
+    const [selectMale, setSelectMale] = useState(null)
 
     const MixedForum = () => {
         setMixed(<Image style={styles.checked} source={require('../assets/images/Others/checked.png')} />)
         setFemale("")
         setMale("")
+        setSelectMixed(true)
+        setSelectFemale(false)
+        setSelectMale(false)
         console.log("Mixed-Forum Selected")
     }
     const FemaleForum = () => {
         setFemale(<Image style={styles.checked} source={require('../assets/images/Others/checked.png')} />)
         setMixed("")
         setMale("")
+        setSelectMixed(false)
+        setSelectFemale(true)
+        setSelectMale(false)
         console.log("Female-Forum Selected")
     }
 
@@ -24,52 +33,65 @@ const ForumType = () => {
         setMale(<Image style={styles.checked} source={require('../assets/images/Others/checked.png')} />)
         setMixed("")
         setFemale("")
+        setSelectMixed(false)
+        setSelectFemale(false)
+        setSelectMale(true)
         console.log("Male-Forum Selected")
     }
 
- 
-
+    const getForumDetails = () => {
+        if (selectMixed === true) {
+            console.log("mixed pressed")
+        } else if (selectFemale === true) {
+            console.log('female pressed')
+        } else if (selectMale === true) {
+            console.log('male pressed')
+        } else {
+            console.log("no selection")
+        }
+    }
+    //Get forum info from forum id
     return (
-        <SafeAreaView>
-            <ScrollView>
-                <View style={{ height: height, width: width, justifyContent: 'flex-start' }}>
-                    <Image style={styles.container} source={require('../assets/images/yin/light-solid-full-header.png')} />
-                    <Text style={styles.heading}>FORUM TYPES</Text>
-                    <TouchableOpacity onPress={MixedForum}>
-                        <View style={styles.forum_container}>
-                            <Image style={styles.forum_img} source={require('../assets/images/Others/mixed-gender-forum-image.png')} />
-                            <Text style={styles.forum_text}>Mixed-Gender-Forum</Text>
-                            <Text>{mixed}</Text>
 
-                        </View>
-                    </TouchableOpacity>
+        <ScrollView>
+            {/* Get forum info from id */}
+            <View style={{ height: height, width: width, justifyContent: 'flex-start' }}>
+                <Image style={styles.container} source={require('../assets/images/yin/light-solid-full-header.png')} />
+                <Text style={styles.heading}>FORUM TYPES</Text>
+                <TouchableOpacity onPress={MixedForum}>
+                    <View style={styles.forum_container}>
+                        <Image style={styles.forum_img} source={require('../assets/images/Others/mixed-gender-forum-image.png')} />
+                        <Text style={styles.forum_text}>Mixed-Gender-Forum</Text>
+                        <Text>{mixed}</Text>
 
-                    <TouchableOpacity onPress={FemaleForum}>
-                        <View style={styles.forum_container}>
-                            <Image style={styles.forum_img} source={require('../assets/images/Others/female-forum-image.png')} />
-                            <Text style={styles.forum_text}>Female-Forum</Text>
-                            <Text>{female}</Text>
-                        </View>
-                    </TouchableOpacity>
+                    </View>
+                </TouchableOpacity>
 
-                    <TouchableOpacity onPress={MaleForum}>
-                        <View style={styles.forum_container}>
-                            <Image style={styles.forum_img} source={require('../assets/images/Others/male-forum-image.png')} />
-                            <Text style={styles.forum_text}>Male-Forum</Text>
-                            <Text>{male}</Text>
-                        </View>
-                    </TouchableOpacity>
+                <TouchableOpacity onPress={FemaleForum}>
+                    <View style={styles.forum_container}>
+                        <Image style={styles.forum_img} source={require('../assets/images/Others/female-forum-image.png')} />
+                        <Text style={styles.forum_text}>Female-Forum</Text>
+                        <Text>{female}</Text>
+                    </View>
+                </TouchableOpacity>
 
-                    <TouchableOpacity>
-                        <View style={styles.btn_container}>
-                            <Text style={styles.btn_text}>Get Started</Text>
-                            <Image style={styles.btn_img} source={require('../assets/images/for-next.png')} />
-                        </View>
-                    </TouchableOpacity>
+                <TouchableOpacity onPress={MaleForum}>
+                    <View style={styles.forum_container}>
+                        <Image style={styles.forum_img} source={require('../assets/images/Others/male-forum-image.png')} />
+                        <Text style={styles.forum_text}>Male-Forum</Text>
+                        <Text>{male}</Text>
+                    </View>
+                </TouchableOpacity>
 
-                </View>
-            </ScrollView>
-        </SafeAreaView>
+                <TouchableOpacity onPress={getForumDetails}>
+                    <View style={styles.btn_container}>
+                        <Text style={styles.btn_text}>Get Started</Text>
+                        <Image style={styles.btn_img} source={require('../assets/images/for-next.png')} />
+                    </View>
+                </TouchableOpacity>
+            </View>
+        </ScrollView>
+
     )
 }
 
@@ -121,15 +143,15 @@ const styles = StyleSheet.create({
     },
     btn_container: {
         flexDirection: "row",
-        justifyContent:'space-between',
+        justifyContent: 'space-between',
         textAlign: "left",
-        marginTop: height/4,
+        marginTop: height / 4,
         borderRadius: 15,
         marginLeft: 15,
         marginRight: 15,
         padding: 15,
         backgroundColor: "#20e8e8"
-       
+
     },
     btn_img: {
         height: 20,

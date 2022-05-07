@@ -1,13 +1,29 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios';
 import { View, Text, Image, StyleSheet, Dimensions, SafeAreaView, ScrollView } from 'react-native';
+import { returnKeyType } from 'deprecated-react-native-prop-types/DeprecatedTextInputPropTypes';
 const H = Dimensions.get('window').height;
 const W = Dimensions.get('window').width;
 const CheckUpdates = () => {
+    const [isLoading, setLoading] = useState(false)
+    const [data, setData] = useState([])
+    //Get Activity list using yin id
+
+    const getUpdates = async () => {
+        setLoading(true)
+        const response = await axios.get("https://stg-yin-talk-api.foxberry.link/v1/activity/list/yin-id/MHPC000012")
+        setData(response.data)
+        setLoading(false)
+    }
+
+    useEffect(() => {
+        getUpdates()
+    }, [])
 
     return (
         <SafeAreaView>
             <ScrollView>
-                <View style={{height:'auto', width:'auto'}}>
+                <View style={{ height: 'auto', width: 'auto' }}>
 
                     <View>
                         <Image style={styles.pollution_img} source={require('../assets/images/Others/issue-details-image.png')} />
@@ -77,110 +93,35 @@ const CheckUpdates = () => {
                         <Image style={styles.progress_line} source={require('../assets/images/Others/line.png')} />
                     </View>
 
+                    {
+                        isLoading ? <Text>Loading please wait</Text> : data.map((value, i) => {
+                            return (<View style={{ display: "flex", flexDirection: "row", marginBottom: 10 }}>
+                                <View>
+                                    <Text style={styles.progress_stage}>4</Text>
+                                </View>
+                                <View style={{
+                                    width: '72%',
+                                    backgroundColor: "#a7e1cd",
+                                    borderRadius: 15,
+                                    padding: 9
+                                }}>
+                                    <View style={{
+                                        flexDirection: "row",
+                                        justifyContent: 'space-between',
 
-                    <View style={{ display: "flex", flexDirection: "row", marginBottom: 10 }}>
-                        <View>
-                            <Text style={styles.progress_stage}>4</Text>
-                        </View>
-                        <View style={{
-                            width: '72%',
-                            backgroundColor: "#a7e1cd",
-                            borderRadius: 15,
-                            padding: 9
-                        }}>
-                            <View style={{
-                                flexDirection: "row",
-                                justifyContent: 'space-between',
+                                    }}>
+                                        <Text style={styles.progress_date}>{value.updated_at}</Text>
+                                        <Text style={styles.progress_status}>{value.activity_status}</Text>
+                                    </View>
+                                    <View>
+                                        <Text style={styles.progress_text}>{value.activity_description}</Text>
+                                    </View>
+                                </View>
+                            </View>
 
-                            }}>
-                                <Text style={styles.progress_date}>15th October 2021</Text>
-                                <Text style={styles.progress_status}>Completed</Text>
-                            </View>
-                            <View>
-                                <Text style={styles.progress_text}>Lorem Ipsum is simply dummy text of the printing and showing.
-                                    This is a dummy text written here for the purpose of design only.
-                                </Text>
-                            </View>
-                        </View>
-                    </View>
-
-                    <View style={{ display: "flex", flexDirection: "row", marginBottom: 10 }}>
-                        <View>
-                            <Text style={styles.progress_stage}>3</Text>
-                        </View>
-                        <View style={{
-                            width: '72%',
-                            backgroundColor: "#a7e1cd",
-                            borderRadius: 15,
-                            padding: 15
-                        }}>
-                            <View style={{
-                                flexDirection: "row",
-                                justifyContent: 'space-between',
-
-                            }}>
-                                <Text style={styles.progress_date}>21st October 2021</Text>
-                                <Text style={styles.progress_status}>Completed</Text>
-                            </View>
-                            <View>
-                                <Text style={styles.progress_text}>Lorem Ipsum is simply dummy text of the printing and showing.
-                                    This is a dummy text written here for the purpose of design only.
-                                </Text>
-                            </View>
-                        </View>
-                    </View>
-
-                    <View style={{ display: "flex", flexDirection: "row", marginBottom: 10 }}>
-                        <View>
-                            <Text style={styles.progress_stage}>2</Text>
-                        </View>
-                        <View style={{
-                            width: '72%',
-                            backgroundColor: "#a7e1cd",
-                            borderRadius: 15,
-                            padding: 15
-                        }}>
-                            <View style={{
-                                flexDirection: "row",
-                                justifyContent: 'space-between',
-
-                            }}>
-                                <Text style={styles.progress_date}>25th October 2021</Text>
-                                <Text style={styles.progress_status}>Completed</Text>
-                            </View>
-                            <View>
-                                <Text style={styles.progress_text}>Lorem Ipsum is simply dummy text of the printing and showing.
-                                    This is a dummy text written here for the purpose of design only.
-                                </Text>
-                            </View>
-                        </View>
-                    </View>
-
-                    <View style={{ display: "flex", flexDirection: "row", marginBottom:20}}>
-                        <View>
-                            <Text style={styles.progress_stage}>1</Text>
-                        </View>
-                        <View style={{
-                            width: '72%',
-                            backgroundColor: "#a7e1cd",
-                            borderRadius: 15,
-                            padding: 15
-                        }}>
-                            <View style={{
-                                flexDirection: "row",
-                                justifyContent: 'space-between',
-
-                            }}>
-                                <Text style={styles.progress_date}>31st October 2021</Text>
-                                <Text style={styles.progress_status}>Completed</Text>
-                            </View>
-                            <View>
-                                <Text style={styles.progress_text}>Lorem Ipsum is simply dummy text of the printing and showing.
-                                    This is a dummy text written here for the purpose of design only.
-                                </Text>
-                            </View>
-                        </View>
-                    </View>
+                            )
+                        })
+                    }
 
                 </View>
 

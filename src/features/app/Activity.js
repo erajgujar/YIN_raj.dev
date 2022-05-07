@@ -8,14 +8,28 @@ export default class Activity extends Component {
         this.state = {
             data: ['Mark As Complete', 'Mark As Abondoned', 'As for Help'],
             checked: 0,
-            text: "input text"
+            text: "input text",
+            activity: []
         }
+
+        
     }
 
     onChangeText() {
         this.serState({ text: "Write Your Comments" })
     }
+
+    componentDidMount() {
+       
+        fetch("https://stg-yin-talk-api.foxberry.link/v1/activity/list/yin-id/MHPC000012")
+        .then(response=>response.json())
+        .then(response=> this.setState({activity:response}))
+    
+    }
+
     render() {
+        
+        //Get activity list using yin id
         return (
             <SafeAreaView>
                 <ScrollView>
@@ -30,33 +44,35 @@ export default class Activity extends Component {
                             width: 3,
                             height: 250,
                             marginLeft: 65,
-                            marginTop: 75,                     
+                            marginTop: 75,
                             zIndex: 0,
                             position: 'absolute',
                             tintColor: "#a7e1cd"
                         }} source={require('../assets/images/Others/line.png')} />
 
-                        <View style={{ flexDirection: "row", width: W, marginBottom: 10 }}>
-                            <Image style={styles.radio_img} source={require('../assets/images/Others/Radio_checked.png')} />
-                            <Text style={styles.progress_btn}>1</Text>
-                            <View style={styles.activity_card}>
-                                <Text style={{ fontSize: 14, color: "black", padding: 2 }}>Activity Title</Text>
-                                <Text style={{ fontSize: 13, padding: 2, textAlign:'auto' }}>Lorem Ipsum is simply dummy text of the printing,
-                                    this is an dummy text written here </Text>
-                            </View>
-                        </View>
+                        { this.state.activity.map((activity) => <View style={{ flexDirection: "row", width: W, marginBottom: 10 }}>
+                                    <Image style={styles.radio_img} source={require('../assets/images/Others/Radio_checked.png')} />
+                                    <Text style={styles.progress_btn}>1</Text>
+                                    <View style={styles.activity_card}>
+                                        <Text style={{ fontSize: 14, color: "black", padding: 2 }}>{activity.activity_title}</Text>
+                                        <Text style={{ fontSize: 13, padding: 2, textAlign: 'auto' }}>{activity.activity_description}</Text>
+                                    </View>
+                                </View>
+                            )
+                        }
 
-                        <View style={{ flexDirection: "row", marginBottom: 10 }}>
+                        {/* <View style={{ flexDirection: "row", marginBottom: 10 }}>
                             <Image style={styles.radio_img} source={require('../assets/images/Others/Radio_unchecked.png')} />
                             <Text style={styles.progress_btn}>2</Text>
                             <View style={styles.activity_card}>
-                                <Text style={{ fontSize: 14, color: "black", padding: 2}}>Activity Title</Text>
-                                <Text style={{ fontSize: 13, padding: 2, textAlign:'auto' }}>Lorem Ipsum is simply dummy text of the printing,
+                                <Text style={{ fontSize: 14, color: "black", padding: 2 }}>Activity Title</Text>
+                                <Text style={{ fontSize: 13, padding: 2, textAlign: 'auto' }}>Lorem Ipsum is simply dummy text of the printing,
                                     this is an dummy text written here </Text>
                             </View>
-                        </View>
+                        </View> */}
 
                         <View style={styles.radio_btn}>
+                        
                             {
                                 this.state.data.map((data, key) => {
                                     return (
@@ -76,6 +92,7 @@ export default class Activity extends Component {
                                     )
                                 })
                             }
+
                         </View>
                         <View>
                             <TextInput
@@ -179,8 +196,8 @@ const styles = StyleSheet.create({
     },
     progress_btn: {
         width: 30,
-        alignItems:'center',
-        paddingTop:1,
+        alignItems: 'center',
+        paddingTop: 1,
         height: 25,
         color: "white",
         backgroundColor: "#14a3db",
@@ -226,7 +243,7 @@ const styles = StyleSheet.create({
     button: {
         flexDirection: "row",
         justifyContent: 'center',
-        marginBottom:15
+        marginBottom: 15
 
 
     }

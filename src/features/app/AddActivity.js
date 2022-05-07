@@ -197,10 +197,10 @@ export default function AddActivity() {
                                         borderRadius: 20,
                                         backgroundColor: 'green',
                                         color: 'white',
-                                        paddingLeft: 7,
-                                        paddingRight: 7,
+                                        width:'auto',
+                                        marginLeft:'auto',
                                         marginBottom: 5,
-                                        padding: 2
+                                        padding: 3,
                                     }}>{value.activity_status}</Text>
                                 </View>
                                 <View>

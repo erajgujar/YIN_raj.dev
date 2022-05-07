@@ -12,31 +12,31 @@ import ListIssues from './src/features/app/ListIssues';
 import IssueFilter from './src/features/app/IssueFilter';
 import IssueDetails from './src/features/app/IssueDetails';
 
-
 const App = () => {
   return (
     <View>
 
 
 
-      
+
 
 
 
 
       <ForumType />
+
       {/* <LiveIssues /> */}
-      {/* <AddNewIssue/> */}
-      {/* <CheckUpdates/> */}
-        {/* <Activity /> */}
       {/* <IssueFilter/> */}
-
-
       {/* <ListIssues/> */}
       {/* <Members/> */}
       {/* <MinutesOfMeeting/> */}
       {/* <AddActivity/> */}
+      {/* <AddNewIssue/> */}
+      {/* <CheckUpdates/> */}
+      {/* <Activity /> */}
       {/* <IssueDetails/> */}
+
+
 
 
     </View>
