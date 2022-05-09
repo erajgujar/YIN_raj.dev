@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { View, Image, Text, StyleSheet, TouchableOpacity, Dimensions, SafeAreaView, ScrollView, StatusBar } from 'react-native'
+import React, { useState } from 'react';
+import { View, Image, Text, StyleSheet, TouchableOpacity, Dimensions, ScrollView } from 'react-native'
+//import { ForumDashboard } from '../Other Components/ForumDashboard';
 const { height, width } = Dimensions.get('window')
 
 const ForumType = () => {
@@ -49,6 +50,8 @@ const ForumType = () => {
         } else {
             console.log("no selection")
         }
+
+        // ( selectMixed===true)? <ForumDashboard/> : <Text>No data found</Text>
     }
     //Get forum info from forum id
     return (
@@ -88,7 +91,7 @@ const ForumType = () => {
                         <Text style={styles.btn_text}>Get Started</Text>
                         <Image style={styles.btn_img} source={require('../assets/images/for-next.png')} />
                     </View>
-                </TouchableOpacity>
+                </TouchableOpacity>   
             </View>
         </ScrollView>
 

@@ -11,6 +11,9 @@ import LiveIssues from './src/features/app/LiveIssues';
 import ListIssues from './src/features/app/ListIssues';
 import IssueFilter from './src/features/app/IssueFilter';
 import IssueDetails from './src/features/app/IssueDetails';
+import { ForumDashboard } from './src/features/Other Components/ForumDashboard';
+
+
 
 const App = () => {
   return (
@@ -23,7 +26,7 @@ const App = () => {
 
 
 
-      <ForumType />
+      {/* <ForumType /> */}
 
       {/* <LiveIssues /> */}
       {/* <IssueFilter/> */}
@@ -36,7 +39,7 @@ const App = () => {
       {/* <Activity /> */}
       {/* <IssueDetails/> */}
 
-
+<ForumDashboard/>
 
 
     </View>
