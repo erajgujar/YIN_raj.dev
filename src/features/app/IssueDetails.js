@@ -2,20 +2,37 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { View, ActivityIndicator, TextInput, Text, Image, Dimensions, StyleSheet, ScrollView, SafeAreaView, Alert, Modal, Pressable } from 'react-native';
 const { width, height } = Dimensions.get('window');
+const H = Dimensions.get('window').height;
+const W = Dimensions.get('window').width;
 export default function IssueDetails() {
   const [modalVisible, setModalVisible] = useState(false);
+  const [modVisible, setModVisible] = useState(false)
 
-  const [name, setName] = useState('')
-  const [college, setCollege] = useState('')
+  const [profile_image, setProfileImage] = useState(["https://foxberry-images.s3.amazonaws.com/yin/users/b5d4c940-4362-11ec-8d3f-8fa32b52bc04_blob.blob"])
+  const [yin_id, setYinId] = useState('')
+  // const [first_name, setFirstName] = useState('')
+  // const [last_name, setLastName] = useState('')
+  // const [college_name, setCollegeName] = useState('')
   const [designation, setDesignation] = useState('')
-  const [mobile, setMobile] = useState('')
-  const [email, setEmail] = useState('')
+
   const [data, setData] = useState([])
   const [isLoading, setLoading] = useState(false)
 
+  const [issue_id, setIssueId] = useState('')
+  const [forum_id, setForumId] = useState('')
+  const [activity_title, setActivityTitle] = useState('')
+  const [activity_description, setActivityDescription] = useState('')
+  const [activity_images, setActivityImages] = useState('')
+  const [activity_status, setActivityStatus] = useState('')
+  const [activity_member_details, setActivityMemberDetails] = useState([{ "designation": "member", "yin_id": "MHPC000012" }, { "designation": "member", "yin_id": "MHPC0000123" }, { "designation": "member", "yin_id": "MHPC00001234" }])
+  const [is_published, setIsPublished] = useState(true)
+  const [activity_tags, setActivityTags] = useState('')
+  const [activity_start_time, setActivityStartTime] = useState('')
+  const [activity_end_time, setActivityEndTime] = useState('')
+
   function addMember() {
-    const memberDetails = { name, college, designation, mobile, email }
-    console.log({ name, college, designation, mobile, email })
+    const memberDetails = { issue_id, yin_id, designation }
+    console.log({ issue_id, yin_id, designation })
     fetch("https://stg-yin-talk-api.foxberry.link/v1/forum/add/forum/member", {
       method: 'POST',
       headers: {
@@ -23,6 +40,24 @@ export default function IssueDetails() {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(memberDetails)
+    }).then((result) => {
+      //console.log('result', result);
+      result.json().then((response) => {
+        console.log("response", response);
+      })
+    })
+  }
+
+  function addNewActivity() {
+    const activityDetails = { issue_id, forum_id, activity_title, activity_description, activity_images, activity_status, activity_member_details, is_published, activity_tags, activity_start_time, activity_end_time }
+    console.log({ issue_id, forum_id, activity_title, activity_description, activity_images, activity_status, activity_member_details, is_published, activity_tags, activity_start_time, activity_end_time })
+    fetch("https://stg-yin-talk-api.foxberry.link/v1/activity/create", {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(activityDetails)
     }).then((result) => {
       //console.log('result', result);
       result.json().then((response) => {
@@ -40,7 +75,7 @@ export default function IssueDetails() {
       console.log(response.data)
     }
     getActivity()
-  },[])
+  }, [])
 
 
   return (
@@ -117,10 +152,10 @@ export default function IssueDetails() {
               <Modal
                 animationType="slide"
                 transparent={true}
-                visible={modalVisible}
+                visible={modVisible}
                 onRequestClose={() => {
                   Alert.alert("Modal has been closed.");
-                  setModalVisible(!modalVisible);
+                  setModVisible(!modVisible);
                 }}
               >
                 <View style={styles.centeredView}>
@@ -129,17 +164,18 @@ export default function IssueDetails() {
                       <View>
                         <Text style={{ textAlign: 'center', color: 'black', marginBottom: 30, fontSize: 20 }}>Add Member</Text>
                         <View style={{ borderRadius: 1 }}>
-                          <TextInput onChangeText={Name => setName(Name)} style={styles.input_field} placeholder='Enter Name' />
-                          <TextInput onChangeText={College => setCollege(College)} style={styles.input_field} placeholder='Enter College Name' />
-                          <TextInput onChangeText={Designation => setDesignation(Designation)} style={styles.input_field} placeholder='Enter Designation' />
-                          <TextInput onChangeText={Mobile => setMobile(Mobile)} style={styles.input_field} placeholder='Enter Mobile Number' />
-                          <TextInput onChangeText={Email => setEmail(Email)} style={styles.input_field} placeholder='Enter Email Id' />
+                          <TextInput style={styles.input_field} placeholder="Enter Issue Id" onChangeText={issueId => setIssueId(issueId)} />
+                          <TextInput onChangeText={yinId => setYinId(yinId)} style={styles.input_field} placeholder='Enter YIN_Id' />
+                          {/* <TextInput onChangeText={firstName => setFirstName(firstName)} style={styles.input_field} placeholder='Enter First Name' />
+                          <TextInput onChangeText={lastName => setLastName(lastName)} style={styles.input_field} placeholder='Enter Last Name' />
+                          <TextInput onChangeText={collegeName => setCollegeName(collegeName)} style={styles.input_field} placeholder='Enter College Name' /> */}
+                          <TextInput onChangeText={designation => setDesignation(designation)} style={styles.input_field} placeholder='Enter Designation' />
                         </View>
                       </View>
                     </View>
 
                     <Pressable
-                      onPress={() => setModalVisible(!modalVisible)}
+                      onPress={() => setModVisible(!modVisible)}
                     >
                       <View style={{ flexDirection: 'row', width: '100%', marginTop: 50 }}>
 
@@ -153,6 +189,50 @@ export default function IssueDetails() {
               </Modal>
             </View>
 
+
+            <View style={styles.centeredView}>
+              <Modal
+                animationType="slide"
+                transparent={true}
+                visible={modalVisible}
+                onRequestClose={() => {
+                  Alert.alert("Modal has been closed.");
+                  setModalVisible(!modalVisible);
+                }}
+              >
+                <View style={styles.centeredView}>
+                  <View style={styles.modalView}>
+                    <View style={{ width: W - 50 }}>
+                      <Text style={{ textAlign: 'center', color: 'black', marginBottom: 30, fontSize: 20 }}>Add Activity</Text>
+                      <TextInput style={styles.input_field} placeholder="Enter Issue Id" onChangeText={issueId => setIssueId(issueId)} />
+                      <TextInput style={styles.input_field} placeholder="Enter Forum Id" onChangeText={forumId => setForumId(forumId)} />
+                      <TextInput style={styles.input_title} placeholder="Title" onChangeText={newTitle => setActivityTitle(newTitle)} />
+                      <TextInput style={styles.input_des} placeholder="Write Description" onChangeText={newDescription => setActivityDescription(newDescription)} />
+                      <TextInput style={styles.input_field} placeholder="Add Activity Images" onChangeText={activityImages => setActivityImages(activityImages)} />
+                      <TextInput style={styles.input_field} placeholder="Add Activity Status" onChangeText={activityStatus => setActivityStatus(activityStatus)} />
+                      {/* <TextInput style={styles.input_field} placeholder="Enter Activity Member Details" onChangeText={activityMember => setActivityMemberDetails(activityMember)} /> */}
+
+                      <TextInput style={styles.input_field} placeholder="Enter Activity Tags" onChangeText={activityTags => setActivityTags(activityTags)} />
+                      <TextInput style={styles.input_field} placeholder="Activity Start Time" onChangeText={startTime => setActivityStartTime(startTime)} />
+                      <TextInput style={styles.input_field} placeholder="Activity End Time" onChangeText={endTime => setActivityEndTime(endTime)} />
+                    </View>
+
+                    <Pressable
+                      onPress={() => setModalVisible(!modalVisible)}
+                    >
+                      <View style={{ flexDirection: 'row', width: '100%', marginTop: 50 }}>
+
+                        <Text onPress={addNewActivity} style={styles.save}>Save</Text>
+
+                        <Text style={styles.cancel}>Cancel</Text>
+                      </View>
+                    </Pressable>
+                  </View>
+                </View>
+              </Modal>
+            </View>
+
+
             <View style={{
               alignItems: 'center',
               padding: 10,
@@ -161,7 +241,7 @@ export default function IssueDetails() {
               justifyContent: 'space-between'
             }}>
               <View>
-                <Pressable onPress={() => setModalVisible(true)}>
+                <Pressable onPress={() => setModVisible(true)}>
                   <Text style={{
                     borderRadius: 25,
                     backgroundColor: '#0cb0e7',
@@ -212,16 +292,21 @@ export default function IssueDetails() {
             alignItems: 'center'
           }}>
             <Text style={{ color: 'black', fontSize: 17 }}>List of Activities</Text>
-            <Text style={{
-              backgroundColor: '#0cb0e7',
-              borderRadius: 25,
-              color: 'white',
-              paddingTop: 5,
-              paddingBottom: 5,
-              paddingLeft: 10,
-              marginRight: 7,
-              paddingRight: 10
-            }}>Add Activity +</Text>
+
+            <Pressable
+              //style={[styles.button_modal, styles.buttonOpen]}
+              onPress={() => setModalVisible(true)}>
+              <Text style={{
+                backgroundColor: '#0cb0e7',
+                borderRadius: 25,
+                color: 'white',
+                paddingTop: 5,
+                paddingBottom: 5,
+                paddingLeft: 10,
+                marginRight: 7,
+                paddingRight: 10
+              }}>Add Activity +</Text>
+            </Pressable>
           </View>
 
           <View style={{ width: width, height: 'auto' }}>
@@ -238,7 +323,7 @@ export default function IssueDetails() {
 
 
             {
-              isLoading ? <ActivityIndicator size="large" color="gray"/> :data.map((value, i) => {
+              isLoading ? <ActivityIndicator size="large" color="gray" /> : data.map((value, i) => {
                 return (<View key={String(i)} style={styles.activity_card}>
                   <View>
                     <Text style={{
@@ -266,7 +351,7 @@ export default function IssueDetails() {
 
                   }}>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                      <View style={{ flexDirection: 'row', marginBottom: 3, justifyContent: 'flex-start'}}>
+                      <View style={{ flexDirection: 'row', marginBottom: 3, justifyContent: 'flex-start' }}>
                         <Text style={{ fontSize: 12, color: 'black', paddingRight: 3 }}>{value.activity_title}</Text>
                         <Text style={{ fontSize: 11, color: 'black', paddingRight: 3 }}>|</Text>
                         <Text style={{ fontSize: 12 }}>{value.updated_at}</Text>
@@ -276,7 +361,7 @@ export default function IssueDetails() {
                         justifyContent: 'flex-end',
                         alignItems: 'center',
                         justifyContent: 'flex-end',
-                        marginLeft:'auto'
+                        marginLeft: 'auto'
                       }}>
                         <Image style={{ aspectRatio: 1 / 1, width: 20, marginRight: 5, alignSelf: 'center', tintColor: '#3297f5', }} source={require('../assets/images/Others/chat_bubble.png')} />
                         <Image style={{ aspectRatio: 1 / 1, width: 20, marginRight: 5, alignSelf: 'center', tintColor: '#3297f5', }} source={require('../assets/images/Others/edit.png')} />
@@ -302,186 +387,6 @@ export default function IssueDetails() {
                 )
               })
             }
-
-
-
-            {/* <View style={styles.activity_card}>
-
-              <View>
-                <Text style={{
-                  borderRadius: 5,
-                  paddingLeft: 12,
-                  paddingRight: 12,
-                  paddingTop: 5,
-                  color: 'white',
-                  marginTop: 25,
-                  paddingBottom: 5,
-                  position: 'relative',
-                  zIndex: 1,
-                  marginLeft: 10,
-                  backgroundColor: '#0cb0e7'
-                }}>2</Text>
-              </View>
-
-              <View style={{
-                height: 'auto',
-                padding: 10,
-                width: '82%',
-                borderwidth: 2,
-                borderRadius: 20,
-                backgroundColor: '#afcfed'
-
-              }}>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                  <View style={{ flexDirection: 'row', marginBottom: 3 }}>
-                    <Text style={{ fontSize: 12, color: 'black', paddingRight: 3 }}>Activity Title</Text>
-                    <Text style={{ fontSize: 11, color: 'black', paddingRight: 3 }}>|</Text>
-                    <Text style={{ fontSize: 12 }}>5th Jan 2022</Text>
-                  </View>
-                  <View style={{
-                    flexDirection: 'row',
-                    justifyContent: 'flex-end',
-                    alignItems: 'center'
-                  }}>
-                    <Image style={{ aspectRatio: 1 / 1, width: 20, marginRight: 5, alignSelf: 'center', tintColor: '#3297f5', }} source={require('../assets/images/Others/chat_bubble.png')} />
-                    <Image style={{ aspectRatio: 1 / 1, width: 20, marginRight: 5, alignSelf: 'center', tintColor: '#3297f5', }} source={require('../assets/images/Others/edit.png')} />
-                    <Image style={{ aspectRatio: 1 / 1, width: 20, alignSelf: 'center', tintColor: '#3297f5', }} source={require('../assets/images/Others/delete.png')} />
-                  </View>
-                </View>
-                <Text style={{
-                  fontSize: 12,
-                  textAlign: 'justify',
-                  marginBottom: 5
-                }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac ipsum et metus vulputate posuere.</Text>
-                <View style={{ flexDirection: 'row' }}>
-                  <Text style={{ fontSize: 11, color: 'black', paddingRight: 3 }}>Activity Owners:</Text>
-                  <Text style={{ fontSize: 11 }}>Ashutosh Kulkarni</Text>
-                </View>
-
-                <View>
-
-                </View>
-              </View>
-            </View> */}
-
-            {/* <View style={styles.activity_card}>
-
-              <View>
-                <Text style={{
-                  borderRadius: 5,
-                  paddingLeft: 12,
-                  paddingRight: 12,
-                  paddingTop: 5,
-                  color: 'white',
-                  marginTop: 25,
-                  paddingBottom: 5,
-                  position: 'relative',
-                  zIndex: 1,
-                  marginLeft: 10,
-                  backgroundColor: '#0cb0e7'
-                }}>3</Text>
-              </View>
-
-              <View style={{
-                height: 'auto',
-                padding: 10,
-                width: '82%',
-                borderwidth: 2,
-                borderRadius: 20,
-                backgroundColor: '#afcfed'
-
-              }}>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                  <View style={{ flexDirection: 'row', marginBottom: 3 }}>
-                    <Text style={{ fontSize: 12, color: 'black', paddingRight: 3 }}>Activity Title</Text>
-                    <Text style={{ fontSize: 11, color: 'black', paddingRight: 3 }}>|</Text>
-                    <Text style={{ fontSize: 12 }}>5th Jan 2022</Text>
-                  </View>
-                  <View style={{
-                    flexDirection: 'row',
-                    justifyContent: 'flex-end',
-                    alignItems: 'center'
-                  }}>
-                    <Image style={{ aspectRatio: 1 / 1, width: 20, marginRight: 5, alignSelf: 'center', tintColor: '#3297f5', }} source={require('../assets/images/Others/chat_bubble.png')} />
-                    <Image style={{ aspectRatio: 1 / 1, width: 20, marginRight: 5, alignSelf: 'center', tintColor: '#3297f5', }} source={require('../assets/images/Others/edit.png')} />
-                    <Image style={{ aspectRatio: 1 / 1, width: 20, alignSelf: 'center', tintColor: '#3297f5', }} source={require('../assets/images/Others/delete.png')} />
-                  </View>
-                </View>
-                <Text style={{
-                  fontSize: 12,
-                  textAlign: 'justify',
-                  marginBottom: 5
-                }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac ipsum et metus vulputate posuere.</Text>
-                <View style={{ flexDirection: 'row' }}>
-                  <Text style={{ fontSize: 11, color: 'black', paddingRight: 3 }}>Activity Owners:</Text>
-                  <Text style={{ fontSize: 11 }}>Ashutosh Kulkarni</Text>
-                </View>
-
-                <View>
-
-                </View>
-              </View>
-            </View> */}
-
-            {/* <View style={styles.activity_card}>
-
-              <View>
-                <Text style={{
-                  borderRadius: 5,
-                  paddingLeft: 12,
-                  paddingRight: 12,
-                  paddingTop: 5,
-                  color: 'white',
-                  marginTop: 25,
-                  paddingBottom: 5,
-                  position: 'relative',
-                  zIndex: 1,
-                  marginLeft: 10,
-                  backgroundColor: '#0cb0e7'
-                }}>4</Text>
-              </View>
-
-              <View style={{
-                height: 'auto',
-                padding: 10,
-                width: '82%',
-                borderwidth: 2,
-                marginBottom: 15,
-                borderRadius: 20,
-                backgroundColor: '#afcfed'
-
-              }}>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                  <View style={{ flexDirection: 'row', marginBottom: 3 }}>
-                    <Text style={{ fontSize: 12, color: 'black', paddingRight: 3 }}>Activity Title</Text>
-                    <Text style={{ fontSize: 11, color: 'black', paddingRight: 3 }}>|</Text>
-                    <Text style={{ fontSize: 12 }}>5th Jan 2022</Text>
-                  </View>
-                  <View style={{
-                    flexDirection: 'row',
-                    justifyContent: 'flex-end',
-                    alignItems: 'center'
-                  }}>
-                    <Image style={{ aspectRatio: 1 / 1, width: 20, marginRight: 5, alignSelf: 'center', tintColor: '#3297f5', }} source={require('../assets/images/Others/chat_bubble.png')} />
-                    <Image style={{ aspectRatio: 1 / 1, width: 20, marginRight: 5, alignSelf: 'center', tintColor: '#3297f5', }} source={require('../assets/images/Others/edit.png')} />
-                    <Image style={{ aspectRatio: 1 / 1, width: 20, alignSelf: 'center', tintColor: '#3297f5', }} source={require('../assets/images/Others/delete.png')} />
-                  </View>
-                </View>
-                <Text style={{
-                  fontSize: 12,
-                  textAlign: 'justify',
-                  marginBottom: 5
-                }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac ipsum et metus vulputate posuere.</Text>
-                <View style={{ flexDirection: 'row' }}>
-                  <Text style={{ fontSize: 11, color: 'black', paddingRight: 3 }}>Activity Owners:</Text>
-                  <Text style={{ fontSize: 11 }}>Ashutosh Kulkarni</Text>
-                </View>
-
-                <View>
-
-                </View>
-              </View>
-            </View> */}
 
           </View>
         </View>
@@ -576,6 +481,16 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     textAlign: "center"
   },
+  input_title: {
+    width: '100%',
+    borderRadius: 5,
+    borderColor: '#d9dcde',
+    borderWidth: 2,
+    padding: 10,
+    marginBottom: 5,
+    alignSelf: 'center',
+    justifyContent: "center",
+  },
   input_field: {
     width: width - 60,
     borderRadius: 10,
@@ -585,6 +500,17 @@ const styles = StyleSheet.create({
     marginBottom: 4,
     alignSelf: 'center',
     justifyContent: "center",
+  },
+  input_des: {
+    width: '100%',
+    borderRadius: 10,
+    borderColor: '#d9dcde',
+    borderWidth: 2,
+    padding: 20,
+    alignItems: 'center',
+    alignSelf: 'center',
+    justifyContent: "center",
+    marginBottom: 5
   },
   save: {
     backgroundColor: '#0084ff',

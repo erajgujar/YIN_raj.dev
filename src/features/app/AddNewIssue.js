@@ -5,8 +5,18 @@ import { Alert, Modal, View, Text, StyleSheet, Image, TextInput, SafeAreaView, S
 const H = Dimensions.get('window').height;
 const W = Dimensions.get('window').width;
 export default function AddNewIssue() {
+    const [issue_id, setIssueId] = useState('')
+    const [forum_id, setForumId] = useState('')
     const [activity_title, setActivityTitle] = useState('')
     const [activity_description, setActivityDescription] = useState('')
+    const [activity_images, setActivityImages] = useState('')
+    const [activity_status, setActivityStatus] = useState('')
+    const [activity_member_details, setActivityMemberDetails] = useState([{ "designation": "member", "yin_id": "MHPC000012" }, { "designation": "member", "yin_id": "MHPC0000123" }, { "designation": "member", "yin_id": "MHPC00001234" }])
+    const [is_published, setIsPublished] = useState(true)
+    const [activity_tags, setActivityTags] = useState('')
+    const [activity_start_time, setActivityStartTime] = useState('')
+    const [activity_end_time, setActivityEndTime] = useState('')
+
     const [modalVisible, setModalVisible] = useState(false);
     const [data, setData] = useState([])
     const [isLoading, setLoading] = useState(false)
@@ -21,7 +31,7 @@ export default function AddNewIssue() {
         const response = await axios.get('https://stg-yin-talk-api.foxberry.link/v1/activity/all/list? ISSUE_12022')
         setData(response.data)
         setLoading(false)
-       //console.log(response.data)
+        //console.log(response.data)
     }
 
     function addNewActivity() {
@@ -37,7 +47,7 @@ export default function AddNewIssue() {
         }).then((result) => {
             //console.log('result', result);
             result.json().then((response) => {
-                //console.log("response", response);
+                console.log("response", response);
             })
         })
     }
@@ -65,14 +75,19 @@ export default function AddNewIssue() {
                             >
                                 <View style={styles.centeredView}>
                                     <View style={styles.modalView}>
-                                        <View>
-                                            <View>
-                                                <Text style={{ textAlign: 'center', color: 'black', marginBottom: 30, fontSize: 20 }}>Add Activity</Text>
-                                                <TextInput style={styles.input_title} placeholder="Title" onChangeText={newTitle => setActivityTitle(newTitle)} />
-                                                <View style={{ display: 'flex', flexDirection: 'row' }}>
-                                                    <TextInput style={styles.input_des} placeholder="Write Description" onChangeText={newDescription => setActivityDescription(newDescription)} />
-                                                </View>
-                                            </View>
+                                        <View style={{ width: W - 50 }}>
+                                            <Text style={{ textAlign: 'center', color: 'black', marginBottom: 30, fontSize: 20 }}>Add Activity</Text>
+                                            <TextInput style={styles.input_field} placeholder="Enter Issue Id" onChangeText={issueId => setIssueId(issueId)} />
+                                            <TextInput style={styles.input_field} placeholder="Enter Forum Id" onChangeText={forumId => setForumId(forumId)} />
+                                            <TextInput style={styles.input_title} placeholder="Title" onChangeText={newTitle => setActivityTitle(newTitle)} />
+                                            <TextInput style={styles.input_des} placeholder="Write Description" onChangeText={newDescription => setActivityDescription(newDescription)} />
+                                            <TextInput style={styles.input_field} placeholder="Add Activity Images" onChangeText={activityImages => setActivityImages(activityImages)} />
+                                            <TextInput style={styles.input_field} placeholder="Add Activity Status" onChangeText={activityStatus => setActivityStatus(activityStatus)} />
+                                            {/* <TextInput style={styles.input_field} placeholder="Enter Activity Member Details" onChangeText={activityMember => setActivityMemberDetails(activityMember)} /> */}
+
+                                            <TextInput style={styles.input_field} placeholder="Enter Activity Tags" onChangeText={activityTags => setActivityTags(activityTags)} />
+                                            <TextInput style={styles.input_field} placeholder="Activity Start Time" onChangeText={startTime => setActivityStartTime(startTime)} />
+                                            <TextInput style={styles.input_field} placeholder="Activity End Time" onChangeText={endTime => setActivityEndTime(endTime)} />
                                         </View>
 
                                         <Pressable
@@ -194,11 +209,11 @@ export default function AddNewIssue() {
                                         fontSize: 12,
                                         borderRadius: 20,
                                         backgroundColor: 'green',
-                                        color: 'white',                                       
+                                        color: 'white',
                                         marginBottom: 5,
                                         width: 'auto',
                                         padding: 3,
-                                        marginLeft:'auto',
+                                        marginLeft: 'auto',
                                     }}>{value.activity_status}</Text>
                                 </View>
                                 <View>
@@ -402,7 +417,7 @@ const styles = StyleSheet.create({
         margin: 10,
         backgroundColor: "white",
         borderRadius: 20,
-        padding: 40,
+        padding: 10,
         alignItems: "center",
         shadowColor: "#000",
         shadowOffset: {
@@ -424,11 +439,20 @@ const styles = StyleSheet.create({
     },
     input_title: {
         width: '100%',
-        height: 70,
-        borderRadius: 10,
+        borderRadius: 5,
         borderColor: '#d9dcde',
         borderWidth: 2,
         padding: 10,
+        marginBottom: 5,
+        alignSelf: 'center',
+        justifyContent: "center",
+    },
+    input_field: {
+        width: '100%',
+        borderRadius: 10,
+        borderColor: '#d9dcde',
+        borderWidth: 2,
+        padding: 3,
         marginBottom: 5,
         alignSelf: 'center',
         justifyContent: "center",
@@ -438,10 +462,11 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         borderColor: '#d9dcde',
         borderWidth: 2,
-        padding: 35,
+        padding: 20,
         alignItems: 'center',
         alignSelf: 'center',
         justifyContent: "center",
+        marginBottom:5
     },
     save: {
         backgroundColor: '#0084ff',

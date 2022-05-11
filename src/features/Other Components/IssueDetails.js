@@ -107,50 +107,6 @@ export const IssueDetails=()=> {
         }}>Add Activity +</Text>
       </View>
 
-{/* 
-        <View style={styles.activity_card}>
-
-          <View style={{
-            padding: 10,
-            borderwidth: 2,
-            borderRadius: 20,
-            backgroundColor: '#afcfed'
-
-          }}>
-            <View style={{ flexDirection: 'row', }}>
-              <View style={{ flexDirection: 'row', marginBottom: 3 }}>
-                <Text style={{ fontSize: 12, color: 'black', paddingRight: 3 }}>Activity Title</Text>
-                <Text style={{ fontSize: 12, color: 'black', paddingRight: 3 }}>|</Text>
-                <Text style={{ fontSize: 12 }}>5th Jan 2022</Text>
-              </View>
-              <View style={{
-                flexDirection: 'row',
-                justifyContent: 'flex-end',
-                alignItems: 'center'
-              }}>
-                <Image style={{width:12,height:12,marginRight: 10, alignSelf: 'center', tintColor: '#3297f5', }} source={require('../../../assets/images/chat_bubble.png')} />
-                <Image style={{ width:12,height:12, marginRight: 10, alignSelf: 'center', tintColor: '#3297f5', }} source={require('../../../assets/images/edit.png')} />
-                <Image style={{ width:12,height:12, alignSelf: 'center', tintColor: '#3297f5', }} source={require('../../../assets/images/delete.png')} />
-              </View>
-            </View>
-
-            <Text style={{
-              fontSize: 12,
-              textAlign: 'justify',
-              marginBottom: 5
-            }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac ipsum et metus vulputate posuere.</Text>
-            <View style={{ flexDirection: 'row' }}>
-              <Text style={{ fontSize: 12, color: 'black', paddingRight: height * 0.003 }}>Activity Owners:</Text>
-              <Text style={{ fontSize: 12 }}>Manisha Walimbe, Ashutosh Kulkarni</Text>
-            </View>
-
-            <View>
-
-            </View>
-          </View>
-        </View>  */}
-
-        
         <View style={{ flexDirection:'row',padding:10}}>
             <DashedLineWithNumber indexNumber="5" ></DashedLineWithNumber>
             <View style={styles.update}>

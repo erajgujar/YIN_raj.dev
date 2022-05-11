@@ -37,9 +37,9 @@ const App = () => {
       {/* <AddNewIssue/> */}
       {/* <CheckUpdates/> */}
       {/* <Activity /> */}
-      {/* <IssueDetails/> */}
+      <IssueDetails/>
 
-<ForumDashboard/>
+{/* <ForumDashboard/> */}
 
 
     </View>
