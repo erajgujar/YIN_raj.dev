@@ -1,15 +1,34 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, Dimensions, StyleSheet, TextInput, SafeAreaView, ScrollView } from 'react-native';
+import { View, Text, Image, Dimensions, StyleSheet, TextInput, Modal, Pressable, SafeAreaView, ScrollView } from 'react-native';
 const { width, height } = Dimensions.get('window')
 
 export default function ListIssues() {
     const [isLoading, setLoading] = useState(false)
     const [issues, setIssues] = useState([])
 
+    const [modVisible, setModVisible] = useState(false)
+    const [college_code, setCollegeCode] = useState('')
+    const [issue_title, setIssueTitle] = useState('')
+    const [issue_description, setIssueDescription] = useState('')
+    const [issue_full_description, setIssueFullDescription] = useState('')
+    const [issue_images, setIssueImages] = useState("https://foxberry-images.s3.amazonaws.com/yin/college_id_cards/issues-image-1.png")
+    const [issue_types, setIssueTypes] = useState('')
+    const [forum_id, setForumId] = useState('')
+    const [issue_member_details, setIssueMemberDetails] = useState([{ "designation": "member", "yin_id": "MHPC000012" }, { "designation": "member", "yin_id": "MHPC0000123" }, { "designation": "member", "yin_id": "MHPC00001234" }])
+    const [is_published, setPublished] = useState(true)
+    const [issue_tags, setIssueTags] = useState(["dfgdfg", "gfdgdfg", "fgdfgdfgdfg"])
+
+    const addIssue = () => {
+        axios.post("https://stg-yin-talk-api.foxberry.link/v1/issue/create", {
+            college_code, issue_title, issue_description, issue_full_description, issue_images, issue_types, forum_id, issue_member_details,
+            is_published, issue_tags
+        }).then(res => console.log("Posting Data ::: 😎", res)).catch(err => console.log(err))
+    }
+    // Add New Issue
     async function getIssues() {
         setLoading(true)
-        const response = await axios.get("https://stg-yin-talk-api.foxberry.link/v1/issue/all/list?FORUM_COL0001234_BOYS")
+        const response = await axios.get("https://stg-yin-talk-api.foxberry.link/v1/issue/list/forum/FORUM_COL0001234_BOYS")
         setIssues(response.data)
         setLoading(false)
         console.log(response.data)
@@ -41,7 +60,10 @@ export default function ListIssues() {
                                 flexBasis: 70,
                                 marginRight: 'auto'
                             }}>Issues</Text>
-                            <Text style={styles.Add_issue}>Add New Issue + </Text>
+                            <Pressable onPress={() => setModVisible(true)}>
+                                <Text style={styles.Add_issue}>Add New Issue + </Text>
+                            </Pressable>
+
                         </View>
 
                         <View style={{
@@ -61,18 +83,58 @@ export default function ListIssues() {
                         </View>
                     </View>
 
+                    <View style={styles.centeredView}>
+                        <Modal
+                            animationType="slide"
+                            transparent={true}
+                            visible={modVisible}
+                            onRequestClose={() => {
+                                Alert.alert("Modal has been closed.");
+                                setModVisible(!modVisible);
+                            }}
+                        >
+                            <View style={styles.centeredView}>
+                                <View style={styles.modalView}>
+                                    <View>
+                                        <View>
+                                            <Text style={{ textAlign: 'center', color: 'black', marginBottom: 30, fontSize: 20 }}>Add New Issue</Text>
+                                            <View style={{ borderRadius: 1 }}>
+                                                <TextInput style={styles.input_field} placeholder="Enter College Code" onChangeText={collgeCode => setCollegeCode(collgeCode)} />
+                                                <TextInput style={styles.input_title} placeholder='Enter Issue Title' onChangeText={issueTitle => setIssueTitle(issueTitle)} />
+                                                <TextInput style={styles.input_des} placeholder='Enter Issue Description' onChangeText={description => setIssueDescription(description)} />
+                                                <TextInput style={styles.input_des} placeholder='Enter Issue Full Description' onChangeText={fullDescription => setIssueFullDescription(fullDescription)} />
+                                                <TextInput style={styles.input_field} placeholder='Enter Issue Types' onChangeText={issueType => setIssueTypes(issueType)} />
+                                                <TextInput style={styles.input_field} placeholder='Enter Forum Id' onChangeText={forumId => setForumId(forumId)} />
+                                            </View>
+                                        </View>
+                                    </View>
+
+                                    <Pressable
+                                        onPress={() => setModVisible(!modVisible)}
+                                    >
+                                        <View style={{ flexDirection: 'row', width: '100%', marginTop: 50 }}>
+
+                                            <Text onPress={addIssue} style={styles.save}>Save</Text>
+
+                                            <Text style={styles.cancel}>Cancel</Text>
+                                        </View>
+                                    </Pressable>
+                                </View>
+                            </View>
+                        </Modal>
+                    </View>
 
                     <View>
 
-                        { isLoading? <Text>Loading please wait</Text> : issues.map((value,i)=>{
-                            return( <View key={String(i)} style={{
+                        {isLoading ? <Text>Loading please wait</Text> : issues.map((value, i) => {
+                            return (<View key={String(i)} style={{
                                 position: 'relative',
                                 zIndex: 1,
                                 top: 145,
                                 height: height / 5
                             }}>
                                 <View>
-                                    <Image style={styles.river_cleaning_img} source={{uri:value.issue_images[0]}} />
+                                    <Image style={styles.river_cleaning_img} source={{ uri: value.issue_images[0] }} />
                                     <View style={{ position: 'absolute', top: 10 }}>
                                         <Text style={{
                                             marginLeft: 20,
@@ -100,7 +162,8 @@ export default function ListIssues() {
 
                                 <Text style={{ marginLeft: 15, marginTop: 5, color: 'black' }}>{value.issue_title}</Text>
                             </View>
-                        )})}
+                            )
+                        })}
 
                     </View>
 
@@ -124,7 +187,7 @@ export default function ListIssues() {
 const styles = StyleSheet.create({
     issue_wrap: {
         width: '100%',
-        height:170,
+        height: 170,
         backgroundColor: '#4083f6',
         borderBottomLeftRadius: 30,
         borderBottomRightRadius: 30,
@@ -144,13 +207,12 @@ const styles = StyleSheet.create({
     Add_issue: {
         borderWidth: 2,
         borderRadius: 20,
-        padding: 5,
+        paddingTop: 5,
+        paddingBottom: 5,
+        paddingRight: 10,
+        paddingLeft: 10,
         color: '#ffff',
-        borderColor: '#ffff',
-        height: 35,
-        flexBasis: 135,
-        marginTop: 5,
-        textAlign: 'center'
+        borderColor: '#ffff'
 
     },
     river_cleaning_img: {
@@ -185,5 +247,86 @@ const styles = StyleSheet.create({
         marginRight: 13,
         tintColor: '#ffff',
         marginTop: -60
+    },
+    centeredView: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: 15
+    },
+    modalView: {
+        width: '90%',
+        margin: 10,
+        borderwidth: 2,
+        backgroundColor: "white",
+        borderRadius: 20,
+        padding: 20,
+        alignItems: "center",
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 5,
+            height: 2
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5
+    },
+    textStyle: {
+        color: "white",
+        fontWeight: "bold",
+        textAlign: "center"
+    },
+    modalText: {
+        marginBottom: 15,
+        textAlign: "center"
+    },
+    input_title: {
+        width: '100%',
+        borderRadius: 5,
+        borderColor: '#d9dcde',
+        borderWidth: 2,
+        padding: 10,
+        marginBottom: 5,
+        alignSelf: 'center',
+        justifyContent: "center",
+    },
+    input_field: {
+        width: width - 60,
+        borderRadius: 10,
+        borderColor: '#d9dcde',
+        borderWidth: 1,
+        padding: 4,
+        marginBottom: 4,
+        alignSelf: 'center',
+        justifyContent: "center",
+    },
+    input_des: {
+        width: '100%',
+        borderRadius: 10,
+        borderColor: '#d9dcde',
+        borderWidth: 2,
+        padding: 20,
+        alignItems: 'center',
+        alignSelf: 'center',
+        justifyContent: "center",
+        marginBottom: 5
+    },
+    save: {
+        backgroundColor: '#0084ff',
+        marginRight: 10,
+        width: 90,
+        textAlign: 'center',
+        borderRadius: 20,
+        padding: 3,
+        color: '#ffff'
+
+    },
+    cancel: {
+        backgroundColor: '#0084ff',
+        width: 90,
+        textAlign: 'center',
+        borderRadius: 20,
+        padding: 3,
+        color: '#ffff'
     }
 })

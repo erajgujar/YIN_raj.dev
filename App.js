@@ -27,17 +27,16 @@ const App = () => {
 
 
       {/* <ForumType /> */}
-
-      {/* <LiveIssues /> */}
-      {/* <IssueFilter/> */}
-      {/* <ListIssues/> */}
+            {/* <LiveIssues /> */}
+            {/* <IssueFilter/> */}
+            {/* <ListIssues/> */}
       {/* <Members/> */}
       {/* <MinutesOfMeeting/> */}
-      {/* <AddActivity/> */}
-      {/* <AddNewIssue/> */}
+            {/* <AddActivity/> */}
+            <AddNewIssue/>
       {/* <CheckUpdates/> */}
       {/* <Activity /> */}
-      <IssueDetails/>
+      {/* <IssueDetails/> */}
 
 {/* <ForumDashboard/> */}
 
