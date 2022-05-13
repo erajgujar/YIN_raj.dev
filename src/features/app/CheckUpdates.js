@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
-import { View, Text, Image, StyleSheet, Dimensions, SafeAreaView, ScrollView } from 'react-native';
+import { View, Text, Image, StyleSheet, Dimensions, SafeAreaView, ScrollView, ActivityIndicator } from 'react-native';
 import { returnKeyType } from 'deprecated-react-native-prop-types/DeprecatedTextInputPropTypes';
 const H = Dimensions.get('window').height;
 const W = Dimensions.get('window').width;
@@ -94,7 +94,7 @@ const CheckUpdates = () => {
                     </View>
 
                     {
-                        isLoading ? <Text>Loading please wait</Text> : data.map((value, i) => {
+                        isLoading ? <ActivityIndicator size='large' color="gray"/> : data.map((value, i) => {
                             return (<View style={{ display: "flex", flexDirection: "row", marginBottom: 10 }}>
                                 <View>
                                     <Text style={styles.progress_stage}>4</Text>

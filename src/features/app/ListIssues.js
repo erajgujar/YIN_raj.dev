@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, Dimensions, StyleSheet, TextInput, Modal, Pressable, SafeAreaView, ScrollView } from 'react-native';
+import { View, Text, Image, Dimensions, StyleSheet, TextInput, Modal, Pressable, ActivityIndicator, SafeAreaView, ScrollView } from 'react-native';
 const { width, height } = Dimensions.get('window')
 
 export default function ListIssues() {
@@ -61,7 +61,7 @@ export default function ListIssues() {
                                 marginRight: 'auto'
                             }}>Issues</Text>
                             <Pressable onPress={() => setModVisible(true)}>
-                                <Text style={styles.Add_issue}>Add New Issue + </Text>
+                                <Text style={styles.Add_issue}>Create New Issue + </Text>
                             </Pressable>
 
                         </View>
@@ -97,7 +97,7 @@ export default function ListIssues() {
                                 <View style={styles.modalView}>
                                     <View>
                                         <View>
-                                            <Text style={{ textAlign: 'center', color: 'black', marginBottom: 30, fontSize: 20 }}>Add New Issue</Text>
+                                            <Text style={{ textAlign: 'center', color: 'black', marginBottom: 30, fontSize: 20 }}>Create New Issue</Text>
                                             <View style={{ borderRadius: 1 }}>
                                                 <TextInput style={styles.input_field} placeholder="Enter College Code" onChangeText={collgeCode => setCollegeCode(collgeCode)} />
                                                 <TextInput style={styles.input_title} placeholder='Enter Issue Title' onChangeText={issueTitle => setIssueTitle(issueTitle)} />
@@ -126,7 +126,7 @@ export default function ListIssues() {
 
                     <View>
 
-                        {isLoading ? <Text>Loading please wait</Text> : issues.map((value, i) => {
+                        {isLoading ? <ActivityIndicator  size='large' color="gray"/> : issues.map((value, i) => {
                             return (<View key={String(i)} style={{
                                 position: 'relative',
                                 zIndex: 1,

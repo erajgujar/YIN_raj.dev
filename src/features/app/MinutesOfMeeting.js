@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, {useState, useEffect } from 'react'
-import { View, Text, Image, StyleSheet, ScrollView, SafeAreaView } from 'react-native'
+import { View, Text, Image, StyleSheet, ScrollView, SafeAreaView, ActivityIndicator } from 'react-native'
 const MinutesOfMeeting = () => {
 const [data, setData] = useState([])
 const [isLoading, setLoading] = useState(false)
@@ -74,7 +74,7 @@ async function minutesfMeeting(){
                             color: "black"
                         }}>Details</Text>
                    
-                    { isLoading? <Text>Loadin please wait</Text>: data.map((value,i)=>{
+                    { isLoading? <ActivityIndicator size='large' color="gray"/> : data.map((value,i)=>{
                         return( <View key={String(i)}>
                         <View style={{ width: '100%' }}>
                             <View style={{ display: "flex", flexDirection: "row", width: "30%" }}>

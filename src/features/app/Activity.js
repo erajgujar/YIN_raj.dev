@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, Image, StyleSheet, TouchableOpacity, TextInput, Dimensions, SafeAreaView, ScrollView } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity, ActivityIndicator, TextInput, Dimensions, SafeAreaView, ScrollView } from 'react-native';
 const H = Dimensions.get('window').height;
 const W = Dimensions.get('window').width;
 export default class Activity extends Component {
@@ -9,7 +9,8 @@ export default class Activity extends Component {
             data: ['Mark As Complete', 'Mark As Abondoned', 'As for Help'],
             checked: 0,
             text: "input text",
-            activity: []
+            activity: [],
+
         }
 
         

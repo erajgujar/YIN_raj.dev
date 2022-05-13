@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
-import { Alert, Modal, View, Text, StyleSheet, Image, TextInput, SafeAreaView, ScrollView, Pressable, Dimensions, TouchableOpacity } from 'react-native';
+import { Alert, Modal, View, Text, StyleSheet, Image, TextInput, SafeAreaView, ScrollView, ActivityIndicator, Pressable, Dimensions, TouchableOpacity } from 'react-native';
 const H = Dimensions.get('window').height;
 const W = Dimensions.get('window').width;
 export default function AddActivity() {
@@ -199,7 +199,7 @@ export default function AddActivity() {
                     </View>
 
 
-                    {isLoading ? <Text>Loading please wait</Text> : data.map((value, i) => {
+                    {isLoading ? <ActivityIndicator size='large' color="gray"/> : data.map((value, i) => {
                         return (<View key={String(i)} style={{ flexDirection: "row" }}>
                             <View>
                                 <Text style={styles.progress_stage}>1</Text>

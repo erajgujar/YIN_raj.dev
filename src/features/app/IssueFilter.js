@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, StyleSheet, TextInput, Dimensions, TouchableOpacity, Modal, Pressable, ScrollView } from 'react-native';
+import { View, Text, Image, StyleSheet, TextInput, Dimensions, TouchableOpacity, ActivityIndicator, Modal, Pressable, ScrollView } from 'react-native';
 import DropDown from './DropDown';
 import axios from 'axios';
 //import SelectDropdown from 'react-native-select-dropdown'
@@ -75,7 +75,7 @@ export default function IssueFilter() {
                         }}>Issues</Text>
 
                         <Pressable onPress={() => setModVisible(true)}>
-                            <Text style={styles.Add_issue}>Add New Issue + </Text>
+                            <Text style={styles.Add_issue}>Create New Issue + </Text>
                         </Pressable>
                     </View>
 
@@ -109,7 +109,7 @@ export default function IssueFilter() {
                             <View style={styles.modalView}>
                                 <View>
                                     <View>
-                                        <Text style={{ textAlign: 'center', color: 'black', marginBottom: 30, fontSize: 20 }}>Add New Issue</Text>
+                                        <Text style={{ textAlign: 'center', color: 'black', marginBottom: 30, fontSize: 20 }}>Create New Issue</Text>
                                         <View style={{ borderRadius: 1 }}>
                                             <TextInput style={styles.input_field} placeholder="Enter College Code" onChangeText={collgeCode => setCollegeCode(collgeCode)} />
                                             <TextInput style={styles.input_title} placeholder='Enter Issue Title' onChangeText={issueTitle => setIssueTitle(issueTitle)} />
@@ -137,7 +137,7 @@ export default function IssueFilter() {
                 </View>
 
 
-                {isLoading ? <Text>Loading please wait</Text> : issue.map((value, i) => {
+                {isLoading ? <ActivityIndicator  size='large' color="gray"/> : issue.map((value, i) => {
                     return (<View key={String(i)} style={{
                         position: 'relative',
                         zIndex: 1,
@@ -196,7 +196,8 @@ export default function IssueFilter() {
                         width: '95%',
                         height: 160,
                         alignSelf: 'center',
-                        borderRadius: 20
+                        borderRadius: 20,
+                        marginBottom:20
                     }} source={require('../assets/images/Others/forum-des.png')} />
                     <Text style={{
                         marginLeft: 20,
@@ -211,7 +212,7 @@ export default function IssueFilter() {
                         marginTop: 10
                     }}>5th January 2022</Text>
                 </View>
-                <View>
+                <View style={{ marginBottom:10 }}>
                     <View style={{ flexDirection: 'row' }}>
                         <Text style={{ marginLeft: 15, marginTop: 15, fontSize: 17, color: 'black' }}>Forum Name:</Text>
                         <Text style={{ marginLeft: 15, marginTop: 15, fontSize: 17 }}>Grievence Corner</Text>
@@ -223,9 +224,6 @@ export default function IssueFilter() {
                 </View>
 
             </View>
-
-
-
 
         </ScrollView>
 
