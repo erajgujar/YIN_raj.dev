@@ -8,7 +8,7 @@ export default function AddActivity() {
     const [data, setData] = useState([])
     const [isLoading, setLoading] = useState(false)
     const [issue_id, setIssueId] = useState('')
-    const [forum_id, setForumId] = useState('')
+    const [forum_id, setForumId] = useState('FORUM_COL0001234_BOYS')
     const [activity_title, setActivityTitle] = useState('')
     const [activity_description, setActivityDescription] = useState('')
     const [activity_images, setActivityImages] = useState('')
@@ -18,6 +18,16 @@ export default function AddActivity() {
     const [activity_tags, setActivityTags] = useState('')
     const [activity_start_time, setActivityStartTime] = useState('')
     const [activity_end_time, setActivityEndTime] = useState('')
+
+
+    const [college_code, setCollegeCode] = useState('COL_120223')
+    const [issue_title, setIssueTitle] = useState('')
+    const [issue_description, setIssueDescription] = useState('')
+    const [issue_full_description, setIssueFullDescription] = useState('This section describes the issue full details')
+    const [issue_images, setIssueImages] = useState("https://foxberry-images.s3.amazonaws.com/yin/college_id_cards/issues-image-1.png")
+    const [issue_types, setIssueTypes] = useState('LIVE')
+    const [issue_member_details, setIssueMemberDetails] = useState([{ "designation": "member", "yin_id": "MHPC000012" }, { "designation": "member", "yin_id": "MHPC0000123" }, { "designation": "member", "yin_id": "MHPC00001234" }])
+    const [issue_tags, setIssueTags] = useState(["dfgdfg", "gfdgdfg", "fgdfgdfgdfg"])
 
     useEffect(() => {
         getActivity()
@@ -48,6 +58,13 @@ export default function AddActivity() {
                 console.log("response", response);
             })
         })
+    }
+
+    const addIssue = () => {
+        axios.post("https://stg-yin-talk-api.foxberry.link/v1/issue/create", {
+            college_code, issue_title, issue_description, issue_full_description, issue_images, issue_types, forum_id, issue_member_details,
+            is_published, issue_tags
+        }).then(res => console.log("Posting Data ::: 😎", res)).catch(err => console.log(err))
     }
 
     return (
@@ -112,9 +129,7 @@ export default function AddActivity() {
                             alignSelf: 'center'
 
                         }}>
-                            <SafeAreaView>
-                                <TextInput placeholder='Give a Title to the Issue' />
-                            </SafeAreaView>
+                                <TextInput placeholder='Give a Title to the Issue' onChangeText={addTitle=> setIssueTitle(addTitle)} />
                         </View>
                     </View>
                     <View style={{
@@ -130,9 +145,7 @@ export default function AddActivity() {
                         marginBottom: 10
 
                     }}>
-                        <SafeAreaView>
-                            <TextInput placeholder='Give a description to the Issue' />
-                        </SafeAreaView>
+                            <TextInput placeholder='Give a description to the Issue' onChangeText={addDescription=> setIssueDescription(addDescription)} />
                     </View>
 
                     <View style={{ flexDirection: "row" }}>
@@ -227,7 +240,7 @@ export default function AddActivity() {
                     }
 
                     <View style={styles.button}>
-                        <Text style={{
+                        <Text onPress={addIssue} style={{
                             width: '30%',
                             color: "white",
                             textAlign: "center",

@@ -1,12 +1,13 @@
-import { Axios } from 'axios';
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
-import { Alert, Modal, View, Text, StyleSheet, Image, TextInput, SafeAreaView, ScrollView, Pressable, Dimensions } from 'react-native';
+import { Alert, Modal, View, Text, StyleSheet, Image, TextInput, SafeAreaView, ScrollView, Pressable, Dimensions, TouchableOpacity} from 'react-native';
 const H = Dimensions.get('window').height;
 const W = Dimensions.get('window').width;
+
+
 export default function AddNewIssue() {
     const [issue_id, setIssueId] = useState('')
-    const [forum_id, setForumId] = useState('')
+    const [forum_id, setForumId] = useState('FORUM_COL0001234_BOYS')
     const [activity_title, setActivityTitle] = useState('')
     const [activity_description, setActivityDescription] = useState('')
     const [activity_images, setActivityImages] = useState('')
@@ -22,6 +23,17 @@ export default function AddNewIssue() {
     const [isLoading, setLoading] = useState(false)
 
 
+
+    const [college_code, setCollegeCode] = useState('COL_120223')
+    const [issue_title, setIssueTitle] = useState('')
+    const [issue_description, setIssueDescription] = useState('')
+    const [issue_full_description, setIssueFullDescription] = useState('This section describes the issue full details')
+    const [issue_images, setIssueImages] = useState("https://foxberry-images.s3.amazonaws.com/yin/college_id_cards/issues-image-1.png")
+    const [issue_types, setIssueTypes] = useState('LIVE')
+    const [issue_member_details, setIssueMemberDetails] = useState([{ "designation": "member", "yin_id": "MHPC000012" }, { "designation": "member", "yin_id": "MHPC0000123" }, { "designation": "member", "yin_id": "MHPC00001234" }])
+    const [issue_tags, setIssueTags] = useState(["dfgdfg", "gfdgdfg", "fgdfgdfgdfg"])
+
+
     useEffect(() => {
         getActivity()
     }, [])
@@ -35,8 +47,8 @@ export default function AddNewIssue() {
     }
 
     function addNewActivity() {
-        const activityDetails = { activity_title, activity_description }
-        console.log({ activity_title, activity_description })
+        const activityDetails = {issue_id, forum_id, activity_title, activity_description, activity_images, activity_status, activity_member_details, is_published, activity_tags, activity_start_time, activity_end_time }
+        console.log({ issue_id, forum_id, activity_title, activity_description, activity_images, activity_status, activity_member_details, is_published, activity_tags, activity_start_time, activity_end_time })
         fetch("https://stg-yin-talk-api.foxberry.link/v1/activity/create", {
             method: 'POST',
             headers: {
@@ -51,6 +63,17 @@ export default function AddNewIssue() {
             })
         })
     }
+
+    const addIssue = () => {
+        axios.post("https://stg-yin-talk-api.foxberry.link/v1/issue/create", {
+            college_code, issue_title, issue_description, issue_full_description, issue_images, issue_types, forum_id, issue_member_details,
+            is_published, issue_tags
+        }).then(res => console.log("Posting Data ::: 😎", res)).catch(err => console.log(err))
+    }
+    // Add New Issue
+
+
+
     return (
         <SafeAreaView>
             <ScrollView>
@@ -114,9 +137,7 @@ export default function AddNewIssue() {
                             alignSelf: 'center'
 
                         }}>
-                            <SafeAreaView>
-                                <TextInput placeholder='Title' />
-                            </SafeAreaView>
+                                <TextInput placeholder='Title' onChangeText={addTitle=> setIssueTitle(addTitle)} />
                         </View>
                     </View>
                     <View style={{
@@ -132,18 +153,20 @@ export default function AddNewIssue() {
                         marginBottom: 10
 
                     }}>
-                        <SafeAreaView>
-                            <TextInput placeholder='Description' />
-                        </SafeAreaView>
+                            <TextInput placeholder='Description' onChangeText={addDescription=> setIssueDescription(addDescription)}/>
                     </View>
 
                     <View style={{ flexDirection: "row" }}>
-                        <View style={{ margin: 10, marginLeft: 30 }}>
-                            <Text style={{ fontSize: 15, color: "black", marginBottom: 10 }}>Add Photo</Text>
-                            <View style={styles.camera_border}>
-                                <Image style={styles.camera} source={require('../assets/images/Others/camera.jpg')} />
+
+                            <View style={{ margin: 10, marginLeft: 30 }}>
+                                <Text style={{ fontSize: 15, color: "black", marginBottom: 10 }}>Add Photo</Text>
+                                <TouchableOpacity activeOpacity={0.7}>
+                                <View style={styles.camera_border}>
+                                    <Image style={styles.camera} source={require('../assets/images/Others/camera.jpg')} />
+                                </View>
+                                </TouchableOpacity>
                             </View>
-                        </View>
+
                         <View style={{
                             width: "65%", borderWidth: 1,
                             borderColor: "#dfe2e4",
@@ -225,81 +248,8 @@ export default function AddNewIssue() {
                     })
                     }
 
-                    {/* <View style={{ flexDirection: "row" }}>
-                <View>
-                    <Text style={styles.progress_stage}>2</Text>
-                </View>
-
-                <View style={{
-                    backgroundColor: "#a7e1cd",
-                    width: '70%',
-                    borderRadius: 25,
-                    marginBottom: 15,
-                    padding: 13,
-                    marginBottom: 9,
-                }}>
-                    <View style={{
-                        flexDirection: "row",
-                        justifyContent: 'space-between'
-                    }}>
-                        <Text style={{ fontSize: 14, color: 'black' }}>Activity Title</Text>
-                        <Text style={{
-                            fontSize: 12,
-                            borderRadius: 20,
-                            backgroundColor: 'orange',
-                            color: 'white',
-                            paddingLeft: 7,
-                            paddingRight: 7,
-                            marginBottom: 5,
-                            padding: 2
-                        }}>Pending</Text>
-                    </View>
-                    <View>
-                        <Text style={{ fontSize: 12 }}>Lorem Ipsum is simply dummy text of the printing and showing the text and images.</Text>
-                    </View>
-                </View>
-            </View> */}
-
-                    {/* <View style={{ flexDirection: "row" }}>
-                <View>
-                    <Text style={styles.progress_stage}>3</Text>
-                </View>
-
-                <View style={{
-                    backgroundColor: "#a7e1cd",
-                    width: '70%',
-                    borderRadius: 25,
-                    marginBottom: 15,
-                    padding: 13,
-                    marginBottom: 9,
-                }}>
-                    <View style={{
-                        flexDirection: "row",
-                        justifyContent: 'space-between'
-                    }}>
-                        <Text style={{ fontSize: 14, color: 'black' }}>Activity Title</Text>
-                        <Text style={{
-                            fontSize: 12,
-                            borderRadius: 20,
-                            backgroundColor: 'orange',
-                            color: 'white',
-                            paddingLeft: 7,
-                            paddingRight: 7,
-                            marginBottom: 5,
-                            padding: 2
-                        }}>Pending</Text>
-                    </View>
-                    <View>
-                        <Text style={{ fontSize: 12 }}>Lorem Ipsum is simply dummy text of the printing and showing the text and images.</Text>
-                    </View>
-                </View>
-            </View> */}
-
-
-
-
                     <View style={styles.button}>
-                        <Text style={{
+                        <Text onPress={addIssue} style={{
                             width: '30%',
                             color: "white",
                             textAlign: "center",
@@ -466,7 +416,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         alignSelf: 'center',
         justifyContent: "center",
-        marginBottom:5
+        marginBottom: 5
     },
     save: {
         backgroundColor: '#0084ff',
