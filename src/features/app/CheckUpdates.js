@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import { View, Text, Image, StyleSheet, Dimensions, SafeAreaView, ScrollView, ActivityIndicator } from 'react-native';
-import { returnKeyType } from 'deprecated-react-native-prop-types/DeprecatedTextInputPropTypes';
 const H = Dimensions.get('window').height;
 const W = Dimensions.get('window').width;
 const CheckUpdates = () => {
@@ -21,7 +20,6 @@ const CheckUpdates = () => {
     }, [])
 
     return (
-        <SafeAreaView>
             <ScrollView>
                 <View style={{ height: 'auto', width: 'auto' }}>
 
@@ -126,7 +124,6 @@ const CheckUpdates = () => {
                 </View>
 
             </ScrollView>
-        </SafeAreaView>
     )
 }
 

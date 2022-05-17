@@ -17,9 +17,19 @@ export default function Members() {
     const [isLoading, setLoading] = useState(false)
     const [memberDetails, setMemberDetails] = useState([])
 
-    function addMember() {
+    const [issue_id, setIssueId] = useState('')
+    const [yin_id, setYinId] = useState('')
+    const [designation, setDesignation] = useState('')
 
+    const addMember = ()=>{
+        axios.post("https://stg-yin-talk-api.foxberry.link/v1/forum/add/forum/member" , {
+            issue_id,
+             yin_id,
+            designation
+        }).then(res => console.log("Posting Data ::: 😎", res)).catch(err => console.log(err))
     }
+
+    // add member POST API Not Implemented
 
     useEffect(() => {
         memberDetailed_list()
@@ -61,15 +71,15 @@ export default function Members() {
                                             <View style={{ borderRadius: 19 }}>
                                                 <View style={{ flexDirection: 'row', marginBottom: 7 }} >
                                                     <Image style={styles.icon_img} source={require('../assets/images/Others/person.png')} />
-                                                    <TextInput style={styles.input_field} placeholder="First Name" />
+                                                    <TextInput style={styles.input_field_member} placeholder="First Name" />
                                                 </View>
                                                 <View style={{ flexDirection: 'row', marginBottom: 7 }}>
                                                     <Image style={styles.icon_img} source={require('../assets/images/Others/person.png')} />
-                                                    <TextInput style={styles.input_field} placeholder="Last Name" />
+                                                    <TextInput style={styles.input_field_member} placeholder="Last Name" />
                                                 </View>
                                                 <View style={{ flexDirection: 'row', marginBottom: 7 }}>
                                                     <Image style={styles.icon_img} source={require('../assets/images/Others/mobile.png')} />
-                                                    <TextInput style={styles.input_field} placeholder="Mobile Number" />
+                                                    <TextInput style={styles.input_field_member} placeholder="Mobile Number" />
                                                 </View>
                                                 <View style={{ flexDirection: 'row', marginBottom: 10 }}>
                                                     <Text style={{marginRight:5}}>Gender:</Text>
@@ -92,7 +102,7 @@ export default function Members() {
                                                 </View>
                                                 <View style={{ flexDirection: 'row', marginBottom: 7 }}>
                                                     <Image style={styles.icon_img} source={require('../assets/images/Others/college.png')} />
-                                                    <TextInput style={styles.input_field} placeholder="College Name" />
+                                                    <TextInput style={styles.input_field_member} placeholder="College Name" />
                                                     <Image style={styles.dropdown_img} source={require('../assets/images/Others/expand_more.png')} />
                                                 </View>
                                             </View>
@@ -256,7 +266,7 @@ const styles = StyleSheet.create({
         position: 'absolute'
 
     },
-    input_field: {
+    input_field_member: {
         width: width - 100,
         alignSelf: 'center',
         borderRadius: 10,

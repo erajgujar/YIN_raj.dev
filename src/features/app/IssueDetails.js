@@ -163,15 +163,47 @@ export default function IssueDetails() {
                     <View>
                       <View>
                         <Text style={{ textAlign: 'center', color: 'black', marginBottom: 30, fontSize: 20 }}>Add Member</Text>
-                        <View style={{ borderRadius: 1 }}>
-                          <TextInput style={styles.input_field} placeholder="Enter Issue Id" onChangeText={issueId => setIssueId(issueId)} />
-                          <TextInput onChangeText={yinId => setYinId(yinId)} style={styles.input_field} placeholder='Enter YIN_Id' />
-                          {/* <TextInput onChangeText={firstName => setFirstName(firstName)} style={styles.input_field} placeholder='Enter First Name' />
-                          <TextInput onChangeText={lastName => setLastName(lastName)} style={styles.input_field} placeholder='Enter Last Name' />
-                          <TextInput onChangeText={collegeName => setCollegeName(collegeName)} style={styles.input_field} placeholder='Enter College Name' /> */}
-                          <TextInput onChangeText={designation => setDesignation(designation)} style={styles.input_field} placeholder='Enter Designation' />
+                        <View style={{ borderRadius: 19 }}>
+                          <View style={{ flexDirection: 'row', marginBottom: 7 }} >
+                            <Image style={styles.icon_img} source={require('../assets/images/Others/person.png')} />
+                            <TextInput style={styles.input_field_member} placeholder="First Name" />
+                          </View>
+                          <View style={{ flexDirection: 'row', marginBottom: 7 }}>
+                            <Image style={styles.icon_img} source={require('../assets/images/Others/person.png')} />
+                            <TextInput style={styles.input_field_member} placeholder="Last Name" />
+                          </View>
+                          <View style={{ flexDirection: 'row', marginBottom: 7 }}>
+                            <Image style={styles.icon_img} source={require('../assets/images/Others/mobile.png')} />
+                            <TextInput style={styles.input_field_member} placeholder="Mobile Number" />
+                          </View>
+                          <View style={{ flexDirection: 'row', marginBottom: 10 }}>
+                            <Text style={{ marginRight: 5 }}>Gender:</Text>
+                            <View style={{ flexDirection: 'row', marginRight: 10 }}>
+                              <Image style={{ width: 18, height: 18, tintColor: '#0f78f8', marginRight: 5, alignSelf: 'center' }} source={require('../assets/images/Others/radio1.png')} />
+                              <Text style={{ alignSelf: 'center' }}>Female</Text>
+                            </View>
+                            <View style={{ flexDirection: 'row', marginRight: 10 }}>
+                              <Image style={{ width: 18, height: 18, tintColor: 'gray', marginRight: 5, alignSelf: 'center' }} source={require('../assets/images/Others/radio2.png')} />
+                              <Text style={{ alignSelf: 'center' }}>Male</Text>
+                            </View>
+                            <View style={{ flexDirection: 'row' }}>
+                              <Image style={{ width: 18, height: 18, tintColor: 'gray', marginRight: 5, alignSelf: 'center' }} source={require('../assets/images/Others/radio2.png')} />
+                              <Text style={{ alignSelf: 'center' }}>Other</Text>
+                            </View>
+                          </View>
+                          <View style={{ flexDirection: 'row', marginBottom: 7 }}>
+                            <TextInput style={styles.input_field2} placeholder="State" />
+                            <Image style={styles.dropdown_img} source={require('../assets/images/Others/expand_more.png')} />
+                          </View>
+                          <View style={{ flexDirection: 'row', marginBottom: 7 }}>
+                            <Image style={styles.icon_img} source={require('../assets/images/Others/college.png')} />
+                            <TextInput style={styles.input_field_member} placeholder="College Name" />
+                            <Image style={styles.dropdown_img} source={require('../assets/images/Others/expand_more.png')} />
+                          </View>
                         </View>
                       </View>
+
+
                     </View>
 
                     <Pressable
@@ -511,6 +543,48 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     justifyContent: "center",
     marginBottom: 5
+  },
+  icon_img: {
+    width: 25,
+    height: 25,
+    alignSelf: 'center',
+    tintColor: 'gray',
+    marginLeft: 10,
+    marginTop: 2,
+    position: 'absolute'
+
+  },
+  input_field_member: {
+    width: width - 100,
+    alignSelf: 'center',
+    borderRadius: 10,
+    borderColor: '#d9dcde',
+    borderWidth: 1,
+    padding: 4,
+    paddingLeft: 50,
+    position: 'relative'
+
+  },
+  input_field2: {
+    width: width - 100,
+    alignSelf: 'center',
+    borderRadius: 10,
+    borderColor: '#d9dcde',
+    borderWidth: 1,
+    padding: 4,
+    paddingLeft: 10,
+    position: 'relative',
+    color: 'gray'
+
+  },
+  dropdown_img: {
+    width: 30,
+    height: 30,
+    alignSelf: 'center',
+    tintColor: '#0f78f8',
+    marginLeft: 250,
+    marginTop: 2,
+    position: 'absolute'
   },
   save: {
     backgroundColor: '#0084ff',
