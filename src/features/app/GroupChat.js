@@ -5,310 +5,254 @@ const GroupChat = () => {
     return (
         <ScrollView>
             <View>
-                <Text>working</Text>
+                <View style={styles.header_container}>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <View>
+                            <Image style={styles.back_img} source={require('../assets/images/back.png')} />
+                        </View>
+                        <View>
+                            <Text style={styles.header_title}>Group - Air Pollution</Text>
+                        </View>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                            <Image style={styles.videocam_img} source={require('../assets/images/Others/videocam.png')} />
+                            <Image style={styles.android_img} source={require('../assets/images/Others/android.png')} />
+                            <Image style={styles.more_vert_img} source={require('../assets/images/Others/more_vert.png')} />
+                        </View>
+                    </View>
+                    <View style={{ flexDirection: 'row', marginTop: 15, justifyContent: 'center' }}>
+                        <Image style={styles.user_thumbnail} source={require('../assets/images/Others/member-1.png')} />
+                        <Image style={styles.user_thumbnail} source={require('../assets/images/Others/member-2.png')} />
+                        <Image style={styles.user_thumbnail} source={require('../assets/images/Others/member-3.png')} />
+                        <Image style={styles.user_thumbnail} source={require('../assets/images/Others/member-1.png')} />
+                        <Image style={styles.user_thumbnail} source={require('../assets/images/Others/chat-profile-4.jpg')} />
+                        <Image style={styles.user_thumbnail} source={require('../assets/images/Others/chat-profile-3.jpg')} />
+                        <Image style={styles.user_thumbnail} source={require('../assets/images/Others/chat-profile-2.jpg')} />
+                    </View>
+                </View>
+                <View>
+                    <Text style={styles.time}>Today, 3:24 pm</Text>
+                </View>
+
+                <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 15 }}>
+                    <View style={{ width: '25%', padding: 15 }}>
+                        <Image style={styles.user_img} source={require('../assets/images/Others/chat-profile-2.jpg')} />
+                    </View>
+                    <View style={{ width: '75%', backgroundColor: '#f6dff4', marginRight: 25, padding: 12, borderRadius: 25 }}>
+                        <Text style={styles.chat_text}>
+                            This is dummy chatting text written here for showing chat between group with the different peoples.
+                        </Text>
+                        <Text style={[styles.chat_text, { marginLeft: 'auto' }]}>3.25 pm </Text>
+                    </View>
+                </View>
+
+                <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 15, marginRight: 'auto' }}>
+                    <View style={{ width: '25%', padding: 5, marginLeft: -10 }}>
+                        <Image style={styles.user_img} source={require('../assets/images/Others/chat-profile-3.jpg')} />
+                    </View>
+                    <View style={{ width: 'auto', backgroundColor: '#efd4ac', marginRight: 25, padding: 12, borderRadius: 25 }}>
+                        <Text style={styles.chat_text}>
+                            This is dummy chatting text.
+                        </Text>
+                        <Text style={[styles.chat_text, { marginLeft: 'auto' }]}>3.28 pm </Text>
+                    </View>
+                </View>
+
+                <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 15, marginRight: 'auto' }}>
+                    <View style={{ width: '25%', padding: 5, marginLeft: -10 }}>
+                        <Image style={styles.user_img} source={require('../assets/images/Others/member-1.png')} />
+                    </View>
+                    <View style={{ width: 'auto', backgroundColor: '#abfae8', marginRight: 25, padding: 12, borderRadius: 25 }}>
+                        <View style={{ flexDirection: 'row' }}>
+                            <Text style={[styles.chat_text, { marginRight: 7 }]}>
+                                Yes
+                            </Text>
+                            <Image style={styles.thumb_img} source={require('../assets/images/Others/thumb.png')} />
+                        </View>
+                        <View>
+                            <Text style={[styles.chat_text, { marginLeft: 50 }]}>4.00 pm </Text>
+                        </View>
+                    </View>
+                </View>
+
+                <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 15 }}>
+                    <View style={{ width: '25%', padding: 15 }}>
+                        <Image style={styles.user_img} source={require('../assets/images/Others/member-2.png')} />
+                    </View>
+                    <View style={{ width: '75%', backgroundColor: '#f0ac97', marginRight: 25, padding: 12, borderRadius: 25 }}>
+                        <Text style={styles.chat_text}>
+                            This is dummy chatting text written here for showing chat between group with the different peoples.
+                        </Text>
+                        <Text style={[styles.chat_text, { marginLeft: 'auto' }]}>4.02 pm </Text>
+                    </View>
+                </View>
+
+                <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 15 }}>
+                    <View style={{ width: '75%', backgroundColor: '#2da9f1', marginRight: 6, padding: 9, borderRadius: 25 }}>
+                        <Text style={[styles.chat_text, { color: 'white' }]}>
+                            This is dummy chatting text written here for showing chat between group
+                        </Text>
+                        <Text style={[styles.chat_text, { marginLeft: 'auto', color: 'white' }]}>4.10 pm </Text>
+                    </View>
+                    <View style={{ width: '20%', marginRight:-10 }}>
+                        <Image style={styles.user_img} source={require('../assets/images/Others/member-3.png')} />
+                    </View>
+                </View>
+
+                <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 15, marginLeft: 'auto' }}>
+                    <View style={{ width: '55%', backgroundColor: '#2da9f1', marginRight: 6, padding: 9, borderRadius: 25 }}>
+                        <Image style={styles.chat_img} source={require('../assets/images/Others/chat-message-img.jpg')} />
+                        <Text style={[styles.chat_text, { color: 'white' }]}>This is dummy image sent in group chat one of the member</Text>
+                        <Text style={[styles.chat_text, { marginLeft: 'auto', color: 'white' }]}>4.11 pm </Text>
+                    </View>
+                    <View style={{ width: '20%', padding: 10}}>
+                        <Image style={styles.user_img} source={require('../assets/images/Others/member-3.png')} />
+                    </View>
+                </View>
+
+                <View style={{ marginTop: 10, marginBottom: 10, flexDirection: 'row', padding: 7 }} >
+                    <View style={styles.container_chat}>
+                        <View style={{ flexDirection: 'row' }}>
+                            <Image style={styles.smilly_img} source={require('../assets/images/Others/smilly.png')} />
+                            <TextInput style={{ alignSelf: 'center' }} placeholder='Type message' />
+                        </View>
+                        <View style={{ flexDirection: 'row', marginLeft: 'auto' }}>
+                            <Image style={styles.keyboard_img} source={require('../assets/images/Others/attachment.png')} />
+                            <Image style={styles.keyboard_img} source={require('../assets/images/Others/mic.png')} />
+                            <Image style={styles.keyboard_img} source={require('../assets/images/Others/android_camera.png')} />
+                        </View>
+                    </View>
+
+                    <View style={{marginLeft:'auto', backgroundColor: '#64bfed',
+                     borderRadius:50, justifyContent:'center', alignItems:'center', marginRight:7,marginLeft:5, width:45, height:45}}>
+                        <Image style={styles.sent_img} source={require('../assets/images/Others/send.png')} />
+                    </View>
+                </View>
+
             </View>
         </ScrollView>
     )
 }
 
 const styles = StyleSheet.create({
-    container_wrap: {
-        flexDirection: 'row',
+    header_container: {
         width: '100%',
         backgroundColor: '#1fa6ea',
-        paddingTop: 25,
+        paddingTop: 20,
         paddingBottom: 17,
-        borderBottomLeftRadius: 15,
-        borderBottomRightRadius: 15,
-        position: 'absolute',
-        zIndex: 1
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20,
+
     },
-    pollution_img: {
-        position: 'relative',
-        zIndex: 0,
-        width: '100%',
-        marginTop: 25
-    },
-    menu_img: {
-        width: 15,
-        height: 17,
-        paddingLeft: 15,
-        paddingRight: 15,
+    back_img: {
+        width: 27,
+        height: 29,
+        marginLeft: 15,
+        marginRight: 15,
         tintColor: 'white',
-        alignSelf: 'center'
-    },
-    calender_img: {
-        width: 15,
-        height: 18,
         alignSelf: 'center',
-        tintColor: 'white',
-        marginRight: 10,
-        marginLeft: 11,
-        width: 15,
-        height: 17
+        alignSelf: 'center'
+
     },
     header_title: {
         color: 'white',
         alignSelf: 'center',
-        fontSize: 17
-    },
-    meeting: {
-        color: 'white',
-        borderRadius: 15,
-        borderColor: 'white',
-        borderWidth: 1,
-        padding: 4
-    },
-    container_meeting: {
-        flexDirection: 'row',
-        width: 'auto',
-        padding: 12,
-        margin: 15,
-        borderRadius: 15,
-        borderWidth: 1,
-        borderColor: '#c8cacc',
-        position: 'relative',
-        zIndex: 1,
-        top: -60,
-        backgroundColor: '#ffff'
-
-    },
-    activity: {
-        marginTop: 20,
-        borderRadius: 3,
-        paddingTop: 3,
-        paddingBottom: 3,
-        paddingLeft: 11,
-        paddingRight: 11,
-        backgroundColor: '#1fa6ea',
-        color: 'white'
-
-
-    },
-    meeting_title: {
-        fontSize: 15,
-        width: 110,
-        color: 'black',
+        fontSize: 17,
+        fontWeight: 'bold',
         alignSelf: 'center'
-
     },
-    meeting_date_time: {
-        fontSize: 12,
-        color: 'black',
-
+    android_img: {
+        height: 22,
+        width: 17,
+        tintColor: 'white',
+        alignSelf: 'center',
+        marginRight: 15
     },
-    view_details_text: {
-        textAlign: 'right',
-        paddingRight: 5,
-        paddingLeft: 3,
-        color: 'white'
-    },
-    meeting_description: {
-        textAlign: 'justify',
-        fontSize: 12,
-        paddingTop: 10,
-        paddingBottom: 10,
-        width: '96%'
-    },
-    view_details: {
-        flexDirection: 'row',
-        padding: 5,
-        marginRight: 55,
-        alignItems: 'center',
-        backgroundColor: '#1fa6ea',
-        borderRadius: 25,
-        width: 125,
-        color: 'white',
-        alignSelf: 'flex-end',
-        marginTop: 10
-    },
-    visibility_img: {
-        width: 25,
+    videocam_img: {
         height: 17,
-        alignSelf: 'center',
-        tintColor: 'white'
-    },
-    centeredView: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        marginTop: 15
-    },
-    modalView: {
-        width: '90%',
-        margin: 10,
-        borderwidth: 3,
-        borderColor: '#626364',
-        backgroundColor: "white",
-        borderRadius: 20,
-        padding: 20,
-        alignItems: "center",
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 5,
-            height: 2
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
-        elevation: 5
-    },
-    textStyle: {
-        color: "white",
-        fontWeight: "bold",
-        textAlign: "center"
-    },
-    modalText: {
-        marginBottom: 15,
-        textAlign: "center"
-    },
-    input_title: {
-        width: '90%',
-        borderRadius: 25,
-        borderColor: '#d9dcde',
-        borderWidth: 2,
-        padding: 10,
-        marginBottom: 5,
-        alignSelf: 'center'
-    },
-    input_field: {
-        width: '90%',
-        borderRadius: 25,
-        borderColor: '#d9dcde',
-        borderWidth: 1,
-        padding: 4,
-        marginBottom: 4,
-        alignSelf: 'center',
-        justifyContent: "center",
-        color: '#8a8c8d'
-    },
-    input_des: {
-        width: '90%',
-        borderRadius: 25,
-        borderColor: '#d9dcde',
-        borderWidth: 2,
-        padding: 20,
-        paddingTop: 0,
-        paddingLeft: 60,
-        height: 100,
-        alignSelf: 'center',
-        marginBottom: 5,
-        color: '#8a8c8d'
-
-    },
-    icon_des: {
         width: 25,
-        height: 20,
-        marginTop: 33,
-        marginLeft: 20,
-        position: 'absolute',
-        zIndex: 1,
-        tintColor: 'gray'
-    },
-    schedule: {
-        backgroundColor: '#0084ff',
-        marginRight: 10,
-        width: 90,
-        textAlign: 'center',
-        borderRadius: 20,
-        padding: 4,
-        color: '#ffff'
-
-    },
-    search: {
-        backgroundColor: '#0084ff',
-        marginRight: 10,
-        width: 90,
-        textAlign: 'center',
-        borderRadius: 20,
-        padding: 4,
-        color: '#ffff'
-
-    },
-    cancel: {
-        backgroundColor: '#0084ff',
-        width: 90,
-        textAlign: 'center',
-        borderRadius: 20,
-        padding: 4,
-        color: '#ffff'
-    },
-    icon_img: {
-        width: 25,
-        height: 25,
+        tintColor: 'white',
         alignSelf: 'center',
-        tintColor: 'gray',
-        marginLeft: 10,
-        marginTop: 2,
-        position: 'absolute'
-
+        marginRight: 13
     },
-    input_field_member: {
-        width: '90%',
+    more_vert_img: {
+        height: 18,
+        width: 10,
+        tintColor: 'white',
         alignSelf: 'center',
-        borderRadius: 25,
-        borderColor: '#d9dcde',
-        borderWidth: 1,
-        height: 45,
-        padding: 4,
-        paddingLeft: 50,
-        position: 'relative'
-
+        marginRight: 15
     },
-    input_field2: {
-        width: '90%',
-        alignSelf: 'center',
-        borderRadius: 25,
-        borderColor: '#d9dcde',
-        borderWidth: 1,
-        padding: 4,
-        height: 45,
-        paddingLeft: 10,
-        position: 'relative',
-        color: '#8a8c8d'
-
-    },
-    dropdown_img: {
+    user_thumbnail: {
         width: 30,
         height: 30,
-        alignSelf: 'center',
-        tintColor: '#0f78f8',
-        marginLeft: 260,
-        marginTop: 2,
-        position: 'absolute'
+        marginRight: 8,
+        borderRadius: 5,
+        borderColor: 'white',
+        borderwidth: 2
     },
-    calender_icon: {
-        width: 20,
-        height: 25,
+    time: {
+        color: 'black',
         alignSelf: 'center',
-        tintColor: '#0f78f8',
-        marginLeft: 240,
-        marginTop: 2,
-        position: 'absolute'
+        fontSize: 13,
+        marginTop: 5
     },
-    time_icon: {
-        width: 20,
-        height: 25,
+    user_img: {
+        width: 50,
+        height: 50,
+        borderRadius: 5,
+        alignSelf: 'center'
+    },
+    chat_text: {
+        borderRadius: 20,
+        fontSize: 12,
+        textAlign: 'justify'
+
+    },
+    thumb_img: {
+        width: 22,
+        height: 22,
         alignSelf: 'center',
-        tintColor: '#0f78f8',
-        marginLeft: 260,
-        marginTop: 2,
-        position: 'absolute'
+        marginTop: -5,
+        tintColor: '#1fa6ea'
     },
-    close_img: {
+    chat_img: {
+        width: 195,
+        height: 90,
+        borderRadius: 15,
+        margin: 2
+    },
+    container_chat: {
+        flexDirection: 'row',
+        padding: 1,
+        borderRadius: 20,
+        borderWidth: 2,
+        borderColor: '#d0d0d6',
+        width: '83%',
+        height:45,
+        marginLeft:7,
+        marginRight:5
+    },
+    smilly_img: {
+        width: 30,
+        height: 30,
+        marginLeft: 5,
+        marginRight: 5,
+        alignSelf: 'center',
+        tintColor:'#2da9f1'
+
+    },
+    keyboard_img: {
         width: 25,
         height: 25,
-        tintColor: '#1fa6ea',
-        position: 'absolute',
-        left: 280,
-        top: -10
+        marginRight: 9,
+        alignSelf: 'center',
+        tintColor:'#767879'
     },
-    close_img2: {
-        width: 25,
-        height: 25,
-        tintColor: '#1fa6ea',
-        position: 'absolute',
-        left: 300,
-        top: -10
+    sent_img: {
+        width: 27,
+        height: 27,
+        alignSelf: 'center',
+        tintColor:'white',
+        alignSelf:'center'
     }
 })
 export default GroupChat

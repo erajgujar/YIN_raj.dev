@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { View, ActivityIndicator, TextInput, Text, Image, Dimensions, StyleSheet, ScrollView, SafeAreaView, Alert, Modal, Pressable } from 'react-native';
+import { View, ActivityIndicator, TouchableOpacity, TextInput, Text, Image, Dimensions, StyleSheet, ScrollView, SafeAreaView, Alert, Modal, Pressable } from 'react-native';
 const { width, height } = Dimensions.get('window');
 const H = Dimensions.get('window').height;
 const W = Dimensions.get('window').width;
@@ -29,6 +29,8 @@ export default function IssueDetails() {
   const [activity_tags, setActivityTags] = useState('')
   const [activity_start_time, setActivityStartTime] = useState('')
   const [activity_end_time, setActivityEndTime] = useState('')
+
+  const [mdVisible, setMdVisible] = useState(false)
 
   function addMember() {
     const memberDetails = { issue_id, yin_id, designation }
@@ -287,6 +289,54 @@ export default function IssueDetails() {
                 </Pressable>
 
               </View>
+
+
+              <View style={styles.centeredView}>
+                <Modal
+                  animationType="slide"
+                  transparent={true}
+                  visible={mdVisible}
+                  onRequestClose={() => {
+                    Alert.alert("Modal has been closed.");
+                    setMdVisible(!mdVisible);
+                  }}
+                >
+                  <View style={styles.centeredView}>
+                    <View style={styles.modalView}>
+                      <View>
+                        <View>
+                          <Text style={{ textAlign: 'center', color: 'black', marginBottom: 30, fontSize: 16 }}>Add Comments on Activity</Text>
+                          <View style={{ marginRight: 'auto', marginBottom: 5 }}>
+                            <Text style={{ fontSize: 13, color: 'black', alignSelf: 'flex-start', textAlign: 'left' }}>Activity Title | 5th Jan 2022 </Text>
+                            <Text style={{ fontSize: 11, alignSelf: 'center' }}>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration</Text>
+                          </View>
+                          <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 7 }}>
+                            <Text style={{ fontSize: 13, color: 'black', alignSelf: 'center' }}>Activity Owners: </Text>
+                            <Text style={{ fontSize: 11, alignSelf: 'center' }}>Manisha Deshpande, Ashutosh Kulkarni</Text>
+                          </View>
+                          <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
+                            <Image style={styles.icon_des} source={require('../assets/images/Others/message_des.png')} />
+                            <TextInput style={styles.input_des} placeholder="Write Description" onChangeText={newDescription => setMeetingDescription(newDescription)} />
+                          </View>
+
+                        </View>
+                      </View>
+
+                      <Pressable
+                        onPress={() => setMdVisible(!mdVisible)}
+                      >
+                        <View style={{ flexDirection: 'row', width: '100%', marginTop: 50 }}>
+
+                          <Text style={styles.add}>Add</Text>
+
+                          <Text style={styles.cancel}>Cancel</Text>
+                        </View>
+                      </Pressable>
+                    </View>
+                  </View>
+                </Modal>
+              </View>
+
               <View style={{ flexDirection: 'row' }}>
                 <Text style={{
                   borderRadius: 25,
@@ -395,7 +445,10 @@ export default function IssueDetails() {
                         justifyContent: 'flex-end',
                         marginLeft: 'auto'
                       }}>
-                        <Image style={{ aspectRatio: 1 / 1, width: 20, marginRight: 5, alignSelf: 'center', tintColor: '#3297f5', }} source={require('../assets/images/Others/chat_bubble.png')} />
+
+                        <Pressable onPress={() => setMdVisible(true)}>
+                          <Image style={{ aspectRatio: 1 / 1, width: 20, marginRight: 5, alignSelf: 'center', tintColor: '#3297f5', }} source={require('../assets/images/Others/chat_bubble.png')} />
+                        </Pressable>
                         <Image style={{ aspectRatio: 1 / 1, width: 20, marginRight: 5, alignSelf: 'center', tintColor: '#3297f5', }} source={require('../assets/images/Others/edit.png')} />
                         <Image style={{ aspectRatio: 1 / 1, width: 20, alignSelf: 'center', tintColor: '#3297f5', }} source={require('../assets/images/Others/delete.png')} />
                       </View>
@@ -539,10 +592,12 @@ const styles = StyleSheet.create({
     borderColor: '#d9dcde',
     borderWidth: 2,
     padding: 20,
+    paddingLeft: 60,
     alignItems: 'center',
     alignSelf: 'center',
     justifyContent: "center",
-    marginBottom: 5
+    marginBottom: 5,
+    height: 90
   },
   icon_img: {
     width: 25,
@@ -553,6 +608,15 @@ const styles = StyleSheet.create({
     marginTop: 2,
     position: 'absolute'
 
+  },
+  icon_des: {
+    width: 25,
+    height: 20,
+    marginTop: 29,
+    marginLeft: 25,
+    position: 'absolute',
+    zIndex: 1,
+    tintColor: 'gray'
   },
   input_field_member: {
     width: width - 100,
@@ -587,6 +651,16 @@ const styles = StyleSheet.create({
     position: 'absolute'
   },
   save: {
+    backgroundColor: '#0084ff',
+    marginRight: 10,
+    width: 90,
+    textAlign: 'center',
+    borderRadius: 20,
+    padding: 3,
+    color: '#ffff'
+
+  },
+  add: {
     backgroundColor: '#0084ff',
     marginRight: 10,
     width: 90,

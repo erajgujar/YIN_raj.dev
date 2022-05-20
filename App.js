@@ -15,6 +15,7 @@ import { ForumDashboard } from './src/features/Other Components/ForumDashboard';
 import FilterMembers from './src/features/app/FilterMembers';
 import Meetings from './src/features/app/Meetings';
 import GroupChat from './src/features/app/GroupChat';
+import CreateIssue from './src/features/app/CreateIssue';
 
 
 
@@ -32,11 +33,11 @@ const App = () => {
       {/* <AddNewIssue/> */}
       {/* <CheckUpdates/> */}
       {/* <Activity /> */}
-      {/* <IssueDetails/> */}
+      <IssueDetails/>
       {/* <FilterMembers/> */}
       {/* <Meetings/> */}
-      
-<GroupChat/>
+      {/* <CreateIssue/> */}
+{/* <GroupChat/> */}
 {/* <ForumDashboard/> */}
 
 
