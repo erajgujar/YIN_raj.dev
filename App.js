@@ -11,6 +11,7 @@ import LiveIssues from './src/features/app/LiveIssues';
 import ListIssues from './src/features/app/ListIssues';
 import IssueFilter from './src/features/app/IssueFilter';
 import IssueDetails from './src/features/app/IssueDetails';
+import ImagePicker from './src/features/Practice/ImagePicker';
 // import DropDown from './src/features/app/DropDown';
 
 const App = () => {
@@ -21,7 +22,7 @@ const App = () => {
 
       {/* <LiveIssues /> */}
       {/* <ListIssues/> */}
-      <IssueFilter/>
+      {/* <IssueFilter/> */}
       {/* <IssueDetails/> */}
       {/* <ForumType /> */}
       {/* <CheckUpdates/> */}
@@ -32,7 +33,7 @@ const App = () => {
       {/* <MinutesOfMeeting/> */}
       {/* <DropDown/> */}
 
-
+<ImagePicker/>
 
     </View>
 
