@@ -10,7 +10,7 @@ const CheckUpdates = () => {
 
     const getUpdates = async () => {
         setLoading(true)
-        const response = await axios.get("https://stg-yin-talk-api.foxberry.link/v1/activity/list/yin-id/MHPC000012")
+        const response = await axios.get("https://stg-yin-talk-api.foxberry.link/v1/activity/all/list? ISSUE_12022")
         setData(response.data)
         setLoading(false)
     }

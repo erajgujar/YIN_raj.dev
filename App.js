@@ -25,7 +25,7 @@ const App = () => {
 
       {/* <ForumType /> */}
       {/* <LiveIssues /> */}
-      {/* <IssueFilter/> */}
+      <IssueFilter/>
       {/* <ListIssues/> */}
       {/* <Members/> */}
       {/* <MinutesOfMeeting/> */}
@@ -33,12 +33,12 @@ const App = () => {
       {/* <AddNewIssue/> */}
       {/* <CheckUpdates/> */}
       {/* <Activity /> */}
-      <IssueDetails/>
+      {/* <IssueDetails/> */}
       {/* <FilterMembers/> */}
       {/* <Meetings/> */}
       {/* <CreateIssue/> */}
-{/* <GroupChat/> */}
-{/* <ForumDashboard/> */}
+      {/* <GroupChat/> */}
+      {/* <ForumDashboard/> */}
 
 
     </View>

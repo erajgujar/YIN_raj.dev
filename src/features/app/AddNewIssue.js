@@ -6,7 +6,7 @@ const W = Dimensions.get('window').width;
 
 
 export default function AddNewIssue() {
-    const [issue_id, setIssueId] = useState('')
+    const [issue_id, setIssueId] = useState( "ISSUECOL_120223_RIVERCLEANINGDATA" )
     const [forum_id, setForumId] = useState('FORUM_COL0001234_BOYS')
     const [activity_title, setActivityTitle] = useState('')
     const [activity_description, setActivityDescription] = useState('')
@@ -67,7 +67,7 @@ export default function AddNewIssue() {
     const addIssue = () => {
         axios.post("https://stg-yin-talk-api.foxberry.link/v1/issue/create", {
             college_code, issue_title, issue_description, issue_full_description, issue_images, issue_types, forum_id, issue_member_details,
-            is_published, issue_tags
+            is_published, issue_tags, issue_id
         }).then(res => console.log("Posting Data ::: 😎", res)).catch(err => console.log(err))
     }
     // Add New Issue

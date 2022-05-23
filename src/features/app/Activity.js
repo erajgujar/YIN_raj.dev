@@ -22,7 +22,7 @@ export default class Activity extends Component {
 
     componentDidMount() {
        
-        fetch("https://stg-yin-talk-api.foxberry.link/v1/activity/list/yin-id/MHPC000012")
+        fetch("https://stg-yin-talk-api.foxberry.link/v1/activity/all/list? ISSUE_12022")
         .then(response=>response.json())
         .then(response=> this.setState({activity:response}))
     

@@ -1,16 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Image, StyleSheet, TextInput, Dimensions, TouchableOpacity, ActivityIndicator, Modal, Pressable, ScrollView } from 'react-native';
-import DropDown from './DropDown';
 import axios from 'axios';
-//import SelectDropdown from 'react-native-select-dropdown'
 const H = Dimensions.get('window').height;
 const W = Dimensions.get('window').width;
 const { width, height } = Dimensions.get('window')
 
-const issues = [{ id: 1, name: 'All' }, { id: 2, name: 'Completed' }, { id: 3, name: 'Live' }, { id: 4, name: 'Droped' }, { id: 4, name: 'External' }]
-
 export default function IssueFilter() {
-    const [selectedItem, setSelectedItem] = useState(null)
     const [isLoading, setLoading] = useState(false)
     const [issue, setIssue] = useState([])
 
@@ -26,6 +21,14 @@ export default function IssueFilter() {
     const [is_published, setPublished] = useState(true)
     const [issue_tags, setIssueTags] = useState(["dfgdfg", "gfdgdfg", "fgdfgdfgdfg"])
 
+    const [dropdownVisible, setDropdownVisible] = useState(true);
+    const [All, setAll] = useState('All')
+    const [Live, setLive] = useState('Live')
+    const [Completed, setCompleted] = useState('Completed')
+    const [External, setExternal] = useState('External')
+    const [Dropped, setDroped] = useState('Dropped')
+
+
     const addIssue = () => {
         axios.post("https://stg-yin-talk-api.foxberry.link/v1/issue/create", {
             college_code, issue_title, issue_description, issue_full_description, issue_images, issue_types, forum_id, issue_member_details,
@@ -34,22 +37,81 @@ export default function IssueFilter() {
     }
     // Add New Issue
 
-    const onSelect = (item) => {
-        setSelectedItem(item)
-    }
-
-
     async function getIssues() {
         setLoading(true)
         const response = await axios.get("https://stg-yin-talk-api.foxberry.link/v1/issue/list/forum/FORUM_COL0001234_BOYS")
         setIssue(response.data)
         setLoading(false)
-        //console.log(response.data)
+        console.log(response.data)
+        setDropdownVisible(!dropdownVisible)
+    }
+    async function getIssuesAll() {
+        setLoading(true)
+        const response = await axios.get("https://stg-yin-talk-api.foxberry.link/v1/issue/list/forum/FORUM_COL0001234_BOYS")
+        setIssue(response.data)
+        setLoading(false)
+        console.log(response.data)
+        setDropdownVisible(!dropdownVisible)
+    }
+
+    async function getIssuesLive() {
+        setLoading(true)
+        const response = await axios.get("https://stg-yin-talk-api.foxberry.link/v1/issue/list/forum/FORUM_COL0001234_BOYS?issue_type=LIVE")
+        setIssue(response.data)
+        setLoading(false)
+        console.log(response.data)
+        setDropdownVisible(!dropdownVisible)
+    }
+
+    async function getIssuesCompleted() {
+        setLoading(true)
+        const response = await axios.get("https://stg-yin-talk-api.foxberry.link/v1/issue/list/forum/FORUM_COL0001234_BOYS?issue_type=COMPLETED")
+        setIssue(response.data)
+        setLoading(false)
+        console.log(response.data)
+        setDropdownVisible(!dropdownVisible)
+    }
+
+    async function getIssuesDropped() {
+        setLoading(true)
+        const response = await axios.get("https://stg-yin-talk-api.foxberry.link/v1/issue/list/forum/FORUM_COL0001234_BOYS?issue_type=DROPPED")
+        setIssue(response.data)
+        setLoading(false)
+        console.log(response.data)
+        setDropdownVisible(!dropdownVisible)
+    }
+
+    async function getIssuesExternal() {
+        setLoading(true)
+        const response = await axios.get("https://stg-yin-talk-api.foxberry.link/v1/issue/list/forum/FORUM_COL0001234_BOYS?issue_type=EXTERNAL")
+        setIssue(response.data)
+        setLoading(false)
+        console.log(response.data)
+        setDropdownVisible(!dropdownVisible)
     }
 
     useEffect(() => {
+
         getIssues()
+        if (All) {
+            getIssuesAll()
+        } else if (Live) {
+            getIssuesLive()
+        } else if (Completed) {
+            getIssuesCompleted()
+        } else if (Dropped) {
+            getIssuesDropped()
+        } else if (External) {
+            getIssuesExternal()
+        } else {
+            console.log('No Selection')
+        }
+
     }, [])
+
+
+
+
 
     return (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
@@ -90,8 +152,52 @@ export default function IssueFilter() {
                         <TextInput style={styles.input_issue} placeholder='Search by Categories of Issues' />
                         <Image style={styles.search_img} source={require('../assets/images/Others/search.png')} />
                     </View>
+                </View>
+                <View style={{ position:'relative', top:115, marginBottom:3}}>
+                        <Pressable onPress={() => setDropdownVisible(!dropdownVisible)}>
+                            <Image style={styles.filter_img} source={require('../assets/images/Others/filter.png')} />
+                        </Pressable>
+                    </View>
+
+                {/* modal for filter options */}
 
 
+                <View style={styles.centeredViewDropdown}>
+                    <Modal
+                        animationType="slide"
+                        transparent={true}
+                        visible={dropdownVisible}
+                    >
+                        <View style={styles.centeredViewDropdown}>
+                            <View style={styles.modalViewDropdown}>
+                                {/* <Pressable onPress={() => setModalVisible(!modalVisible)}>
+                                <Image  source={require('../assets/images/Others/close.png')}/>                            
+                                </Pressable>                             */}
+
+                                <View style={{ backgroundColor: 'gray' }}>
+                                    <TouchableOpacity onPress={getIssuesAll}>
+                                        <Text style={styles.dropdown_text}>{All}</Text>
+                                    </TouchableOpacity>
+
+                                    <TouchableOpacity onPress={getIssuesLive}>
+                                        <Text style={styles.dropdown_text}>{Live}</Text>
+                                    </TouchableOpacity>
+
+                                    <TouchableOpacity onPress={getIssuesCompleted}>
+                                        <Text style={styles.dropdown_text}>{Completed}</Text>
+                                    </TouchableOpacity>
+
+                                    <TouchableOpacity onPress={getIssuesExternal}>
+                                        <Text style={styles.dropdown_text}>{External}</Text>
+                                    </TouchableOpacity>
+
+                                    <TouchableOpacity onPress={getIssuesDropped}>
+                                        <Text style={styles.dropdown_text}>{Dropped}</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                        </View>
+                    </Modal>
                 </View>
 
 
@@ -137,11 +243,11 @@ export default function IssueFilter() {
                 </View>
 
 
-                {isLoading ? <ActivityIndicator  size='large' color="gray"/> : issue.map((value, i) => {
+                {isLoading ? <ActivityIndicator size='large' color="gray" /> : issue.map((value, i) => {
                     return (<View key={String(i)} style={{
                         position: 'relative',
                         zIndex: 1,
-                        top: 190,
+                        top: 5,
                     }}>
                         <View>
                             <Image style={styles.river_cleaning_img} source={{ uri: value.issue_images[0] }} />
@@ -170,34 +276,20 @@ export default function IssueFilter() {
                             </View>
                         </View>
 
-                        <Text style={{ marginLeft: 15, marginTop: 3, color: 'black' }}>{value.issue_title}</Text>
+                        <Text style={{ marginLeft: 15, marginTop: 2, marginBottom:3, color: 'black' }}>{value.issue_title}</Text>
                     </View>
                     )
                 })
                 }
 
-                <View style={{
-                    position: 'absolute',
-                    zIndex: 1,
-                    top: 90,
-                    marginLeft: 200
-                }}>
-                    <DropDown
-                        value={selectedItem}
-                        data={issues}
-                        onSelect={onSelect}
-                    />
-                </View>
-
-
-
                 <View>
                     <Image style={{
                         width: '95%',
                         height: 160,
+                        marginTop: 1,
                         alignSelf: 'center',
                         borderRadius: 20,
-                        marginBottom:20
+                        marginBottom: 20
                     }} source={require('../assets/images/Others/forum-des.png')} />
                     <Text style={{
                         marginLeft: 20,
@@ -212,7 +304,7 @@ export default function IssueFilter() {
                         marginTop: 10
                     }}>5th January 2022</Text>
                 </View>
-                <View style={{ marginBottom:10 }}>
+                <View style={{ marginBottom: 20 }}>
                     <View style={{ flexDirection: 'row' }}>
                         <Text style={{ marginLeft: 15, marginTop: 15, fontSize: 17, color: 'black' }}>Forum Name:</Text>
                         <Text style={{ marginLeft: 15, marginTop: 15, fontSize: 17 }}>Grievence Corner</Text>
@@ -244,11 +336,11 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'stretch',
         position: 'absolute',
-        height: 'auto',
+        height: 190,
         zIndex: 0,
         padding: 7,
         paddingTop: 10,
-        paddingBottom: 15
+        paddingBottom: 5
 
     },
     menu_icon_img: {
@@ -274,7 +366,8 @@ const styles = StyleSheet.create({
         width: '95%',
         height: 170,
         borderRadius: 20,
-        alignSelf: 'center'
+        alignSelf: 'center',
+        marginBottom:2
     },
     search_img: {
         width: 20,
@@ -301,7 +394,7 @@ const styles = StyleSheet.create({
         width: 15,
         height: 17,
         alignSelf: 'flex-end',
-        marginRight: 15,
+        marginRight: 17,
         tintColor: '#ffff',
         marginTop: 10,
         marginBottom: 90
@@ -387,65 +480,75 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         padding: 3,
         color: '#ffff'
+    },
+    dropdown_button_text: {
+        fontSize: 15,
+
+        padding: 0
+    },
+    dropdown_button: {
+        width: 100,
+        padding: 0
+    },
+    dropdown_row: {
+        padding: 5
+    },
+    dropdown_row_text: {
+        fontSize: 13,
+        padding: 5
+    },
+    dropdown_menu: {
+        backgroundColor: 'black',
+        color: 'white',
+        borderWidth: 2,
+        padding: 5
+    },
+    text: {
+        width: H * 0.045,
+        height: H * 0.107,
+        alignSelf: 'flex-end',
+        marginRight: H * 0.015,
+        marginTop: H * 0.010,
+        marginBottom: H * 0.090,
+        zIndex: 1
+
+    },
+    centeredViewDropdown: {
+        flex: 1,
+        justifyContent: 'flex-start',
+        alignItems: "center",
+        marginTop: 10,
+
+
+    },
+    modalViewDropdown: {
+        position: 'relative',
+        top: 110,
+        left: 115,
+        width: '20%',
+        margin: 10,
+        borderwidth: 2,
+        backgroundColor: "gray",
+        borderRadius: 5,
+        padding: 4,
+        alignItems: "center",
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 5,
+            height: 2
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5
+    },
+    dropdown_text: {
+        fontSize: 12,
+        color: 'white',
+        padding: 2
     }
-    // dropdown_button_text: {
-    //     fontSize: 10,
-
-    //     padding: 0
-    // },
-    // dropdown_button: {
-    //     width: 100,
-    //     padding: 0
-    // },
-    // dropdown_row: {
-    //     padding: 5
-    // },
-    // dropdown_row_text: {
-    //     fontSize: 13,
-    //     padding: 5
-    // },
-    // dropdown_menu: {
-    //     backgroundColor: 'black',
-    //     color: 'white',
-    //     borderWidth: 2,
-    //     padding: 5
-    // },
-    // text: {
-    //     width: H * 0.045,
-    //     height: H * 0.107,
-    //     alignSelf: 'flex-end',
-    //     marginRight: H * 0.015,
-    //     marginTop: H * 0.010,
-    //     marginBottom: H * 0.090,
-    //     zIndex:1
-
-    // }
 })
 
-{/* <View>
-                <SelectDropdown
-                    buttonTextStyle={styles.dropdown_button_text}
-                    buttonStyle={styles.dropdown_button}
-                    rowStyle={styles.dropdown_row}
-                    rowTextStyle={styles.dropdown_row_text}
-                    dropdownIconPosition="right"
 
-                    data={Issues}
-                    onSelect={(selectedItem, index) => {
-                        console.log(selectedItem, index)
-                    }}
-                    buttonTextAfterSelection={(selectedItem, index) => {
-                        // text represented after item is selected
-                        // if data array is an array of objects then return selectedItem.property to render after item is selected
-                        return selectedItem
-                    }}
-                    rowTextForSelection={(item, index) => {
-                        // text represented for each item in dropdown
-                        // if data array is an array of objects then return item.property to represent item in dropdown
-                        return item
-                    }}
-                />
-            </View> */}
 
 
 

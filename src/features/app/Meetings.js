@@ -483,7 +483,7 @@ const styles = StyleSheet.create({
     height: 25,
     alignSelf: 'center',
     tintColor: '#0f78f8',
-    marginLeft: 260,
+    marginLeft: 240,
     marginTop: 2,
     position: 'absolute'
   },

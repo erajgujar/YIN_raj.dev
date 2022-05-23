@@ -26,11 +26,11 @@ export default function Members() {
           isLoading ? <ActivityIndicator size="large" color='green' /> : data.map((value, i) => {
             return (<View key={String(i)} style={{ flexDirection: 'row' }}>
               <View style={{ flex: 0.4 }}>
-                <Image source={{uri:value.profile_image[0]}} style={style.profile} />
+                <Image source={require('../assets/images/Others/user.png')} style={style.profile} />
               </View>
 
               <View style={{ flex: 1 }}>
-                <Text style={style.name}>Name: {value.first_name} {value.last_name}</Text>
+                <Text style={style.name}>Name: {value.name}</Text>
                 <Text ellipsizeMode='tail' numberOfLines={2} style={style.college}>College Name:{value.college_name}</Text>
                 <Text style={style.mobile}>Mobile: {value.mobile}</Text>
               </View>

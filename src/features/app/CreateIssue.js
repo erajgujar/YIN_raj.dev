@@ -314,11 +314,11 @@ export default function CreateIssue() {
                                         borderBottomWidth: 2, borderBottomColor: '#e1e4e5'
                                     }}>
                                         <View style={{ marginBottom: 15 }}>
-                                            <Image style={styles.user_img} source={{ uri: value.profile_image[0] }} />
+                                            <Image style={styles.user_img} source={require('../assets/images/Others/user.png')}/>
                                         </View>
                                         <View>
                                             <View style={{ justifyContent: 'space-between', flexDirection: "row" }}>
-                                                <Text style={styles.user_name}>{value.first_name} {value.last_name}</Text>
+                                                <Text style={styles.user_name}>{value.name}</Text>
                                             </View>
                                             <View>
                                                 <View style={{ display: "flex", flexDirection: "row", marginBottom: 2 }}>
@@ -335,11 +335,11 @@ export default function CreateIssue() {
 
                                     <View style={{ flexDirection: 'row', width: '50%', borderBottomWidth: 2, borderBottomColor: '#e1e4e5' }}>
                                         <View style={{ marginBottom: 15 }}>
-                                            <Image style={styles.user_img} source={{ uri: value.profile_image[0] }} />
+                                            <Image style={styles.user_img} source={require('../assets/images/Others/user.png')} />
                                         </View>
                                         <View>
                                             <View style={{ justifyContent: 'space-between', flexDirection: "row" }}>
-                                                <Text style={styles.user_name}>{value.first_name} {value.last_name}</Text>
+                                                <Text style={styles.user_name}>{value.name}</Text>
                                             </View>
                                             <View>
                                                 <View style={{ display: "flex", flexDirection: "row", marginBottom: 1 }}>

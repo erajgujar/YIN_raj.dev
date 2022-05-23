@@ -71,7 +71,7 @@ export default function IssueDetails() {
   useEffect(() => {
     const getActivity = async () => {
       setLoading(true)
-      const response = await axios.get("https://stg-yin-talk-api.foxberry.link/v1/activity/list/yin-id/MHPC000012")
+      const response = await axios.get("https://stg-yin-talk-api.foxberry.link/v1/activity/all/list? ISSUE_12022")
       setData(response.data)
       setLoading(false)
       console.log(response.data)
@@ -79,6 +79,8 @@ export default function IssueDetails() {
     getActivity()
   }, [])
 
+
+  
 
   return (
 
@@ -394,7 +396,7 @@ export default function IssueDetails() {
           <View style={{ width: width, height: 'auto' }}>
             <View style={{ flexDirection: 'column' }}>
               <Image style={{
-                height: 540,
+                height: 1000,
                 position: 'absolute',
                 zIndex: 0,
                 left: 25,
@@ -445,7 +447,7 @@ export default function IssueDetails() {
                         justifyContent: 'flex-end',
                         marginLeft: 'auto'
                       }}>
-
+                        
                         <Pressable onPress={() => setMdVisible(true)}>
                           <Image style={{ aspectRatio: 1 / 1, width: 20, marginRight: 5, alignSelf: 'center', tintColor: '#3297f5', }} source={require('../assets/images/Others/chat_bubble.png')} />
                         </Pressable>
