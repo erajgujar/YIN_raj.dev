@@ -93,7 +93,7 @@ const CheckUpdates = () => {
 
                     {
                         isLoading ? <ActivityIndicator size='large' color="gray"/> : data.map((value, i) => {
-                            return (<View style={{ display: "flex", flexDirection: "row", marginBottom: 10 }}>
+                            return (<View key={String(i)} style={{ display: "flex", flexDirection: "row", marginBottom: 10 }}>
                                 <View>
                                     <Text style={styles.progress_stage}>4</Text>
                                 </View>
@@ -144,16 +144,18 @@ const styles = StyleSheet.create({
 
     },
     left_arrow: {
-        width: 15,
-        height: 10,
+        width: 25,
+        height: 20,
         marginLeft: 15,
         marginRight: 15,
-        tintColor: "white"
+        tintColor: "white",
+        alignSelf:'center'
     },
     header_text: {
         fontSize: 20,
         color: "white",
-        marginRight: 'auto'
+        marginRight: 'auto',
+        alignSelf:'center'
     },
     pollution_img: {
         position: "absolute",

@@ -1,5 +1,5 @@
-import React from 'react'
-import { View } from 'react-native';
+import * as React from 'react';
+import { View, Text } from 'react-native';
 import Activity from './src/features/app/Activity';
 import CheckUpdates from './src/features/app/CheckUpdates';
 import ForumType from './src/features/app/ForumType';
@@ -22,10 +22,9 @@ import CreateIssue from './src/features/app/CreateIssue';
 const App = () => {
   return (
     <View>
-
-      {/* <ForumType /> */}
+      <ForumType />
       {/* <LiveIssues /> */}
-      <IssueFilter/>
+      {/* <IssueFilter/> */}
       {/* <ListIssues/> */}
       {/* <Members/> */}
       {/* <MinutesOfMeeting/> */}
@@ -40,10 +39,8 @@ const App = () => {
       {/* <GroupChat/> */}
       {/* <ForumDashboard/> */}
 
-
     </View>
-
-  )
+  );
 }
 
-export default App
+export default App;

@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
         display: "flex",
         flexDirection: "row",
         backgroundColor: "#14a3db",
-        paddingTop: 40,
+        paddingTop: 30,
         paddingBottom: 15,
         borderBottomLeftRadius: 25,
         borderBottomRightRadius: 25,
@@ -110,15 +110,18 @@ const styles = StyleSheet.create({
 
     },
     left_arrow: {
-        width: 30,
-        height: 30,
+        width: 25,
+        height: 20,
         marginLeft: 15,
         marginRight: 15,
-        tintColor: "white"
+        tintColor: "white",
+        alignSelf:'center'
+        
     },
     header_text: {
         fontSize: 20,
-        color: "white"
+        color: "white",
+        alignSelf:'center'
     },
     pollution_img: {
         marginTop: 0,

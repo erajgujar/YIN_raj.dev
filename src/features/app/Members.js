@@ -226,8 +226,8 @@ const styles = StyleSheet.create({
         marginBottom: 9
     },
     left_arrow: {
-        width: 20,
-        height: 15,
+        width: 25,
+        height: 20,
         marginLeft: 15,
         marginRight: 5,
         tintColor: "white",

@@ -57,7 +57,7 @@ export const MeetingUpdates = () => {
 
                     {
                         isLoading ? <ActivityIndicator size="large" /> : data.map((value, i) => {
-                            return (<View style={{ paddingTop: 4 }}>
+                            return (<View key={String(i)} style={{ paddingTop: 4 }}>
                                 <Text style={{ padding: 6, margin: 0, }}>
                                     {value.meeting_description}
                                 </Text>

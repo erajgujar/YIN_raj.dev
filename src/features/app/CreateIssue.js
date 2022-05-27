@@ -383,11 +383,7 @@ export default function CreateIssue() {
                             </Pressable>
                         </View>
                     </View>
-
-                    {/* <View style={{ position: "absolute", zIndex: 0, marginTop: 450 }}>
-                        <Image style={styles.progress_line} source={require('../assets/images/Others/line.png')} />
-                    </View> */}
-
+                 
                     {isLoading ? <ActivityIndicator style={styles.loader} size='large' color="gray" /> : data.map((value, i) => {
                         return (<View key={String(i)} style={{ flexDirection: "row" }}>
                             <View>
@@ -476,13 +472,14 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start'
     },
     left_arrow: {
-        width: 20,
+        width: 25,
         height: 20,
         marginLeft: 15,
         marginRight: 15,
         alignSelf: 'center',
         tintColor: "white",
-        marginTop: 2
+        marginTop: 2,
+        alignSelf:'center'
     },
     header_text: {
         fontSize: 16,

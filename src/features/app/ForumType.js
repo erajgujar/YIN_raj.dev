@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { View, Image, Text, StyleSheet, TouchableOpacity, Dimensions, ScrollView } from 'react-native'
-//import { ForumDashboard } from '../Other Components/ForumDashboard';
+import { View, Image, Button, Text, StyleSheet, TouchableOpacity, Dimensions, ScrollView } from 'react-native'
 const { height, width } = Dimensions.get('window')
 
-const ForumType = () => {
+
+const ForumType = ({ navigation }) => {
     const [mixed, setMixed] = useState("")
     const [female, setFemale] = useState("")
     const [male, setMale] = useState("")
@@ -43,16 +43,20 @@ const ForumType = () => {
     const getForumDetails = () => {
         if (selectMixed === true) {
             console.log("mixed pressed")
+            navigation.navigate('Dashboard')
         } else if (selectFemale === true) {
             console.log('female pressed')
+            navigation.navigate('Dashboard')
         } else if (selectMale === true) {
             console.log('male pressed')
+            navigation.navigate('Dashboard')
         } else {
             console.log("no selection")
         }
 
         // ( selectMixed===true)? <ForumDashboard/> : <Text>No data found</Text>
     }
+
     //Get forum info from forum id
     return (
 
@@ -86,14 +90,17 @@ const ForumType = () => {
                     </View>
                 </TouchableOpacity>
 
-                <TouchableOpacity onPress={getForumDetails}>
+                <TouchableOpacity style={{ activeOpacity: 0.9 }} onPress={getForumDetails}>
                     <View style={styles.btn_container}>
                         <Text style={styles.btn_text}>Get Started</Text>
                         <Image style={styles.btn_img} source={require('../assets/images/for-next.png')} />
                     </View>
-                </TouchableOpacity>   
+                </TouchableOpacity>
+
+               
             </View>
         </ScrollView>
+
 
     )
 }
@@ -153,7 +160,8 @@ const styles = StyleSheet.create({
         marginLeft: 15,
         marginRight: 15,
         padding: 15,
-        backgroundColor: "#20e8e8"
+        backgroundColor: "#20e8e8",
+
 
     },
     btn_img: {

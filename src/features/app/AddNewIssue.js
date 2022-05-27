@@ -297,7 +297,7 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start'
     },
     left_arrow: {
-        width: 20,
+        width: 25,
         height: 20,
         marginLeft: 15,
         marginRight: 15,

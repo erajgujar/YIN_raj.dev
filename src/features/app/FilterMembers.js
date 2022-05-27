@@ -75,16 +75,18 @@ const styles = StyleSheet.create({
 
     },
     left_arrow: {
-        width: 15,
-        height: 10,
+        width: 25,
+        height: 20,
         marginLeft: 15,
         marginRight: 10,
-        tintColor: "white"
+        tintColor: "white",
+        alignSelf:'center'
     },
     header_text: {
         fontSize: 18,
         color: "white",
-        marginRight: 'auto'
+        marginRight: 'auto',
+        alignSelf:'center'
     },
     sub_container: {
         width: 'auto',

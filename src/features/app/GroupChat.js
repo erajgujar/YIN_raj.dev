@@ -8,7 +8,7 @@ const GroupChat = () => {
                 <View style={styles.header_container}>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                         <View>
-                            <Image style={styles.back_img} source={require('../assets/images/back.png')} />
+                            <Image style={styles.back_img} source={require('../assets/images/left.png')} />
                         </View>
                         <View>
                             <Text style={styles.header_title}>Group - Air Pollution</Text>
@@ -144,13 +144,13 @@ const styles = StyleSheet.create({
 
     },
     back_img: {
-        width: 27,
-        height: 29,
+        width: 25,
+        height: 20,
         marginLeft: 15,
         marginRight: 15,
         tintColor: 'white',
-        alignSelf: 'center',
         alignSelf: 'center'
+        
 
     },
     header_title: {
@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         fontSize: 17,
         fontWeight: 'bold',
-        alignSelf: 'center'
+       
     },
     android_img: {
         height: 22,

@@ -292,8 +292,8 @@ const styles = StyleSheet.create({
   },
   view_details_text: {
     textAlign: 'right',
-    paddingRight: 5,
-    paddingLeft: 3,
+    paddingRight: 3,
+    paddingLeft: 2,
     color: 'white'
   },
   meeting_description: {
@@ -305,19 +305,19 @@ const styles = StyleSheet.create({
   },
   view_details: {
     flexDirection: 'row',
-    padding: 5,
+    padding: 3,
     marginRight: 55,
     alignItems: 'center',
     backgroundColor: '#1fa6ea',
     borderRadius: 25,
-    width: 125,
+    width: 115,
     color: 'white',
     alignSelf: 'flex-end',
     marginTop: 10
   },
   visibility_img: {
-    width: 25,
-    height: 17,
+    width: 20,
+    height: 12,
     alignSelf: 'center',
     tintColor: 'white'
   },

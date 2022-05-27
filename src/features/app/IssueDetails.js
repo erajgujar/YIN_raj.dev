@@ -4,7 +4,9 @@ import { View, ActivityIndicator, TouchableOpacity, TextInput, Text, Image, Dime
 const { width, height } = Dimensions.get('window');
 const H = Dimensions.get('window').height;
 const W = Dimensions.get('window').width;
-export default function IssueDetails() {
+import CheckUpdates from './CheckUpdates';
+
+export default function IssueDetails({navigation}) {
   const [modalVisible, setModalVisible] = useState(false);
   const [modVisible, setModVisible] = useState(false)
 
@@ -50,7 +52,7 @@ export default function IssueDetails() {
     })
   }
 
-  function addNewActivity() {
+  function addNewActivity({navigation}) {
     const activityDetails = { issue_id, forum_id, activity_title, activity_description, activity_images, activity_status, activity_member_details, is_published, activity_tags, activity_start_time, activity_end_time }
     console.log({ issue_id, forum_id, activity_title, activity_description, activity_images, activity_status, activity_member_details, is_published, activity_tags, activity_start_time, activity_end_time })
     fetch("https://stg-yin-talk-api.foxberry.link/v1/activity/create", {
@@ -79,7 +81,11 @@ export default function IssueDetails() {
     getActivity()
   }, [])
 
-
+function checkUpdates (){
+  
+  navigation.navigate('Updates')
+  
+}
   
 
   return (
@@ -92,8 +98,9 @@ export default function IssueDetails() {
           <View style={styles.header}>
 
             <View style={styles.header_title}>
-              <Image style={{ width: 20, height: 15, tintColor: 'white' }} source={require('../assets/images/left.png')} />
-              <Text style={{ marginRight: 'auto', paddingLeft: 10, color: '#fff', padding: 10, fontSize: 18 }}>Issue Details</Text>
+              <Image style={{ height:20, width:25, tintColor: 'white', alignSelf:'center' }} source={require('../assets/images/left.png')} />
+              <Text style={{ marginRight: 'auto', paddingLeft: 10, color: '#fff', padding: 10, fontSize: 18, alignSelf:'center'}}>Issue Details</Text>
+              <TouchableOpacity onPress={checkUpdates}>
               <Text style={{
                 borderWidth: 1,
                 borderColor: '#fff',
@@ -105,6 +112,7 @@ export default function IssueDetails() {
                 fontSize: 14,
                 color: 'white'
               }}>Check Updates</Text>
+              </TouchableOpacity>
             </View>
 
             <View style={styles.header_img_container}>
@@ -449,10 +457,10 @@ export default function IssueDetails() {
                       }}>
                         
                         <Pressable onPress={() => setMdVisible(true)}>
-                          <Image style={{ aspectRatio: 1 / 1, width: 20, marginRight: 5, alignSelf: 'center', tintColor: '#3297f5', }} source={require('../assets/images/Others/chat_bubble.png')} />
+                          <Image style={{ height:20, width: 20, marginRight: 5, alignSelf: 'center', tintColor: '#3297f5', }} source={require('../assets/images/Others/chat_bubble.png')} />
                         </Pressable>
-                        <Image style={{ aspectRatio: 1 / 1, width: 20, marginRight: 5, alignSelf: 'center', tintColor: '#3297f5', }} source={require('../assets/images/Others/edit.png')} />
-                        <Image style={{ aspectRatio: 1 / 1, width: 20, alignSelf: 'center', tintColor: '#3297f5', }} source={require('../assets/images/Others/delete.png')} />
+                        <Image style={{ height:20, width: 20, marginRight: 5, alignSelf: 'center', tintColor: '#3297f5', }} source={require('../assets/images/Others/edit.png')} />
+                        <Image style={{ height:20, width: 20, alignSelf: 'center', tintColor: '#3297f5', }} source={require('../assets/images/Others/delete.png')} />
                       </View>
                     </View>
 
@@ -613,8 +621,8 @@ const styles = StyleSheet.create({
   },
   icon_des: {
     width: 25,
-    height: 20,
-    marginTop: 29,
+    height: 22,
+    marginTop: 37,
     marginLeft: 25,
     position: 'absolute',
     zIndex: 1,

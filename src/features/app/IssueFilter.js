@@ -109,10 +109,6 @@ export default function IssueFilter() {
 
     }, [])
 
-
-
-
-
     return (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
 
@@ -164,7 +160,7 @@ export default function IssueFilter() {
 
                 <View style={styles.centeredViewDropdown}>
                     <Modal
-                        animationType="slide"
+                        animationType="fade"
                         transparent={true}
                         visible={dropdownVisible}
                     >
@@ -243,7 +239,7 @@ export default function IssueFilter() {
                 </View>
 
 
-                {isLoading ? <ActivityIndicator size='large' color="gray" /> : issue.map((value, i) => {
+                {isLoading ? <ActivityIndicator size='large' color="green" /> : issue.map((value, i) => {
                     return (<View key={String(i)} style={{
                         position: 'relative',
                         zIndex: 1,
@@ -282,7 +278,7 @@ export default function IssueFilter() {
                 })
                 }
 
-                <View>
+                {/* <View>
                     <Image style={{
                         width: '95%',
                         height: 160,
@@ -303,7 +299,8 @@ export default function IssueFilter() {
                         fontSize: 10,
                         marginTop: 10
                     }}>5th January 2022</Text>
-                </View>
+                </View> */}
+                
                 <View style={{ marginBottom: 20 }}>
                     <View style={{ flexDirection: 'row' }}>
                         <Text style={{ marginLeft: 15, marginTop: 15, fontSize: 17, color: 'black' }}>Forum Name:</Text>

@@ -60,17 +60,7 @@ export default class Activity extends Component {
                                     </View>
                                 </View>
                             )
-                        }
-
-                        {/* <View style={{ flexDirection: "row", marginBottom: 10 }}>
-                            <Image style={styles.radio_img} source={require('../assets/images/Others/Radio_unchecked.png')} />
-                            <Text style={styles.progress_btn}>2</Text>
-                            <View style={styles.activity_card}>
-                                <Text style={{ fontSize: 14, color: "black", padding: 2 }}>Activity Title</Text>
-                                <Text style={{ fontSize: 13, padding: 2, textAlign: 'auto' }}>Lorem Ipsum is simply dummy text of the printing,
-                                    this is an dummy text written here </Text>
-                            </View>
-                        </View> */}
+                        }                     
 
                         <View style={styles.radio_btn}>
                         
@@ -158,8 +148,8 @@ const styles = StyleSheet.create({
         marginBottom: 20
     },
     left_arrow: {
-        width: 20,
-        height: 15,
+        width: 25,
+        height: 20,
         marginLeft: 16,
         marginRight: 15,
         alignSelf: 'center',
