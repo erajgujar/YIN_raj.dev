@@ -32,12 +32,10 @@ const LiveIssues = () => {
                 <View style={{ height: '100%' }}>
                     <View style={styles.container}>
                         <View style={{
-                            display: 'flex',
+                            alignItems:'center',
                             flexDirection: 'row',
                             justifyContent: 'space-between',
-                            marginLeft: 10,
-                            marginRight: 10,
-                            marginTop: 10
+                            margin:10
                         }}>
                             <View style={{
                                 display: 'flex',
@@ -47,16 +45,16 @@ const LiveIssues = () => {
                             }}>
                                 <Image style={styles.menu_icon_img} source={require('../assets/images/Others/menu-icon.png')} />
                                 <Text style={{
-                                    textAlign: 'center',
-                                    marginTop: 5,
+                                    textAlign: 'center',                                  
                                     fontSize: 15,
-                                    color: '#ffff'
+                                    color: '#ffff',
+                                    alignSelf:'center'
                                 }}>Live Issues</Text>
                             </View>
 
                             <View>
                                 <Pressable onPress={() => setModVisible(true)}>
-                                    <Text style={styles.Add_issue}>Add New Issue + </Text>
+                                    <Text style={styles.Add_issue}> Add New Issue + </Text>
                                 </Pressable>
                             </View>
 
@@ -195,6 +193,7 @@ const LiveIssues = () => {
                     <View style={{
                         display: "flex",
                         flexDirection: "row",
+                        justifyContent:'space-around',
                         marginTop: 40,
                         width: width
                     }}>
@@ -235,20 +234,20 @@ const styles = StyleSheet.create({
 
     },
     menu_icon_img: {
-        height: 35,
-        width: 30,
+        height: 26,
+        width: 32,
         marginRight: 7,
-        tintColor: '#ffff'
+        tintColor: '#ffff',
+        alignSelf:'center'
     },
     Add_issue: {
         borderWidth: 2,
         borderRadius: 20,
-        paddingTop: 5,
-        paddingBottom: 5,
-        paddingRight: 10,
-        paddingLeft: 10,
+        padding: 3,
+        width:'auto',
         color: '#ffff',
-        borderColor: '#ffff'
+        borderColor: '#ffff',
+        alignSelf:'center'
 
     },
     search_img: {
@@ -271,11 +270,11 @@ const styles = StyleSheet.create({
         fontSize: 15
 
     }, filter_img: {
-        width: 18,
+        width: 20,
         height: 22,
         alignSelf: 'flex-end',
         marginTop: 13,
-        marginRight: 13,
+        marginRight: 18,
         tintColor: '#ffff'
     },
     live_issue_img: {

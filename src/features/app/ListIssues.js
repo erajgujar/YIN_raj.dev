@@ -117,19 +117,20 @@ export default function ListIssues() {
                             flex: 1,
                             justifyContent: 'space-between',
                             alignItems: 'flex-start',
-                            flexDirection: 'row'
+                            flexDirection: 'row',
+                            marginTop:7
                         }}>
                             <Image style={styles.menu_icon_img} source={require('../assets/images/Others/menu-icon.png')} />
                             <Text style={{
                                 textAlign: 'left',
-                                marginTop: 5,
-                                fontSize: 15,
+                                fontSize: 18,
                                 color: '#ffff',
                                 flexBasis: 70,
-                                marginRight: 'auto'
+                                marginRight: 'auto',
+                                //alignSelf:'center'
                             }}>Issues</Text>
                             <Pressable onPress={() => setModVisible(true)}>
-                                <Text style={styles.Add_issue}>Create New Issue + </Text>
+                                <Text style={styles.Add_issue}> Create New Issue + </Text>
                             </Pressable>
 
                         </View>
@@ -158,7 +159,7 @@ export default function ListIssues() {
 
                     <View style={styles.centeredViewDropdown}>
                         <Modal
-                            animationType="slide"
+                            animationType="none"
                             transparent={true}
                             visible={dropdownVisible}                          
                         >
@@ -312,24 +313,23 @@ const styles = StyleSheet.create({
 
     },
     menu_icon_img: {
-        height: 35,
-        width: 30,
-        // marginRight: 7,
-        tintColor: '#ffff'
+        height: 26,
+        width: 32,
+        marginRight: 7,
+        tintColor: '#ffff',
+        //alignSelf:'center'
 
 
     },
     Add_issue: {
         borderWidth: 2,
         borderRadius: 20,
-        paddingTop: 5,
-        paddingBottom: 5,
-        paddingRight: 10,
-        paddingLeft: 10,
+        padding:4,
         color: '#ffff',
-        borderColor: '#ffff'
-
+        borderColor: '#ffff',
+        alignSelf:'center'
     },
+
     river_cleaning_img: {
         width: '95%',
         height: 115,

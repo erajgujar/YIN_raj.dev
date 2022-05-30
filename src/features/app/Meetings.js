@@ -223,10 +223,10 @@ const styles = StyleSheet.create({
     marginTop: 25
   },
   menu_img: {
-    width: 15,
-    height: 17,
-    paddingLeft: 15,
-    paddingRight: 15,
+    width: 26,
+    height: 32,
+    marginLeft:10,
+    marginRight:7,
     tintColor: 'white',
     alignSelf: 'center'
   },

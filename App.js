@@ -22,7 +22,7 @@ import CreateIssue from './src/features/app/CreateIssue';
 const App = () => {
   return (
     <View>
-      <ForumType />
+      {/* <ForumType /> */}
       {/* <LiveIssues /> */}
       {/* <IssueFilter/> */}
       {/* <ListIssues/> */}

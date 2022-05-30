@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, ScrollView, Text, ActivityIndicator, Dimensions, Image, TextInput } from 'react-native';
+import { View, StyleSheet, ScrollView, Text, Dimensions, Image, TextInput } from 'react-native';
 import { Calender } from './Calender';
 import { ImageForumCard } from './ImageForumCard';
 import { MeetingUpdates } from './MeetingUpdates';
@@ -190,8 +190,8 @@ const styles = StyleSheet.create({
 
   },
   menu_icon_img: {
-    height: 30,
-    width: 35,
+    height: 26,
+    width: 32,
     marginRight: 7,
     alignSelf: 'flex-start',
     tintColor: '#ffff'

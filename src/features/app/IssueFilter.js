@@ -341,8 +341,8 @@ const styles = StyleSheet.create({
 
     },
     menu_icon_img: {
-        height: 30,
-        width: 35,
+        height: 26,
+        width: 32,
         marginRight: 7,
         alignSelf: 'flex-start',
         tintColor: '#ffff'
@@ -350,7 +350,7 @@ const styles = StyleSheet.create({
     Add_issue: {
         borderWidth: 2,
         borderRadius: 20,
-        padding: 4,
+        padding: 3,
         color: '#ffff',
         borderColor: '#ffff',
         fontSize: 16,
@@ -388,10 +388,10 @@ const styles = StyleSheet.create({
 
     },
     filter_img: {
-        width: 15,
-        height: 17,
+        width: 21,
+        height: 23,
         alignSelf: 'flex-end',
-        marginRight: 17,
+        marginRight: 19,
         tintColor: '#ffff',
         marginTop: 10,
         marginBottom: 90
