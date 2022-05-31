@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: 'space-between',
         textAlign: "left",
-        marginTop: height / 4,
+        marginTop:70,
         borderRadius: 15,
         marginLeft: 15,
         marginRight: 15,

@@ -1,9 +1,10 @@
-import React from 'react';
-import { View, StyleSheet, ScrollView, Text, Dimensions, Image, TextInput } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, StyleSheet, ScrollView, ActivityIndicator, Text, Dimensions, Image, TextInput } from 'react-native';
 import { Calender } from './Calender';
 import { ImageForumCard } from './ImageForumCard';
 import { MeetingUpdates } from './MeetingUpdates';
 import Members from './Members';
+import axios from 'axios';
 import Events from '../Other Components/Events'
 // import { SliderComponent } from './SliderComponent';
 import Updates from './Updates';
@@ -12,8 +13,21 @@ export const ForumDashboardName = "Forum Dashboard";
 const H = Dimensions.get('window').height;
 const W = Dimensions.get('window').width;
 const { width, height } = Dimensions.get('window')
-export const ForumDashboard = () => {
 
+export const ForumDashboard = () => {
+  const [data, setData] = useState([])
+  const [isLoading, setLoading] = useState(false)
+
+  const getFotumType = async () => {
+    setLoading(true)
+    const response = await axios.get('https://stg-yin-talk-api.foxberry.link/v1/forum/all/forum/list?display_name=BOYS FORUM')
+    setData(response.data)
+    setLoading(false)
+  }
+
+  useEffect(() => {
+    getFotumType()
+  }, [])
   return (
     <ScrollView>
       <View>
@@ -51,45 +65,52 @@ export const ForumDashboard = () => {
         <View style={{ position: 'relative', top: 110 }}>
           <Text style={{ marginLeft: 15, fontSize: 15, color: 'white' }}>Active Forums</Text>
         </View>
-        <View style={{
-          position: 'relative',
-          zIndex: 1,
-          top: 125
-        }}>
-          <Image style={{
-            width: '95%',
-            height: 160,
-            marginTop: 1,
-            alignSelf: 'center',
-            borderRadius: 20,
-            marginBottom: 40
-          }} source={require('../assets/images/Others/forum-des.png')} />
-          <Text style={{
-            marginLeft: 20,
-            backgroundColor: 'white',
-            padding: 3,
-            width: 'auto',
-            color: 'black',
-            position: 'absolute',
-            borderRadius: 20,
-            textAlign: 'center',
-            fontSize: 10,
-            marginTop: 10
-          }}> Forum Title </Text>
-          <Text style={{
-            marginLeft: 240,
-            //alignSelf:'flex-end',
-            backgroundColor: '#515254',
-            padding: 3,
-            width: 'auto',
-            color: 'white',
-            position: 'absolute',
-            borderRadius: 20,
-            textAlign: 'center',
-            fontSize: 10,
-            marginTop: 130
-          }}> 10th Dec to 14th Dec 2021 </Text>
-        </View>
+
+
+        {
+          isLoading ? <ActivityIndicator size="large" color='green' /> : data.map((value, i) => {
+            return (<View key={String(i)} style={{
+              position: 'relative',
+              zIndex: 1,
+              top: 125
+            }}>
+              <Image style={{
+                width: '95%',
+                height: 160,
+                marginTop: 1,
+                alignSelf: 'center',
+                borderRadius: 20,
+                marginBottom: 40
+              }} source={{uri: value.forum_images[0]}} />
+              <Text style={{
+                marginLeft: 20,
+                backgroundColor: 'white',
+                padding: 3,
+                width: 'auto',
+                color: 'black',
+                position: 'absolute',
+                borderRadius: 20,
+                textAlign: 'center',
+                fontSize: 10,
+                marginTop: 10
+              }}> {value.diaplay_name} </Text>
+              <Text style={{
+                marginLeft: 240,
+                backgroundColor: '#515254',
+                padding: 3,
+                width: 'auto',
+                color: 'white',
+                position: 'absolute',
+                borderRadius: 20,
+                textAlign: 'center',
+                fontSize: 10,
+                marginTop: 130
+              }}> {value.forum_created_date} </Text>
+            </View>
+
+            )
+          })
+        }
 
 
         {/* <View style={{ flex: 1 }}>
@@ -115,7 +136,7 @@ export const ForumDashboard = () => {
         </View>
         <Events />
 
-        <View style={{ flexDirection: 'row', marginTop:20 }}>
+        <View style={{ flexDirection: 'row', marginTop: 20 }}>
           <View style={styles.update}>
             <Text style={styles.issueText}>Forum Updates:</Text>
             <Updates />
